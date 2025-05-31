@@ -1,0 +1,48 @@
+{% load pattern_conventions %}
+{% if rs_edge_decreases %}
+	{% if neck_edge_decreases %}
+		<p>
+		Decrease 1 stitch at neck edge of every row 
+		{{ piece.neck_edge_decreases | count_fmt }} times and every RS row 
+		{{ piece.rs_edge_decreases | count_fmt }} times as follows:
+		</p>
+                <p><em>Decrease row (RS):</em> {{ decrease_text_neckline_rs }}</p>
+        <p><em>Decrease row (WS):</em> {{ decrease_text_neckline_ws }}</p>
+
+	{% else %}
+		<p>
+		Decrease 1 stitch at neck edge of every RS row 
+		{{ piece.rs_edge_decreases | count_fmt }} times as follows:
+		</p>
+                <p><em>Decrease row (RS):</em> {{ decrease_text_neckline_rs }}</p>
+
+	{% endif %}
+{% else %}
+	{% if no_rs_decreases_two_stitch_bindoffs %}
+		{% if no_rs_decreases_one_stitch_bindoffs %}
+		<p>
+			BO 2 sts at neck edge every other row 
+			{{piece.no_rs_decreases_two_stitch_bindoffs | count_fmt }} times, 
+			then dec 1 st at neck edge every row 
+			{{ piece.no_rs_decreases_one_stitch_bindoffs | count_fmt }} times as follows:
+		</p>
+                    <p><em>Decrease row (RS):</em> {{ decrease_text_neckline_rs }}</p>
+        <p><em>Decrease row (WS):</em> {{ decrease_text_neckline_ws }}</p>
+
+		{% else %}
+		<p>
+			BO 2 sts at neck edge every other row 
+			{{piece.no_rs_decreases_two_stitch_bindoffs | count_fmt }} times.
+		</p>
+		{% endif %}
+	{% else %}
+		{% if no_rs_decreases_one_stitch_bindoffs %}
+		<p>
+			Dec 1 st at neck edge every row 
+			{{ piece.no_rs_decreases_one_stitch_bindoffs | count_fmt }} times as follows:
+		</p>
+                    <p><em>Decrease row (RS):</em> {{ decrease_text_neckline_rs }}</p>
+        <p><em>Decrease row (WS):</em> {{ decrease_text_neckline_ws }}</p>
+		{% endif %}
+	{% endif %}
+{% endif %}

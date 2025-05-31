@@ -1,0 +1,19 @@
+{% comment %}
+	This is the template for email-address-change notifications, sent to
+	the NEW address
+{% endcomment %}
+
+
+Hello!
+
+We'd just like to let you know that the email address for the CustomFit account
+{{ username }} has been changed to this address. If you made this change, great! 
+Everything is all set. But if you did not change the email address for your 
+CustomFit account, please get in touch with us at {{ help_address }}! We'll 
+help you figure out what happened.
+
+Thanks, and we hope you're enjoying CustomFit!
+
+Warmly-
+
+The CustomFit Team

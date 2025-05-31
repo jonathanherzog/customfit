@@ -1,0 +1,16 @@
+{% extends "admin/change_form.html" %}
+
+{% block after_field_sets %}
+  {% comment %}
+  This allows you to track down adminsite errors attached to a non-displayed field.
+  In your admin.ModelAdmin subclass, add the following line:
+  `    change_form_template = 'my_custom_admin.html'`
+  That will make that admin use this form, forcing all the errors to be listed.
+  Intended for localhost/testing only, though it wouldn't hurt anything in production,
+  since only staff see this page.
+  {% endcomment %}
+  <h2>more errors</h2>
+  {% for error in errors %}
+    {{ error }}
+  {% endfor %}
+{% endblock %}

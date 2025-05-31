@@ -1,0 +1,21 @@
+{% load pattern_conventions %}
+
+<p>
+   <em>Trim Armholes:</em>
+</p>
+
+  <p>
+    Beginning at underarm seam, pick up and knit 
+    {{ piece.total_armhole_stitches | count_fmt }} sts
+    around armhole with a circular needle. 
+  </p>
+  <p>
+    Join for working in the round, being careful not to twist. Work even in 
+    {{ pspec.armhole_edging_stitch_patterntext }} for 
+    {{ pspec.armhole_edging_height | length_fmt }}, 
+    then BO all sts.
+  </p>
+  <p>
+    Repeat for other armhole.
+  </p> 
+

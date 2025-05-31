@@ -1,0 +1,65 @@
+{% extends 'cowls/patterntext_templates/design_choices_base.html' %}
+
+
+
+{% comment %}
+	Note: Extends the design-choices section with web-specific components:
+	(the yardage accordion, for example, which doesn't make sense in the PDF).
+{% endcomment %}
+
+{% block yardage_help_section %}
+     <!-- begin yardage estimate help section -->
+      <br />
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_materials" href="#collapse_materials">
+        Want a better estimate?
+      </a>
+
+      <!-- begin yardage help accordion -->
+      <div class="accordion" id="accordion_materials">
+        <div id="collapse_materials" class="accordion-body collapse out">
+          <div class="accordion-inner">
+            <p>          
+              <a href="{% url 'swatches:swatch_update_view' swatch.id %}">Edit your gauge</a>
+              to add:
+            </p>
+
+            <ul>
+              {% if not swatch.length_per_hank %}
+                <li>
+                  Length per hank
+                </li>
+              {% endif %}
+              {% if not swatch.weight_per_hank %}
+                <li>
+                  Weight per hank
+                </li>
+              {% endif %}
+              {% if not swatch.full_swatch_weight %}
+                <li>
+                  Weight of swatch (in grams). For best results, use a scale that can
+                  measure to tenth-of-a-gram accuracy.
+                </li>
+              {% endif %}
+              {% if not swatch.full_swatch_height %}
+                <li>
+                  Height of full swatch
+                </li>
+              {% endif %}
+              {% if not swatch.full_swatch_width %}
+                <li>
+                  Width of full swatch
+                </li>
+              {% endif %}
+            </ul>
+
+            <p>
+              Your yardage estimate will automatically show up once we have
+              processed the information. (You will need to reload the page.)
+            </p>
+
+          </div>
+        </div>
+      </div>
+      <!-- end yardage help accordion -->
+      <!-- end yardage estimate help section -->
+{% endblock %}

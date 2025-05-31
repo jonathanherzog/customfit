@@ -1,0 +1,14 @@
+{% load pattern_conventions %}
+
+{% comment %}
+All patterns should have a hip-edging stitch, so this template should only 
+be used when the hip-edging height is zero.
+{% endcomment %}
+
+<p>
+  CO {{ piece.cast_ons | count_fmt }} stitches using
+  long tail or other 
+  cast-on method of your choice. 
+</p>
+{{ stitch_transition_text }}
+  

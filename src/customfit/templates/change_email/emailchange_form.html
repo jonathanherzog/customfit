@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Change email</h2>
+{# probably irrelevant because this functionality is incorporated on the account page #}
+<form method="post" action="#">
+  {% csrf_token %}
+  {{ form | crispy }}
+  <input type="submit" class="btn-customfit">
+</form>
+{% endblock %}

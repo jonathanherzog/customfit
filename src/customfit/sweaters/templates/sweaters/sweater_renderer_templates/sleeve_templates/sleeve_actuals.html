@@ -1,0 +1,13 @@
+{% load pattern_conventions %}
+
+<h4>Actual measurements:</h4>
+
+<ul>
+  <li>Sleeve CO: {{ piece.actual_wrist | length_fmt }}</li>
+  <li>Biceps: {{ piece.actual_bicep | length_fmt }}</li>
+    {% if piece.actual_armcap_heights.displayable  %}
+      <li>Sleeve CO to sleeve-caps: {{ piece.actual_wrist_to_cap | length_fmt }}</li>
+      <li>Cap heights: {{ piece.actual_armcap_heights | length_fmt }}</li>
+    {% endif %}
+  <li>Total sleeve length: {{ piece.actual_total_height | length_fmt }}</li>
+</ul>

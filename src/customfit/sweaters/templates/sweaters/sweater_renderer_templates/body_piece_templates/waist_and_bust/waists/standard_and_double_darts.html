@@ -1,0 +1,72 @@
+{% load pattern_conventions %}
+
+{% if is_left_side %}
+    <p>
+    <em>Marker placement row (WS):</em> Work {{ piece.inter_marker | count_fmt }} stitches, pm of color A,
+    work {{ piece.waist_inter_double_marker | count_fmt }} stitches, pm of color B,
+    work {{ piece.waist_double_dart_marker | count_fmt }} sts to end. Two markers
+    of two colors placed for waist shaping. 
+  </p>
+{% elif is_right_side %}
+    <p>
+    <em>Marker placement row (WS):</em> Work {{ piece.waist_double_dart_marker | count_fmt }} stitches, pm of color B,
+    work {{ piece.waist_inter_double_marker | count_fmt }} stitches, pm of color A,
+    work {{ piece.inter_marker | count_fmt }} sts to end. Two markers
+    of two colors placed for waist shaping. 
+  </p>
+{% else %}
+    <p>
+    <em>Marker placement row (WS):</em> Work {{ piece.waist_double_dart_marker | count_fmt }} stitches, pm of color B,
+    work {{ piece.waist_inter_double_marker | count_fmt }} stitches, pm of color A, 
+    work {{ piece.inter_marker | count_fmt }} stitches, pm of color A, 
+    work {{ piece.waist_inter_double_marker | count_fmt }} stitches, pm of color B,
+    work {{ piece.waist_double_dart_marker | count_fmt }} stitches to end. Four markers
+    of two colors placed for waist shaping. 
+  </p>
+{% endif %}
+<p>
+  <em>Decrease Row One (RS)</em>:  
+  {{ decrease_text_double_dart_standard_decrease }}
+    {{ stitches_per_single_dart | capfirst}} decreased. 
+        
+  {% if num_waist_non_double_dart_decrease_repetitions %}
+    
+    Work 3 rows even. 
+</p>
+    {% if waist_non_double_dart_decrease_repetitions_minus_one %}
+<p>
+      Repeat the last 4 rows
+      {{  piece.num_waist_non_double_dart_decrease_repetitions_minus_one | count_fmt }}
+      additional times.
+</p>
+    {% endif %}
+<p>
+    Then, work Decrease Row One once more.  
+  {% endif %}
+  Work 1 row even.
+</p>
+
+{# Now, the double-dart instructions #}
+<p>        
+  <em>Decrease Row Two (RS)</em>: 
+  {{ decrease_text_double_dart_double_dart_decrease }}
+  {{ stitches_per_double_dart | capfirst }} decreased.
+  Work 1 row even.
+</p>
+<p>          
+  Then, work Decrease Row One. Work 1 row even. 
+</p>
+  
+<p>
+  {% if num_waist_double_dart_decrease_repetitions %}
+    Then, alternate Decrease Rows Two and One every RS row
+    {{ piece.num_waist_double_dart_decrease_repetitions | count_fmt }}
+    additional times.
+    </p>
+    <p>
+      {{ piece.num_waist_decrease_rows_knitter_instructions | count_fmt }} total 
+      decrease rows worked since beginning.
+  {% endif %} 
+  {{ piece.waist_stitches | count_fmt }} stitches remain.
+</p>
+

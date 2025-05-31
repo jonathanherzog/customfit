@@ -1,0 +1,24 @@
+{% load static %}
+
+{% load design_wizard_tags %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+    <div id="div_{{ field.auto_id }}" class="form-group{% if form_show_errors and field.errors %} error{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+        <div class="controls"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
+            {% include 'bootstrap3/layout/field_errors_block.html' %}
+                <div class="btn-group" role="group" data-toggle="buttons">
+                    {% for choice in field.field.choices %}
+                        {% if choice.0 %}
+                            <label class="btn">
+                                <input type="radio"{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0 }}">{{ choice.1 }}
+                            </label>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+
+            {% include 'bootstrap3/layout/help_text.html' %}
+        </div>
+    </div>
+{% endif %}

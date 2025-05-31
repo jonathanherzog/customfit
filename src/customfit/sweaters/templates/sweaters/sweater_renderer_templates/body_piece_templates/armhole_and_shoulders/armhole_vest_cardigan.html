@@ -1,0 +1,40 @@
+{% load pattern_conventions %}
+
+<p>
+  <em>Next row ({{ outer_side }})</em>:
+  BO {{ piece.armhole_x | count_fmt }} stitches, then work as established to end. 
+</p>
+
+{% if piece.armhole_y.any and piece.armhole_z.any %}
+    <p>
+    Decrease one stitch at armhole edge of every row
+    {{ piece.armhole_y | count_fmt }} times, then every RS row
+    {{ piece.armhole_z | count_fmt }} times as follows:
+    </p>
+{% elif piece.armhole_y.any %}
+    <p>
+    Decrease one stitch at armhole edge of every row
+    {{ piece.armhole_y | count_fmt }} times as follows:
+    </p>
+{% elif piece.armhole_z.any %}
+    <p>
+    Decrease one stitch at armhole edge of every RS row
+    {{ piece.armhole_z | count_fmt }} times as follows:
+    </p>
+{% endif %}
+
+{%  if piece.armhole_y.any or piece.armhole_z.any %}
+    <p>
+        <em>Decrease row (RS):</em> {{ decrease_text_armhole_rs_onest }}
+    </p>
+
+    {%  if piece.armhole_y.any %}
+        <p>
+        <em>Decrease row (WS):</em> {{ decrease_text_armhole_ws_onest }}
+        </p>
+    {% endif %}
+
+    <p>
+        {{ stitches_per_armhole_dec_one | capfirst }} decreased.
+    </p>
+{% endif %}

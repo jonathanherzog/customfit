@@ -1,0 +1,15 @@
+{% load pattern_conventions %}
+{% include neckline_start %}
+
+<p>
+  <strong>
+    Shape neck:
+  </strong>
+</p>
+
+{% if piece.initial_bindoffs_cardigan %}
+  <p>
+    <em>Next row ({{ inner_side }}):</em> BO 
+    {{ piece.initial_bindoffs_cardigan | count_fmt }} stitches, work to end. 
+  </p>
+{% endif %}

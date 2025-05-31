@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load static %}
+{% load cache %}
+
+
+
+{% block title %}Our ever-growing list of {{ design_type }} designs!{% endblock title %}
+
+{% block content %}
+
+<h2>
+    All designs
+</h2>
+<div class="filters">
+
+  <div class="ui-group">
+    <div class="button-group js-radio-button-group" data-filter-group="toplevel">
+      <button class="button btn-customfit" data-filter=".dropshoulder">Drop-shoulder sweaters</button>
+      <button class="button btn-customfit" data-filter=".setinsleeve">Set-in sleeve sweaters</button>
+      <button class="button btn-customfit" data-filter=".hourglass">Hourglass sweaters</button>
+      <button class="button btn-customfit" data-filter=".halfhourglass">Half-hourglass sweaters</button>
+      <button class="button btn-customfit" data-filter=".aline">A-line sweaters</button>
+      <button class="button btn-customfit" data-filter=".straight">Straight sweaters</button>
+      <button class="button btn-customfit" data-filter=".tapered">Tapered sweaters</button>
+      <button class="button btn-customfit" data-filter=".cowl">Cowls</button>
+    </div>
+  </div>
+</div>
+
+
+  {% cache 3600 all_designs_html design_type %}
+    <div class="row clear-columns isotope-grid">
+      {% for design in designs %}
+          {% include 'designs/choose_design_tile.html' %}
+      {% empty %}
+        <div class="col-xs-12">
+          <p>
+            None yet, but we're busily designing away; check back soon!
+          </p>          
+        </div>
+      {% endfor %}
+    </div>
+  {% endcache %}
+
+
+<h2>Build your own design</h2>
+
+<div class="row">
+  <div class="col-xs-12">
+      {% for garment_name, myo_url, myo_image in myo_options %}
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 customfit-action-tile-rectangle extra-margins">
+                <a href="{{ myo_url }}">
+                    <img src="{% static myo_image | thumbnail_url:'col-md-3'  %}" class="choose-design-hero">
+                    <p>Make your own {{ garment_name }}</p>
+                </a>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
+
+{% block js_jquery %}
+    {{ block.super }}
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+{% endblock %}
+
+
+{% block extra_compressible_js %}
+
+
+<script>
+// init Isotope
+
+// init Isotope
+var $grid = $('.isotope-grid').isotope({
+  itemSelector: '.isotope-grid-item',
+    layoutMode: 'fitRows',
+});
+
+// store filter for each group
+var filters = [];
+
+// change is-checked class on buttons
+$('.filters').on( 'click', 'button', function( event ) {
+  var $target = $( event.currentTarget );
+  $target.toggleClass('is-checked');
+  var isChecked = $target.hasClass('is-checked');
+  var filter = $target.attr('data-filter');
+  if ( isChecked ) {
+    addFilter( filter );
+  } else {
+    removeFilter( filter );
+  }
+  // filter isotope
+  // group filters together, inclusive
+  $grid.isotope({ filter: filters.join(',') });
+});
+
+function addFilter( filter ) {
+  if ( filters.indexOf( filter ) == -1 ) {
+    filters.push( filter );
+  }
+}
+
+function removeFilter( filter ) {
+  var index = filters.indexOf( filter);
+  if ( index != -1 ) {
+    filters.splice( index, 1 );
+  }
+}
+</script>
+
+{% endblock %}

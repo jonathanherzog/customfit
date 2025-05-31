@@ -1,0 +1,502 @@
+@import "customfit_bootstrap.less";
+@import "variables.less";
+
+/*
+-----------------------------------------------------------------------------
+TYPOGRAPHY & LAYOUT
+-----------------------------------------------------------------------------*/
+
+body {
+  background-color: white; /* explicit is better than implicit */
+  color: @body-color;
+  font-family: @body-font;
+  font-size: @font-size-large;
+}
+
+#main-content {
+  padding-bottom: 20px;
+
+  @media (min-width: @screen-sm-min) {
+    padding-bottom: @line-height-computed + 60px; /* make sure to clear fixed footer, with breathing room */
+  }
+}
+
+h1, h2 {
+  font-family: @header-font;
+  text-transform: uppercase;
+  margin-top: 1.5*@font-size-h2;
+  margin-bottom: @font-size-h2;
+
+  @media (max-width: @screen-xs-max) {
+    margin-top: @font-size-h2;
+    margin-bottom: 0.5*@font-size-h2;    
+  }
+}
+
+h3 {
+  font-family: @header-font;
+  text-transform: uppercase;
+  margin-top: 1.5*@font-size-h3;
+  margin-bottom: @font-size-h3;
+
+  @media (max-width: @screen-xs-max) {
+    margin-top: @font-size-h3;
+    margin-bottom: 0.5*@font-size-h3;    
+  }
+}
+
+h4 {
+  margin-top: 1.5*@font-size-h4;  
+  margin-bottom: @font-size-h4;
+
+  @media (max-width: @screen-xs-max) {
+    margin-top: @font-size-h4;
+    margin-bottom: 0.5*@font-size-h4;    
+  }
+}
+
+.strong() {
+  font-family: Verdana, @body-font;
+  font-weight: bold;
+}
+
+strong {
+  .strong;
+}
+
+
+a {
+  color: @orange;
+  text-decoration: none;
+
+  &:hover, &:active, &:focus {
+    text-decoration: underline;
+    color: @yellow;  
+  }
+
+  &:focus {
+    outline-color: @yellow;
+  }
+
+}
+
+a[role='button'] {
+  color: inherit;
+}
+
+
+/* Misc layout utility classes ---------------------------------------------- */
+.lead-customfit {
+  /* For the informational paragraph at the top of some pages. */
+  width: 66.66666666666666666666666%;
+  margin-left: 16.66666666666666666666666%;
+
+  @media (max-width: @screen-sm-max) {
+    width: 83.333333333333333333333%;
+    margin-left: 8.333333333333333333333%;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    width: auto;
+    margin: auto;
+  }
+  .text-center;
+}
+
+.left-justify {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.left-justify-padding {
+  padding-left: 0 !important;
+}
+
+.right-justify {
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+}
+
+.pad-right {
+  padding-right: 15px;
+}
+
+.text-indent {
+  padding-left: 15px;
+}
+
+.text-centered-phone {
+  @media (max-width: @screen-xs-max) {
+    .text-center;    
+  }
+}
+
+
+/* Vertical spacers --------------------------------------------------------- */
+
+.margin-top-0 {
+  /* For vertically aligning things that would otherwise have top margins
+     adjacent to things that don't.
+  */
+  margin-top: 0 !important;
+}
+
+.margin-top-10 {
+  margin-top: 10px !important;
+}
+
+.margin-top-15 {
+  /* Useful for vertically aligning things adjacent to help callout boxes. */
+  margin-top: 15px !important;
+}
+
+.margin-top-20 {
+  /* Useful for vertically aligning things adjacent to headers. */
+  margin-top: 20px !important;
+}
+
+.margin-top-40 {
+  margin-top: 40px !important;
+}
+
+.margin-top-45 {
+  margin-top: 45px !important;
+}
+
+.margin-bottom-5 {
+  margin-bottom: 5px !important;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px !important;
+}
+
+.swatch-tile-margins {
+  margin-bottom: 60px;
+
+  @media (max-width: @screen-xs-max) {
+    margin-bottom: 20px;
+  }
+}
+
+.extra-margins {
+  /* For adding whitespace above and below paragraphs. */
+  margin-top: 1.5*@line-height-computed;
+  margin-bottom: 1.5*@line-height-computed;
+}
+
+.extra-margins-large {
+  /* For adding even more whitespace above and below paragraphs. */
+  margin-top: 2.5*@line-height-computed;
+  margin-bottom: 2.5*@line-height-computed;
+}
+
+/* For elements that look best right-justified on large screens, but look
+   silly right-justified on phones (where they tend to be under, rather than
+   next to, a leftward companion item). elements with this class will right-
+   justify on tablet size and up, and fill the screen width on phones.
+*/
+.pull-right-or-fill {
+  .pull-right;
+}
+
+@media (max-width: @screen-sm-max) {
+  .pull-right-or-fill {
+    width: 100%;
+  }
+}
+
+.shadowed {
+  .box-shadow(@shadow: 10px 10px 5px #999);
+}
+
+.maker-letter {
+  border: 1px solid #aaa;
+  padding: 20px;
+  margin: 0 auto 20px auto;
+  max-width: 900px;
+}
+
+.well {
+  h1, h2, h3, h4 {
+    margin-top: 0;
+  }
+
+  background-color: @five-percent-grey;
+}
+
+.well-bg-white {
+  background-color: white;
+}
+
+
+/*
+-----------------------------------------------------------------------------
+HEADER, NAV BARS & FOOTER
+-----------------------------------------------------------------------------*/
+
+header {
+  position: relative;
+
+  .nav {
+    font-family: @header-font;
+    text-transform: uppercase;
+
+    a {
+      color: @grey;  
+    }
+  }
+
+  img {
+    margin: 10px 0;
+  }
+
+  /* On phone screens, center the image and shrink the nav text. A br element
+     visible only on small screens ensures that the nav is under the image.*/
+  @media (max-width: @screen-xs-max) {
+    margin-top: 0.5*@line-height-computed;
+ 
+    .nav {
+      font-size: @font-size-h3;
+
+      ul {
+        position: relative;
+        margin: 20px 0;
+      }
+
+      li:nth-child(1) {
+        .pull-left;
+      }
+
+      li:nth-child(2) {
+        position: absolute;
+        left: 50%;
+        margin-left: -1em;
+        bottom: 0;
+      }
+
+      li:nth-child(3) {
+        .pull-right;
+      }
+    }
+
+    img {
+      margin: 10px auto 0 auto;
+    }
+  }
+
+  /* On tablet and larger screens, pull the image left and the nav right;
+     vertically center the nav. */
+  @media (min-width: @screen-sm-min) {
+    .nav {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-top: -(.5*@font-size-h2 + 10);
+      font-size: @font-size-h2;  
+    }
+
+    img {
+      .pull-left;
+    }
+  }
+}
+
+.navbar-default {
+  background-color: @lightest-grey;
+  font-family: @body-font;
+  border: none;
+  .border-radius(0);
+  margin-bottom: @font-size-h2;
+  margin-top: 0.5*@font-size-h2;
+
+  @media (max-width: @screen-xs-max) {
+    margin-bottom: 0.5*@font-size-h2;
+    margin-top: auto;
+  }
+
+  .navbar-nav > li > a {
+    color: @body-color;
+
+    &:hover, &:focus {
+      color: white;
+      background-color: @lighter-grey;
+    }
+  }
+
+  .navbar-nav > .open > a {
+    color: white;
+    background-color: @lighter-grey;    
+  }
+
+  .navbar-text {
+    color: @body-color;
+    line-height: 20px;
+  }
+
+  .dropdown-menu > li > a {
+    color: @body-color;
+
+    &:hover {
+      color: @body-color;
+      background-color: @lightest-grey;
+    }
+  }
+
+  li:focus {
+    outline-color: none;
+  }
+
+  button.navbar-toggle {
+    margin-bottom: 0;
+    margin-top: -8px;
+  }
+
+}
+
+hr.logged-out-subnav {
+  /* Occupies the subnav's role in our design, for users who aren't logged in. */
+  height: .25em;
+  background-color: @lightest-grey;
+  width: 100%;
+}
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  hr.logged-out-subnav {
+    height: .5em;
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  hr.logged-out-subnav {
+    height: 1em;
+  }
+}
+
+footer {
+  margin-top: 20px;
+  background-color: @lightest-grey;
+  color: @grey;
+  font-family: @body-font;
+  font-size: @font-size-base;
+  border: none;
+  .border-radius(0);
+
+  @media (min-width: @screen-sm-min) {
+    /* Fix footer to bottom of screen on larger screens */
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;    
+  }
+
+  /* On tablets, center the navs. On larger screens, float
+     the nav right.
+  */
+  @media (max-width: @screen-sm-max) {
+    #footer-nav-parent {
+      text-align: center;   /* This center-aligns the nav contained in this div. */
+    }
+
+    .nav {
+      display: inline-block; /* This shrinks the nav to fit its contents. */
+    }
+  }
+  @media (min-width: @screen-md-min) {
+    .nav {
+      .pull-right;
+
+      > li > a {
+        padding-top: 20px; /* force vertical centering by matching margin on images */        
+        padding-bottom: 15px; /* stretch to bottom of footer so that hover color will reach bottom */        
+      }
+    }
+  }
+
+
+  li:hover, li:focus, li:active {
+    background-color: @light-grey;
+  }
+
+  .nav > li > a { // this rule must have enough specificity to override the usual rule
+    color: @grey;
+
+    &:hover, &:focus, &:active {
+      background-color: @light-grey;
+      .border-radius(0);
+      color: white;
+    }
+  }
+}
+
+/*
+-----------------------------------------------------------------------------
+IMAGES
+-----------------------------------------------------------------------------*/
+
+img {
+  /* Default styling if nothing else is applied */
+  .img-rounded;
+  .img-responsive;
+  margin: 10px auto;
+}
+
+a img:hover {
+  /* Images that are also links should provide some visual cue on hover. */
+  opacity: 0.8;
+}
+
+.img-customfit {
+  /* Looks best with a square image. */
+  .border-radius(50%);
+  .img-responsive;
+  transition: all .2s ease-in-out;
+}
+
+/*
+-----------------------------------------------------------------------------
+ZENBOX OVERRIDES
+-----------------------------------------------------------------------------*/
+
+#zenbox_tab {
+  .border-left-radius(4px);
+
+  img {
+    margin: auto !important;
+    .border-left-radius(4px);
+  }
+
+  /* Position tab on the top of phone screens, so it doesn't overlap
+     navigation elements.
+  */
+
+  @media (max-width: @screen-sm-max) {
+    top: 0 !important;
+    .border-top-radius(0);
+    .border-bottom-radius(4px);
+
+    img {
+      .border-top-radius(0);
+      .border-bottom-radius(4px);      
+    }
+  }  
+}
+
+/* On small screens, make the zenbox help entry box fit within the screen. */
+@media (max-width: @screen-sm-max) {
+  #zenbox_container {
+    width: 96% !important;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  #zenbox_body {
+    width: 96% !important;
+    margin: auto;
+  }
+
+  body.knowledge_base {
+    min-width: 0 !important;
+  }
+}

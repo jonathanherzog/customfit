@@ -1,0 +1,22 @@
+{# Provides the action buttons in the swatch list view. #}
+{% load thumbnail %}
+
+<div class="col-md-4 col-sm-6 col-xs-12">
+  <div class="row">
+      <div class="media clearfix swatch-tile-margins">
+        <div class="media-left media-middle col-xs-6 col-sm-3">
+          <a href="{% url 'swatches:swatch_detail_view' object.id %}">
+            <img src="{% if object.preferred_picture_file %}{{ object.preferred_picture_file | thumbnail_url:'col-md-2-square' }}{% else %}{{ object.preferred_picture_url }}{% endif %}" class="img-customfit media-object">      
+          </a>
+        </div>
+        <div class="media-body col-xs-6 col-sm-9">
+          <div class="force-line-height-two margin-bottom-5">
+            <span>{{ object.name }}</span>
+          </div>
+          <a href="{% url 'swatches:swatch_detail_view' object.id %}" class="btn-customfit-sm btn-customfit-outline margin-top-0">
+            view &amp; edit details
+          </a>        
+        </div>
+    </div>
+  </div>
+</div>

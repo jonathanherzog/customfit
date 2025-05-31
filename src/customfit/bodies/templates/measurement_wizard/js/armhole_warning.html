@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    var $j = jQuery.noConflict();
+
+    $j(document).ready(function() {
+        var armhole_input = $j('#armhole_trigger input');
+        var units = $j('#armhole_trigger .add-on');
+        armhole_input.blur(function() {
+            if(armhole_input.val()) {
+                if(parseFloat(armhole_input.val()) <= 6.5 && units.html()=='inches') {
+                    $j('#armhole_warning').show();
+                } else if(parseFloat(armhole_input.val()) <= 16.5 && units.html()=='cm') {
+                    $j('#armhole_warning').show();
+                } else {
+                    $j('#armhole_warning').hide();
+                }
+            }
+        });
+    });
+</script>

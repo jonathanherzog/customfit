@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load pattern_conventions %}
+{% load static %}
+{% load cache %}
+
+{% block title %}Measurement set for {{ body.name }}{% endblock %}
+
+{% block content %}
+  <h2>Measurements for {{ body.name }}</h2>
+
+   <a href="{% url 'bodies:body_detail_view_pdf' body.id %}" class="btn-customfit-outline">Download as PDF</a>
+
+  <div class="row">
+    <!-- begin measurement tables -->
+    {% include "bodies/measurements_table.html" %}
+    <!-- end measurement tables -->
+
+    <!-- begin pictures -->
+    <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
+ 
+      {% with body as object %}
+        {% include "detail_pictures.html" %}
+      {% endwith %}
+
+
+      <h3>Measurement notes</h3>
+      <p>
+        {{ body.notes }}
+      </p>
+      <a href="{% url 'bodies:body_note_update_view' body.pk %}" class="btn-customfit-outline margin-top-0">edit notes</a>        
+    </div>
+    <!-- end sidebar -->
+  </div>
+
+        
+  <!-- begin deletion option -->
+  <div class="row">
+    <div class="col-xs-12">
+      <hr />
+      <a href="{% url 'bodies:body_delete_view' body.id %}" class="btn-customfit-outline">
+        <span class="glyphicon glyphicon-trash"></span> delete this measurement set
+      </a>
+      {% if body.is_updateable %}
+        <a href="{% url 'bodies:body_update_view' body.id %}" class="btn-customfit-outline">
+          <span class="glyphicon glyphicon-plus"></span> add measurements
+        </a>
+      {% endif %}
+      {% if user.profile.can_create_new_bodies %}
+		<a href="{% url 'bodies:body_copy_view' body.id %}" class="btn-customfit-outline">
+          <span class="glyphicon glyphicon-duplicate"></span> copy into new measurement set
+        </a>
+      {% endif %}
+      <br />
+      {% if body.patterns %}
+        <p class="margin-top-20 small">
+          (Deleting this measurement set will not delete the patterns you've made from it.)
+        </p>
+      {% endif %}        
+    </div>
+  </div>
+  <!-- end deletion option -->
+
+{% endblock %}
+

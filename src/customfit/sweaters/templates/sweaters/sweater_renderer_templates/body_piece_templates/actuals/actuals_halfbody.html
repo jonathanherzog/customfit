@@ -1,0 +1,26 @@
+{% load pattern_conventions %}
+{% block actuals %}
+
+	<h4>Actual measurements</h4>
+	<ul>
+		<li>Hip: {{ piece.actual_hip | length_fmt }}</li>
+        {% if piece.actual_waist.displayable %}
+    		<li>Waist: {{ piece.actual_waist | length_fmt }}</li>
+        {% endif %}
+		<li>Bust/chest: {{ piece.actual_bust | length_fmt }}</li>
+		{% if piece.actual_cross_chest.displayable %}
+			<li>Cross-chest: {{ piece.actual_cross_chest | length_fmt }}</li>
+		{% endif %}
+		<li>Shoulder width (per side): 
+				{{ piece.actual_shoulder_stitch_width | length_fmt }}</li>
+        {% if piece.actual_hem_to_waist.displayable  %}
+    		<li>Hem to waist: {{ piece.actual_hem_to_waist | length_fmt }}</li>
+        {% endif %}
+		<li>Hem to armhole: {{ piece.actual_hem_to_armhole | length_fmt }}</li>
+		<li>Armhole depth: {{ piece.actual_armhole_depth | length_fmt }}</li>
+		<li>Hem to shoulder: {{ piece.actual_hem_to_shoulder | length_fmt }}</li>
+		<li>Neck depth (exclusive of trim): 
+			     {{ neckline.total_depth | length_fmt }}</li>
+	</ul>
+	
+{% endblock actuals %}

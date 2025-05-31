@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Your graded patterns</h2>
+    <ul>
+        {% for pattern in object_list %}
+            <li>
+                <a href="{{ pattern.get_absolute_url }}">
+                    {{ pattern.name}}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

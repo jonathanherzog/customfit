@@ -1,0 +1,105 @@
+@charset "UTF-8";
+@import "variables.less";
+
+/* Used for picture upload only. */
+
+.collapse-toggle {
+  display: none;
+
+  &.visible {
+    display: inherit;
+  }
+}
+
+.upload-picture {
+  display: none;
+}
+
+img {
+    margin: auto;
+}
+
+.edit-picture {
+  .dropdown-menu > li > a {
+    color: @body-color;
+
+    &:hover {
+      background-color: @yellow;
+      
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.upload-picture, .edit-picture {
+  display: inherit;
+  position: absolute;
+  top: 5px;
+  right: 10px;  
+
+  .btn-customfit-outline {
+    margin-right: 0;
+    line-height: 14px;
+  }
+}
+
+/*
+  Allows delete/feature menu on picture edit pages to be displayed
+  even if the user doesn't have JS.
+*/
+.edit-picture-nojs .edit-picture:hover .dropdown-menu {
+  display: inherit;
+}
+
+.thumbnail {
+  position: relative;
+
+  p.long {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &.expanded {
+      overflow: inherit;
+      white-space: inherit;
+    }
+  }
+}
+
+
+li.featured .thumbnail {
+  border-color: @yellow;
+  background-color: @yellow;
+
+  > .glyphicon-star {
+    display: inherit;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: @yellow;
+    background: @grey;
+    .border-radius(14px);
+    padding: 4px;
+  }
+}
+
+.glyphicon-star {
+    display: none;
+}
+
+
+/* We need the !importants to override aggressive bootstrap dropdown css. */
+li a.show_if_unfeatured {
+    display: none !important;
+}
+
+li.featured .show_if_unfeatured {
+    display: inherit !important;
+}
+
+li.featured .feature_link {
+    display: none;
+}

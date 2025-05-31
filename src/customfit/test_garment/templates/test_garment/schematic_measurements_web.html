@@ -1,0 +1,42 @@
+{% load static %}
+{% load pattern_conventions %}
+
+{% comment %}
+  This template is for rendering schematic images for the web only. The template for PDF rendering is
+  schematic_measurements_print.html.
+
+  This template is shared by the pattern renderers and
+  design_wizard/views.py#SummaryAndApproveView, so that we can simplify our users' lives
+  by presenting schematic information consistently.
+{% endcomment %}
+
+
+<!-- begin dimensions -->
+<div class="row">
+<div class="col-xs-12 col-sm-6 col-md-6">
+  <img src="{% static schematic_image %}" class="schematic-image">
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6 text-right text-centered-phone faux-table-hover margin-top-15">
+  <div class="row">
+    <div class="col-md-12 col-lg-10">
+      <strong>test garment dimensions</strong>
+    </div>
+  </div>
+
+  {% for dimension in dimensions %}
+    {% if dimension.1 %}
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-lg-5">
+          {{ dimension.0 }}
+        </div>
+        <div class="col-xs-6 col-sm-6 col-lg-5">
+          {{ dimension.1 | length_fmt }}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+</div>
+</div>
+<!-- end  dimensions -->
+

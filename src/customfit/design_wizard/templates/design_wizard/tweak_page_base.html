@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+{% load pattern_conventions %}
+{% load crispy_forms_tags %}
+{% load thumbnail %}
+
+{% comment %}
+    This template is not intented to be user-facing. Sub-templates that are meant to be user facing
+    should provide the following blocks:
+
+    * customize_header
+    * patternspec_info
+    * sizing_recommendations_summary
+
+    Also, sub-pages are encouraged to overwrite the block
+
+    * extra_compressible_js
+
+{% endcomment %}
+
+
+{% block title %}Tweak my pattern{% endblock %}
+
+{% block extra_compressible_css %}
+  {# only used on this page #}
+  <style type="text/css">
+    .form-group {
+      float: right;
+    }
+
+    .asteriskField {
+      display: none;
+    }
+
+    form .has-error .help-block {
+      display: inherit;
+      font-size: 14px;
+    }
+
+  </style>
+{% endblock %}
+
+{% block content %}
+  {% if form.errors %}
+    <div class="alert alert-error">
+      We're so sorry, but we can't make that pattern. Double-check your values below, or
+      restore to CustomFit originals.
+    </div>
+  {% endif %}
+
+  <!-- begin top info block -->
+{% block customize_header %}
+{% endblock %}
+
+  <div class="row">
+    <div class="col-sm-3 col-xs-12">
+      <img src="{{ featured_image_url }}" class="img-rounded margin-top-0">
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      <p>
+        <strong>Before we take your gauge into account,</strong> take a look at the sizing recommendations below.
+      </p>
+      <p>
+        (You can change it if you want.)        
+      </p>
+    </div>      
+    {# The offset ensures adequate separation from the previous column of text. #}
+    <div class="col-sm-4 col-sm-offset-1 col-xs-12">
+        {% block patternspec_info %}
+        {% endblock %}
+    </div>
+  </div>
+  <!-- end top info block -->
+
+  <!-- begin fit summary block -->
+  <h2>SIZING RECOMMENDATIONS: SUMMARY</h2>
+  <div class="row">
+
+    {% block sizing_recommendations_summary %}
+    {% endblock %}
+
+  </div>
+  <!-- end fit summary block -->
+
+  <!-- begin fit summary actions -->
+  <div class="row margin-top-20">
+    <div class="col-md-8 col-md-offset-2 col-xs-6 col-xs-offset-3 text-center">
+      <a href="{{ no_changes_url }}" class="btn-customfit-outline">proceed with no changes</a>
+    </div>
+  </div>
+  <!-- end fit summary actions -->
+
+  <h2>ADJUST FIT GOALS</h2>
+
+  <div class="row clearfix">
+    <div class="col-xs-12">
+      {% crispy form %}
+    </div>
+  </div>
+
+  <p class="extra-margins-large">{# seriously just because clearfixing the form did not provide vertical spacing down to the footer as expected #}</p>
+{% endblock %}
+
+
+
+{% block extra_compressible_js %}
+
+{% comment %}
+    Note that the Javascript in this page is very very generic. Subpages are expected to
+    shadow this page with page-specific versions if they need to extend this logic
+{% endcomment %}
+
+<script type="text/javascript">
+  /* Restore inputs to original values.
+
+     Depends on the fact that crispy adds a 'value' attribute with the initial
+     input value by default. This attribute does not change when users change
+     the input value.
+  */
+  var $j = jQuery.noConflict();
+
+  $j(document).ready(function() {
+    var restore = $j('#button-id-restore');
+    var inputs = $j('input:not([type="submit"]):not([type="button"]):visible');
+
+    {% autoescape off %}
+      {# HTML escaping would otherwise turn the apostrophe character around field names into &#39;. #}
+      var restore_data = {{ restore_data }};
+    {% endautoescape %}
+
+    restore.click(function() {
+      inputs.each(function() {
+        // Restore original values.
+        var original = restore_data[$j(this).attr('id')];
+        $j(this).val(original.toFixed(2));
+      });
+
+    });
+  });
+</script>
+
+<!-- Add +/- icons -->
+<script type="text/javascript">
+
+  var $j = jQuery.noConflict();
+
+  $j(document).ready(function() {
+    inputs = $j('.form-group');
+
+    inputs.each(function() {
+      var id = $j(this).attr('id');
+      var plus = '<span class="glyphicon glyphicon-plus glyphicon-customfit float-right" aria-hidden="true" aria-label="increase measurement" id="glyphicon-' + id + '-plus"></span>';
+      var minus = '<span class="glyphicon glyphicon-minus glyphicon-customfit float-right" aria-hidden="true" aria-label="decrease measurement" id="glyphicon-'+ id +'-minus"></span>';
+
+      $j(this).append(plus).append('&nbsp;').append(minus);
+    });
+  });
+</script>
+
+<!-- Make +/- icons work and auto-updating numbers auto-update. -->
+<script type="text/javascript">
+  var $j = jQuery.noConflict();
+
+  var display_imperial = '{{ display_imperial }}';
+
+  if ( display_imperial == 'True' ) {
+    /* Adjust by quarter-inches if the user uses imperial measurements. */
+    amt = 0.25;
+  } else {
+    /* Or adjust by half-cms if the user uses metric. */
+    amt = 0.5;
+  }
+
+
+  function increase(input, circ_display, ease_display, amount) {
+    if (amount === undefined) {
+      amount = amt;
+    }
+
+    var orig_val = parseFloat(input.val());
+    input.val((orig_val + amount).toFixed(2));
+
+  }
+
+  function decrease(input) {
+    amount = amt * -1;
+    increase(input amount);
+  }
+
+
+  $j(document).ready(function() {
+    var icons = $j('.form-group .glyphicon');
+
+    /* Update circs and eases when users click the +/- icons. */
+    icons.click(function() {
+      /* Get the input associated with this +/- icon - that is, the 
+         input that's a child of the same .form-group element. */
+      var associated_input = $j(this).parents('.form-group').find('input');
+
+      var id = $j(this).attr('id');
+      if (id.indexOf('-plus') >= 0) {
+        increase(associated_input);
+      } else if (id.indexOf('-minus') >= 0) {
+        decrease(associated_input);
+      }
+    });
+
+  });
+</script>
+{% endblock %}

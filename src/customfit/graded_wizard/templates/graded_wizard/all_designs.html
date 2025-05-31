@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Make graded pattern</h2>
+    <ul>
+        {% for design in object_list %}
+            <li>
+                <a href="{% url 'graded_wizard:make_graded_pattern' design_slug=design.slug %}">
+                    {{ design.name}}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

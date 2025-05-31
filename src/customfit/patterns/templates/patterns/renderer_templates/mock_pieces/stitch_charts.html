@@ -1,0 +1,11 @@
+{% load thumbnail %}
+
+{% for stitch in stitches %}
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+      <img class="img-responsive stitch-chart"
+        src="{{ stitch.chart | thumbnail_url:'col-md-6' }}" 
+        alt="{{ stitch.name }} stitch chart" />
+    </div>
+  </div>
+{% endfor %}

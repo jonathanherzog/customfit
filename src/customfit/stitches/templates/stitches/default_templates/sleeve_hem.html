@@ -1,0 +1,15 @@
+{% load pattern_conventions %}
+  <p>
+    CO {{ piece.cast_ons | count_fmt }} stitches using 
+    long tail or other 
+    cast-on method of your choice. Work even in
+    {{ piece.hem_stitch_patterntext }} for
+{% if piece_is_graded %}
+    {{ piece.wrist_hem_height | length_fmt }},
+{% else %}
+    {{ piece.wrist_hem_height | length_fmt }}
+    ({{ piece.wrist_hem_height_in_rows | count_fmt }} rows),
+{% endif %}
+      ending with a WS row.
+  </p>
+  {{ stitch_transition_text }}

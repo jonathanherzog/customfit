@@ -1,0 +1,66 @@
+{% load pattern_conventions %}
+
+<p>
+	Continue until piece measures {{ piece.begin_decreases_height | length_fmt }},
+    {% if piece_is_graded %}
+		ending with a WS row.
+    {% else %}
+        {% if piece.begin_decreases_height_in_rows.displayable %}
+            ending with a WS row:
+            {{ piece.begin_decreases_height_in_rows | count_fmt }} rows from beginning.
+        {% else %}
+            ending with a WS row.
+        {% endif %}
+    {% endif %}
+</p>
+<p>
+    <strong>Shape body:</strong>
+</p>
+
+
+{% if is_left_side %}
+    <p>
+        <em>Decrease row (RS)</em>: Knit 1, ssk, work to end. One stitch decreased.
+    </p>
+    {% if any_ws_shaping_rows %}
+     <p>
+         <em>Decrease row (WS)</em>: Work to last 3 sts,
+        ssp, p 1. One stitch decreased.
+     </p>
+    {% endif %}
+{% elif is_right_side %}
+    <p>
+        <em>Decrease row (RS)</em>: Work to last 3 stitches, k2tog, k 1. One stitch decreased.
+    </p>
+    {% if any_ws_shaping_rows %}
+     <p>
+         <em>Decrease row (WS)</em>: Purl 1, p2tog, work to end. One stitch decreased.
+     </p>
+    {% endif %}
+{% else %}
+    <p>
+        <em>Decrease row (RS)</em>: Knit 1, ssk, work to last 3 stitches,
+        k2tog, k 1. Two stitches decreased.
+    </p>
+    {% if any_ws_shaping_rows %}
+     <p>
+         <em>Decrease row (WS)</em>: Purl 1, p2tog, work to last 3 sts,
+        ssp, p 1. Two stitches decreased.
+     </p>
+    {% endif %}
+{% endif %}
+
+
+<p>
+    {% if piece.bust_stitches.displayable %}
+        Work decrease row every
+        {{ piece.rows_between_standard_waist_decrease_rows_plus_one | count_fmt }} rows
+        {{ piece.num_waist_standard_decrease_rows | count_fmt }}
+        times total: {{ piece.bust_stitches | count_fmt }} stitches for bust.
+    {% else %}
+        Work decrease row every
+        {{ piece.rows_between_standard_waist_decrease_rows_plus_one | count_fmt }} rows
+        {{ piece.num_waist_standard_decrease_rows | count_fmt }}
+        times total.
+    {% endif %}
+</p>

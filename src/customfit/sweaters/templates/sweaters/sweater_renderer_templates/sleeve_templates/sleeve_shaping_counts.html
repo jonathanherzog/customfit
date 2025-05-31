@@ -1,0 +1,75 @@
+
+{% load pattern_conventions %}
+
+{% if multiple_shaping_rows %}
+<div>
+    {% if show_simple_shaping_instructions %}
+        <div>
+        {% if simple_shaping_grades %}
+            <p><em>
+            For sizes {{ simple_shaping_grades | length_fmt}} only:
+            </em></p>
+        {% endif %}
+
+        <p>
+        Work a shaping row every
+        {% if simple.shaping_rows_plural %}
+            {{ simple.inter_sleeve_increase_rows_plus_one | count_fmt }} rows
+        {% else %}
+            row
+        {% endif %}
+        {{ simple.num_shaping_rows | count_fmt }} times.
+        </p>
+        </div>
+    {% endif %}
+
+
+    {% if show_compound_shaping_instructions %}
+        <div>
+        {% if compound_shaping_grades %}
+            <p><em>
+            For sizes {{ compound_shaping_grades | length_fmt }} only:
+            </em></p>
+        {% endif %}
+
+        <p>
+        Work a shaping row every
+        {% if compound.inter_sleeve_increase_rows_plus_one_plural %}
+            {{ compound.inter_sleeve_increase_rows_plus_one | count_fmt }} rows
+        {% else %}
+            row
+        {% endif %}
+        {% if compound.num_sleeve_increase_rows_plural %}
+            {{  compound.num_sleeve_increase_rows |count_fmt }} times,
+        {% else %}
+            once,
+        {% endif %}
+        then every
+        {% if compound.rows_after_compound_shaping_rows_plus_one_plural %}
+            {{ compound.rows_after_compound_shaping_rows_plus_one | count_fmt }} rows
+        {% else %}
+            row
+        {% endif %}
+        {% if  compound.num_sleeve_compound_increase_rows_plural %}
+            {{  compound.num_sleeve_compound_increase_rows |count_fmt }} times.
+        {% else %}
+            once.
+        {% endif %}
+        {% if compound.num_shaping_rows_plural %}
+            {{ compound.num_shaping_rows |count_fmt }} total shaping rows worked.
+        {% else %}
+            {{ compound.num_shaping_rows |count_fmt }} total shaping row worked.
+        {% endif %}
+        </p>
+        </div>
+    {% endif%}
+
+    {% if simple_shaping_grades or compound_shaping_grades %}
+        <p><em>
+            All sizes:
+        </em></p>
+    {% endif %}
+</div>
+
+{% endif %}
+

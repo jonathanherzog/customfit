@@ -1,0 +1,8 @@
+{% load pattern_conventions %}
+
+<h4>Actual measurements:</h4>
+
+<ul>
+  <li>Circumference: {{ piece.actual_circumference | length_fmt }}</li>
+  <li>Height: {{ piece.actual_height | length_fmt }}</li>
+</ul>

@@ -1,0 +1,52 @@
+{% url 'home_view' as home_view %}
+{% url 'bodies:body_list_view' as body_list_view %}
+{% url 'swatches:swatch_list_view' as swatch_list_view %}
+{% url 'patterns:individualpattern_list_view' as individualpattern_list_view %}
+
+
+<!-- begin nav for logged-in individual users -->
+  <div id="navbar-greeting" class="navbar-text navbar-left left-justify">
+    hi, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}!
+  </div>
+
+  <div class="navbar-right right-justify" id="top_nav">
+    <ul class="nav navbar-nav">
+
+      <!-- begin my customfit submenu -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="my-customfit-submenu">my customfit <span class="caret"></span></a>
+        <ul class="dropdown-menu" aria-labelledby="my-customfit-submenu">
+          <li>
+            <a href="{{ home_view }}">home</a>
+          </li>
+          <li>
+            <a href="{{ body_list_view }}">my measurements</a>
+          </li>
+          <li>
+            <a href="{{ swatch_list_view }}">my gauges</a>
+          </li>
+          <li>
+            <a href="{{ individualpattern_list_view }}">my patterns</a>
+          </li>
+        </ul>
+      </li>
+      <!-- end my customfit submenu -->
+
+      <!-- begin resources submenu -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="resources-submenu">resources <span class="caret"></span></a>
+        <ul class="dropdown-menu" aria-labelledby="resources-submenu">
+          <li>
+            <a href="{% url 'calculators:tool_list' %}" >handy calculators</a>
+          </li>
+          <li>
+            <a href="{% url 'stitch_models:stitch_list_view' %}">stitch patterns</a>
+          </li>
+        </ul>
+      </li>
+      <!-- end resources submenu -->
+
+      <li><a href="{% url 'designs:all_designs' %}"><strong>make a pattern</strong></a></li>
+    </ul>
+  </div>
+<!-- end nav -->

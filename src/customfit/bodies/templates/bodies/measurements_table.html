@@ -1,0 +1,73 @@
+{% load pattern_conventions %}
+
+<div class="col-xs-12 col-sm-8 col-md-6 details-table" id="lightbox_content">
+  <!-- begin essential measurements table -->
+  <table class="table-customfit table-striped">
+    <thead>
+      <tr>
+        <th colspan="2"><h3>Essentials</h3></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for measurement in body.essential_measurement_values %}
+        {# no need for an if statement because these measurements are all required #}
+        <tr>
+          <td class="name col-xs-8">{{ measurement.name }}</td>
+          <td class="col-xs-4">{{ measurement.value | length_fmt }}</td>
+        </tr>
+      {% endfor %}
+      <tr>
+        <td class="name col-xs-8">body type</td>
+        {# this gets the human-readable form; body.body_type returns the internal representation #}
+        <td class="col-xs-4">{{ body.get_body_type_display }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- end essential measurements table -->
+
+  <!-- begin extra measurements table -->
+  {% if body.has_any_extra_measurements %}
+    <table class="table-customfit table-striped">
+      <thead>
+        <tr>
+        <th colspan="2"><h3>Extras</h3></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for measurement in body.extra_measurement_values %}
+          {% if measurement.value %}
+            <tr>
+              <td class="name col-xs-8">{{ measurement.name }}</td>
+              <td class="col-xs-4">{{ measurement.value | length_fmt }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+  <!-- end extra measurements table -->
+
+  <!-- begin optional measurements table -->
+  {% if body.has_any_optional_measurements %}
+    <table class="table-customfit table-striped">
+      <thead>
+        <tr>
+        <th colspan="2"><h3>Optional</h3></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for measurement in body.optional_measurement_values %}
+          {% if measurement.value %}
+            <tr>
+              <td class="name col-xs-8">{{ measurement.name }}</td>
+              <td class="col-xs-4">{{ measurement.value | length_fmt }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+  <!-- end optional measurements table -->
+
+</div>
+<!-- end measurement tables -->

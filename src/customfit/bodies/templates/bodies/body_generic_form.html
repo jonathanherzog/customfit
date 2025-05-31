@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Body measurements{% endblock %}
+
+{% block extra_compressible_css %}
+  {% if not precompress_less %}
+    <link href="{% static 'less/customfit_forms.less' %}" media="all" rel="stylesheet/less" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>
+  {% else %} 
+    <link href="{% static 'css/customfit_forms.css' %}" media="all" rel="stylesheet" type="text/css"/>
+  {% endif %}
+
+  <style type="text/css">
+    .inline-javascript-warning {
+      display: none;
+      float: right;
+    }
+
+    form .help-callout {
+      margin-left: 5px;
+      margin-right: 15px;
+    }
+
+    @media (max-width: 767px) {
+      .help-callout {
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+    }
+
+    legend {
+      margin-top: 0;
+    }
+
+    .greyscale {
+      color: #999;
+    }
+  </style>
+
+{% endblock %}
+
+{% block content %}
+
+  {% block start_with_standards %}
+  {% endblock %}
+
+  {% block form_header %}
+  {% endblock %}
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-push-6">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <h3 class="margin-top-20">Measurement help</h3>
+          <div>
+            <h4>Essentials</h4>
+            <img src="{% static 'img/measurement_entry/Measurements-Help-Essentials-Front.jpg' %}" alt="diagram of essential measurements on back of the body" class="margin-top-0" />
+            <img src="{% static 'img/measurement_entry/Measurements-Help-Essentials-Back.jpg' %}" alt="diagram of essential measurements on the front of the body" class="margin-top-0" />
+          </div>
+          <div id="photos-extras-accordion">
+            <h4><a role="button" aria-expanded="false" aria-controls="photos-extras-images" href="#photos-extras-images" data-toggle="collapse" data-parent="#photos-extras-accordion" id="photos-extras-accordion-control">
+              Extras <span class="glyphicon glyphicon-menu-down"></span>
+            </a></h4>
+            <div id="photos-extras-images" class="panel-collapse collapse out">
+              <img src="{% static 'img/measurement_entry/Measurements-Help-Extras-Front.jpg' %}" alt="diagram of extra measurements on the front of the body" class="margin-top-0" />
+              <img src="{% static 'img/measurement_entry/Measurements-Help-Extras-Back.jpg' %}" alt="diagram of extra measurements on the back of the body" class="margin-top-0" />
+            </div>
+          </div>
+          <div id="photos-optional-accordion">
+            <h4><a role="button" aria-expanded="false" aria-controls="photos-optionals-images" href="#photos-optionals-images" data-toggle="collapse" data-parent="#photos-optionals-accordion" id="photos-optionals-accordion-control">
+              Optional <span class="glyphicon glyphicon-menu-down"></span>
+            </a></h4>
+            <div id="photos-optionals-images" class="panel-collapse collapse out">
+              <img src="{% static 'img/measurement_entry/Measurements-Help-Optionals-Front.jpg' %}" alt="diagram of optional measurements" class="margin-top-0" />
+            </div>
+          </div>
+          <div class="help-callout">
+            <small>Want in-depth measurement info? <a href="https://www.youtube.com/playlist?list=PLFfNXgEam89A6xiFPADASavJcPLkf0RQi">Watch our videos.</a></small>            
+          </div>
+        </div>      
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-sm-pull-6">
+      <form action="" method="post">
+        {% csrf_token %}
+        {% crispy form %}
+      </form>
+    </div>
+  </div>
+
+{% endblock %} 
+
+{% block extra_compressible_js %}
+  <script type="text/javascript" src='{% static "js/toggle_form_help_text.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/body_validation.js" %}'></script>
+  {% endblock %} 

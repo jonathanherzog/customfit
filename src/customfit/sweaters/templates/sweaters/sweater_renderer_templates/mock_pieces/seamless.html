@@ -1,0 +1,95 @@
+{% load pattern_conventions %}
+{% with pspec=piece.get_spec_source %}
+<p>
+	If you’d like to make {{ piece.name }} in a mostly seamless way, 
+	here’s how: 
+</p>
+<p>
+	<strong>Cast on the total number of body stitches, front and back together:</strong> 
+</p>
+{% if piece.is_cardigan %}
+	<p>
+		CO {{ piece.cardigan_front_cast_on_stitches | count_fmt }} stitches, 
+		place side seam marker, 
+		CO {{ piece.back_cast_on_stitches | count_fmt }}, 
+		place side seam marker, 
+		CO {{ piece.cardigan_front_cast_on_stitches | count_fmt }}. 
+		{{ piece.total_cast_on_stitches | count_fmt }} stitches total. 
+	</p>
+{% else %}
+	<p>
+	CO {{ piece.pullover_front_cast_on_stitches | count_fmt }} stitches, 
+	place side seam marker, 
+	CO {{ piece.back_cast_on_stitches | count_fmt }}, 
+	place round marker. 
+	{{ piece.total_cast_on_stitches | count_fmt }} stitches; 
+	join for working in the round, being careful not to twist. <strong><em>Note: You will be
+	working flat once you reach the armhole shaping; change needle size if necessary to 
+	preserve gauge.</em></strong>
+	</p>
+{% endif %}
+<p>
+	Work in hem stitch and then main pattern stitch, including waist shaping 
+	for front and back, as written in instructions above (but on all body 
+	stitches at once). 
+</p>
+<p>
+	<strong>When you reach armhole shaping</strong>, work back and forth on front and back 
+	stitches separately as written in the pattern. 
+</p>
+<p>
+	When body pieces are complete, seam shoulders using mattress stitch. 
+</p>
+{% if piece.has_sleeves %}
+	<p>
+		<strong>Knit sleeves from the top down</strong> in the round as follows: 
+	</p>
+
+     {% if pspec.is_set_in_sleeve %}
+        <p>
+            With RS facing and beginning at top shoulder seam, pick up and
+            knit {{ piece.get_sleeve.bicep_stitches | count_fmt }} stitches around armhole edge.
+            You will now shape the sleeve caps using short rows.
+        </p>
+        <p>
+            <em>Set-up Row 1 (RS):</em> Knit {{ piece.seamless_sleeve_half_top_armcap | count_fmt }}
+            stitches, wrap the next stitch, turn your work.
+        </p>
+        <p>
+            <em>Set-up Row 2 (WS):</em>  Purl {{ piece.seamless_sleeve_top_armcap | count_fmt }}
+            stitches, wrap the next stitch, turn your work.
+        </p>
+        <p>
+            Continue working short rows as established, working one additional
+            stitch each row and working wraps with wrapped stitches, until
+            {{ piece.seamless_sleeve_bottom | count_fmt }} stitches remain unworked at armhole,
+            ending with a WS row.
+        </p>
+        <p>
+            <em>Next row (RS):</em> Knit across all stitches, joining for working in the
+            round. You have shaped the sleeve cap and have
+            {{ piece.get_sleeve.bicep_stitches | count_fmt }} stitches for sleeve.
+        </p>
+    {% endif %}
+
+    {% if pspec.is_drop_shoulder %}
+        <p>
+            With RS facing and beginning at center of underarm,
+            use needles for working in the round to pick up and
+            knit {{ piece.get_sleeve.bicep_stitches | count_fmt }}
+            stitches around armhole edge.
+        </p>
+        <p>
+            Place marker and join for working in the round.
+        </p>
+    {% endif %}
+	<p>
+		Work down the arm in the round, reversing shaping as described in the 
+		Sleeve section of pattern, until you reach the end of the sleeve. 
+		BO all stitches. 
+	</p>
+{% endif %}
+<p>
+	Work any edge trim stitches as described in Finishing.
+</p>
+{% endwith %}

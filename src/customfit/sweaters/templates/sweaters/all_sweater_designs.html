@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load cache %}
+
+{% block title %}Our ever-growing list of sweater designs!{% endblock title %}
+
+{% block content %}
+
+  <h2>
+  	{% block subtitle %}
+    Our {% if silhouette_name %}{{ silhouette_name }}{% endif %} designs, all available in size: you.
+	{%  endblock %}
+  </h2>
+
+  {% cache 3600 all_designs_html silhouette_name %}
+    {% if available_silhouettes %}
+      <div class="text-center">
+        <i>looking for a specific shape?</i><br/>
+        <p>
+          <div class="btn-group" role="group">
+            {% for silhouette in available_silhouettes %}
+				<a href="{% url 'sweaters:all_designs_by_silhouette' silhouette %}"
+                   class="btn btn-default btn-silhouette-option">{{ silhouette }}</a>
+            {% endfor %}
+            {% if available_silhouettes|length > 1 %}
+				<a href="{% url 'sweaters:all_designs' %}" class="btn btn-default btn-silhouette-option">all</a>
+            {% endif %}
+          </div>          
+        </p>
+      </div>
+    {% endif %}
+    <div class="row clear-columns">
+      {% for design in designs %}
+        {% include 'sweaters/choose_sweater_design_tile.html' %}
+      {% empty %}
+        <div class="col-xs-12">
+          <p>
+            None yet, but we're busily designing for this shape; check back soon!
+          </p>          
+        </div>
+      {% endfor %}
+    </div>
+  {% endcache %}
+
+{% endblock content %}

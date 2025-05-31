@@ -1,0 +1,87 @@
+{% load pattern_conventions %}
+
+{% with pspec=piece.get_spec_source %}
+{% with swatch=pspec.swatch %}
+
+<ul>
+  <li>
+    {% if piece.user.first_name %}      
+      For {{ piece.user.first_name }}, to fit
+      {% if pspec.body.archived %}
+        {{ pspec.body.name }} (deleted)
+      {% else %}
+        <a href="{{ pspec.body.get_absolute_url }}">{{ pspec.body.name }}</a>
+      {% endif %}
+    {% else %}      
+      To fit
+      {% if pspec.body.archived %}
+        {{ pspec.body.name }} (deleted)
+      {% else %}
+        <a href="{{ pspec.body.get_absolute_url }}">{{ pspec.body.name }}</a>
+      {% endif %}
+    {% endif %}
+  </li>
+
+  <li>
+    <strong>Finished Bust/Chest:</strong> 
+    {{ piece.total_finished_bust | length_fmt }}
+  </li>
+  
+    
+  <li>
+    <strong>Materials:</strong>
+    {% if swatch.yarn_name %}
+      {% if swatch.yarn_maker %}
+        {{ swatch.yarn_maker }} {{ swatch.yarn_name }}
+      {% else %}
+        {{ swatch.yarn_name }}
+      {% endif %}
+    {% else %}
+      (The yarn used for {{ swatch.name }})
+    {% endif %}
+
+    {%  if piece.weight %}
+      {{ piece.weight }}g{% if piece.hanks or piece.yards %}, {% endif %}
+    {% endif %}
+    {%  if piece.hanks %}
+      {{ piece.hanks }} hanks{% if piece.yards %}, {%  endif %}
+    {%  endif %}
+    {%  if piece.yards %}
+      approximately {{ piece.yards | length_long_fmt}}
+    {%  endif %}
+
+    {% if not piece.yardage_is_precise %}
+		{% block yardage_help_section %}
+		{% endblock %}
+    {% endif %}
+  </li>  
+
+  <li>
+    <strong>Gauge:</strong> 
+    {{ swatch.stitches_in_four_inches | count_fmt}} sts &amp;
+    {{ swatch.rows_in_four_inches | count_fmt}} rows = 4&quot; /
+    {{ swatch.stitches_in_ten_cm | count_fmt}} sts &amp;
+    {{ swatch.rows_in_ten_cm | count_fmt}} rows = 10cm in
+    {% if swatch.archived %}
+      {{ swatch.name }}
+    {% else %}
+      <a href="{{ swatch.get_absolute_url }}">{{ swatch.name }}</a> 
+    {% endif %}
+    pattern stitch.
+  </li>
+
+  <li>
+    <strong>Needles:</strong> {{ needles }}  
+  </li>
+
+  <li>
+    <strong>Notions: </strong> {{ notions }}
+  </li>
+
+</ul>
+
+{% include "sweaters/sweater_renderer_templates/mock_pieces/design_choices_pattern_wizard_only.html" %}
+{% endwith %}
+{% endwith %}
+
+

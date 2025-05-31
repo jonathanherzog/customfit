@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% load md2 %}
+
+{% load crispy_forms_tags %}
+{% load thumbnail %}
+{% load pattern_conventions %}
+{% load static %}
+
+
+{% comment %}
+    This template is not intented to be user-facing. Sub-templates that are meant to be user facing
+    should provide the following blocks:
+
+    * form_header
+    * form_section
+
+{% endcomment %}
+
+{% block title %}Customize your {{ design.name }}{% endblock title %}
+
+{% block extra_compressible_css %}
+  <style type="text/css">
+    .form-actions {
+      margin-top: 20px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <!-- begin header -->
+    {% block form_header %}
+      <h2 class="test-knitter-header">
+        {{ design.name }}{% if design.designer %} by {{ design.designer.full_name }}{% endif %}
+      </h2>
+    {% endblock %}
+  <!-- end header -->
+  
+  <!-- begin design information area -->
+  <div class="row">
+    <div class="hidden-xs"><div class="margin-top-20"></div></div>
+
+    <!-- begin picture column -->
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      {% if design.image %} {# should always exist in production, may not locally #}
+        <div class="clearfix design-image"> {# needed so top margin on gallery works #}
+          <img src="{{ design.image | thumbnail_url:'col-md-4' }}" class="margin-top-0" />
+        </div>
+      {% endif %}
+
+      <div class="row clear-columns below-design-images-row">
+        {% block below_design_image_icon_block %}
+        {% endblock %}
+      </div>
+
+    <div class="hidden-xs">
+        <div class="margin-top-20">
+        </div>
+    </div>
+        {{ design.description | markdown }}
+
+       <div class="hidden-xs"><hr /></div>
+
+    </div>
+    <!-- end picture column -->
+
+    <!-- begin description column -->
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      <div class="visible-xs-block"><hr /></div>
+      <h3 class="margin-top-0">{% if design.name %}Customize your {{ design.name }}{% else %}Build your own pattern{% endif %}</h3>
+              <div class="visible-xs-block"><hr /></div>
+        {% block form_section %}
+        {% endblock %}
+
+       {% block post_form_block %}
+       {% endblock %}
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <!-- begin recommended materials section -->
+        {% if design.recommended_materials %}
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="recommended_materials_heading">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#recommended_materials" aria-expanded="false" aria-controls="recommended_materials">
+                  <strong><span class="caret"></span> recommended materials</strong>
+                </a>
+              </h4>
+            </div>
+            <div id="recommended_materials" class="panel-collapse collapse" role="tabpanel" aria-labelledby="recommended_materials_heading">
+              <div class="panel-body">
+                {{ design.recommended_materials | markdown }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        <!-- end recommended materials section -->
+
+        <!-- begin design choices section -->
+        {% block design_choices_panel_body_block %}
+        {% endblock %}
+
+        <!-- end design choices section -->
+
+        <!-- begin stitches section -->
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="stitches_heading">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#stitches" aria-expanded="false" aria-controls="stitches">
+                <strong><span class="caret"></span> stitches</strong>
+              </a>
+            </h4>
+          </div>
+          <div id="stitches" class="panel-collapse collapse" role="tabpanel" aria-labelledby="stitches_heading">
+            <div class="panel-body">
+              <ul class="list-unstyled">
+                {% for stitch in design.stitches_used %}
+                  <li>
+                    <a href="{{ stitch.get_absolute_url }}">{{ stitch }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- end stitches section -->
+
+      </div>
+
+    </div>
+    <!-- end description column -->
+
+  </div>
+  <!-- end design information area -->
+  <div class="row clear-columns hidden-md hidden-lg" id="gallery-mobile">
+    {% for image in design.alternate_images.all %}
+      <div class="col-xs-2" data-toggle="modal" data-target="#gallery_modal_{{ image.pk }}">
+        <img src="{{ image.image | thumbnail_url:'col-md-4-split' }}" />
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}
+{% block after_sidebar %}
+  <div class="row clear-columns hidden-xs hidden-sm" id="gallery">
+    {% for image in design.alternate_images.all %}
+      <div class="col-xs-2" data-toggle="modal" data-target="#gallery_modal_{{ image.pk }}">
+        <img src="{{ image.image | thumbnail_url:'col-md-4-split' }}" />
+      </div>
+    {% endfor %}
+  </div>
+  <!-- begin modals of gallery images -->
+  {# must be outside gallery area to avoid messing with layout #}
+  {% for image in design.alternate_images.all %}
+    <div class="modal fade" id="gallery_modal_{{ image.pk }}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <img src="{{ image.image | thumbnail_url:'col-md-8' }}" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-customfit-outline" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+  {% endfor %}
+  <!-- end modals of gallery images -->
+
+{% endblock after_sidebar %}
+

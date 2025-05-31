@@ -1,0 +1,135 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style type="text/css">
+
+    @page {
+      size: letter;
+
+      {% block left_header %}
+      {% endblock %}
+
+      {% block right_header %}
+      {% endblock %}
+
+      {% block left_footer %}
+      {% endblock %}
+
+      {% block right_footer %}
+      {% endblock %}
+    }
+
+
+    body {
+      line-height: 140%;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+
+    }
+    em {
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      font-style: italic;
+    }
+    strong {
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      font-weight: bolder;
+    }
+
+
+    h1 {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 28px;
+        margin: 20px auto 10px auto;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        text-align: left;
+        font-size: 23px;
+/*        margin: 10px auto 0px auto; */
+        line-height: 120%;
+    }
+    h2 small {
+        font-size: 20px;
+    }
+
+    h2#id-design-by {
+        color: #777;
+    }
+
+    h3 {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+      text-align: left;
+      font-size: 19px;
+      margin: 20px auto 10px auto;
+      font-weight: bold;
+    }
+
+    .border-top {
+        border-top: 1px solid #666;
+    }
+
+    .two_column {
+        columns: 2;
+        column-fill: balance;
+    }
+
+    img.header-logo {
+        max-width: 100%;
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: auto;
+    }
+
+    div.header {
+       border-bottom: 1px solid #666;
+    }
+
+    div.header h2 {
+       margin:  0px 20px 10px 10px;
+    }
+    div#id-header-logo {
+        float:left;
+        display: inline-block;
+        width:40%;
+    }
+
+    div#id-header-text {
+        float:right;
+        display: inline-block;
+        width: 55%;
+    }
+
+    div.header::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    {% block custom_css %}
+    {% endblock %}
+
+  </style>
+</head>
+
+<body>
+    <div class="header">
+        <div id="id-header-logo">
+            <img class="header-logo" src="{% static 'img/logos/CF_Logo_Large.png' %}"
+                alt="Customfit logo">
+        </div>
+        {% block title_text %}
+        {% endblock %}
+    </div>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

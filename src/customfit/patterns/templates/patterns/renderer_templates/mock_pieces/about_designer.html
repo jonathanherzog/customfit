@@ -1,0 +1,10 @@
+{% load md2 %}
+{% if designer.about_designer_long %}
+	{{ designer.about_designer_long | markdown}}
+{% elif designer.about_designer_short %}
+	{{ designer.about_designer_short | markdown}}
+{% else %}
+	{% comment %}
+		This shouldn't happen, but let's handle it safely if it does.
+	{% endcomment %}
+{% endif %}

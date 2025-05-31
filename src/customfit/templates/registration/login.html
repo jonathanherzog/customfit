@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <!-- begin intro text -->
+  <div class="row clearfix">
+    <div class="col-xs-12">
+      <div class="customfit-horizontal-tile">
+        <img src="{% static 'img/pile-of-sweaters.png' %}">
+        <div>
+          <p>
+            Want to create a pattern, measurement sets, or gauge info?
+          </p>
+          <p>
+            Log in to your account:
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end intro text -->
+
+  <!-- begin login form -->
+  {% comment %}
+    Normally we'd control all this formatting in forms.py via crispy forms helper,
+    but this is a built-in django view, and it's easier to lay it out with our usuual
+    idiom here in the template than override its forms.py and views.py.
+  {% endcomment %}
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3 left-justify-padding">
+      {% if form.non_field_errors %}
+        <ul class="alert-error">
+          {% for error in form.non_field_errors %}
+            <li>
+              {{ error }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+
+  <form method="post" action="{% url 'userauth:login' %}" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group{% if form.username.errors %} has-error{% endif %}">
+      <label for="id_username" class="col-sm-2 col-sm-offset-2 control-label">{{ form.username.label_tag }}</label>
+      <div class="col-sm-5 force-form-input-styling">
+        {{ form.username }}
+        {% if form.username.errors %}
+          <ul class="alert-error">
+            {% for error in form.username.errors %}
+              <li>{{ error|escape }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+    <div class="form-group{% if form.password.errors %} has-error{% endif %}">
+      <label for="id_password" class="col-sm-2 col-sm-offset-2 control-label">{{ form.password.label_tag }}</label>
+      <div class="col-sm-5 force-form-input-styling">
+        {{ form.password }}
+        {% if form.password.errors %}
+          <ul class="alert-error">
+            {% for error in form.password.errors %}
+              <li>{{ error|escape }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- The offsets here are to improve the appearance of centering under the
+           login form, whose center of mass is somewhat off-center because of the
+           offsets on the labels.
+      -->
+      <div class="col-sm-11 col-sm-offset-1">
+        <div class="row text-center">
+          <input type="submit" class="btn-customfit-outline" value="log in" />
+          <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- end login form -->
+
+{% endblock %}

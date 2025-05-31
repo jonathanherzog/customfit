@@ -1,0 +1,70 @@
+{% load pattern_conventions %}
+
+<p>
+  <strong>
+    Lace And Neck Shaping:
+  </strong>
+</p>
+
+<p>
+  Work as established until piece measures 
+  {{ bodypiece.hem_to_neckline_shaping_start |  length_fmt }},
+    {% if piece_is_graded %}
+      ending with a {{ pre_neckline_row_parity }} row.
+    {% else %}
+      ending with a {{ pre_neckline_row_parity }} row:
+      {% if armhole_to_neckline_in_rows %}
+        {{ hem_to_neckline_in_rows | count_fmt }} rows from beginning,
+        {{ armhole_to_neckline_in_rows | count_fmt }} rows from armhole.
+      {% elif last_increase_to_neckline_in_rows %}
+        {{ hem_to_neckline_in_rows | count_fmt }} rows from beginning,
+        {{ last_increase_to_neckline_in_rows | count_fmt }} rows from (and including)
+        last increase row.
+      {% elif last_decrease_to_neckline_in_rows %}
+        {{ hem_to_neckline_in_rows | count_fmt }} rows from beginning,
+        {{ last_decrease_to_neckline_in_rows | count_fmt }} rows from (and including)
+        last decrease row.
+      {% else %}
+        {{ hem_to_neckline_in_rows | count_fmt }} rows from beginning.
+      {% endif %}
+    {% endif %}
+  On last row, place markers around center {{ piece.lace_stitches | count_fmt }} stitches.
+</p>
+
+<p>
+  <em>Work lace:</em>
+</p>
+
+<p>
+  <em>Next row (RS):</em> Work to first lace marker, sm, work Row 1 of 
+  Shower Stitch to next lace marker, sm, work to end. Stockinette and 
+  armhole shaping on outside of lace markers, Shower Stitch between lace 
+  markers.
+</p>
+
+<p>
+  Continue armhole shaping, Stockinette Stitch, and Shower Stitch as 
+  established until lace measures
+    {% if piece_is_graded %}
+        {{ piece.lace_height_in_inches | length_fmt }}, ending with a RS row.
+    {% else %}
+        {{ piece.lace_height_in_inches | length_fmt }}: {{ piece.lace_height_in_rows | count_fmt }}
+        rows from start of lace, ending with a RS row.
+    {% endif %}
+    On your last row, mark center {{ piece.bottom_bindoffs | count_fmt }} sts.
+</p>
+
+<p>
+  <em>Next row (WS):</em> Purl to first marker, rm, work in Shower Stitch 
+  to final marker, rm, purl to end. One marker remains, for neck shaping.
+</p>
+
+<p>
+  <em>Shape neck:</em>
+</p>
+
+  <p>
+    <em>Next row (RS):</em> Work to marker, BO center {{ piece.bottom_bindoffs | count_fmt }} sts
+      to marker, work to end. You will now work the right shoulder only; place stitches for
+      left shoulder on a holder if desired.
+  </p>

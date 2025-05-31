@@ -1,0 +1,10 @@
+{% load md2 %}
+
+{% for stitch in stitches_with_notes %}
+  {{ stitch.notes | markdown }}
+{% endfor %}
+
+
+
+
+

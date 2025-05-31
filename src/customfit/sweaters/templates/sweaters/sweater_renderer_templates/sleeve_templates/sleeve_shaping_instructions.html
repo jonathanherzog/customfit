@@ -1,0 +1,32 @@
+{% load pattern_conventions %}
+
+{% if multiple_shaping_rows %}
+    <p> The shaping rows are worked as follows: </p>
+{% else %}
+    <p> The shaping row is worked as follows: </p>
+{% endif %}
+
+{% if sleeve_is_tapered %}
+    <p>
+        <em>Increase row (RS):</em> Work 1, m1R, work to last stitch,
+        m1L, work 1. Two stitches increased.
+    </p>
+{% else %}
+    <p>
+        <em>Decrease row (RS):</em> Work 1, ssk, work to last 3
+        stitches, k2tog, work 1. Two stitches decreased.
+    </p>
+{% endif %}
+
+{% if shaping_rows_on_ws %}
+    <p>
+    {% if piece.cast_ons < piece.bicep_stitches %}
+        Increase row (WS): Work 1, m1p, work to last stitch,
+        m1p, work 1. Two stitches increased.
+    {% else %}
+        Decrease row (WS): Work 1, p2tog, work to last 3 sts,
+        ssp, work 1. Two stitches decreased.
+    {% endif %}
+    </p>
+{% endif %}
+

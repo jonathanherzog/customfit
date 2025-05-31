@@ -1,0 +1,33 @@
+{% load pattern_conventions %}
+
+<p>Continue as established until piece measures
+  {{ piece.hem_to_shoulders | length_fmt }},
+    {% if piece_is_graded %}
+        ending with a {{ inner_side }} row.
+    {% else %}
+        ending with a {{ inner_side }} row:
+        {{ hem_to_shoulders_in_rows | count_fmt }} rows from beginning,
+        {%  if last_armhole_to_shoulders_in_rows.displayable %}
+            {{ last_armhole_to_shoulders_in_rows | count_fmt }} rows from (and including) last armhole decrease row.
+        {% else %}
+            {{ armhole_to_shoulders_in_rows | count_fmt }} rows from the beginning of armhole shaping.
+        {% endif %}
+    {% endif %}
+</p>
+<p>
+  <strong>Shape shoulders</strong>:
+</p>
+<p>
+  <em>Next row ({{ outer_side }}):</em> BO {{ piece.first_shoulder_bindoff | count_fmt }} 
+  sts, work to end. Work 1 {{ inner_side }} row even. 
+</p>
+<p>
+  BO remaining
+  {{ piece.second_shoulder_bindoff | count_fmt }} sts.
+</p>
+{% if reattach_instructions_needed %}
+  <p>
+    Reattach yarn to {{ reattach_side }} of held stitches.
+  </p>
+{% endif %}
+

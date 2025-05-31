@@ -1,0 +1,49 @@
+{% load thumbnail %}
+{% load static %}
+
+{% comment %}
+  This provides the rectangular sweater image with its name centered underneath.
+  It's used for displaying choices on (e.g.) the choose design or all-designs pages.
+{% endcomment %}
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+  <div class="customfit-action-tile-rectangle extra-margins">
+    <a href="{% url 'design_wizard:personalize' design_slug=design.slug %}">
+        <img src="{{ design.image | thumbnail_url:'col-md-3' }}" alt="{{ design.name }}" class="choose-design-hero">
+    </a>
+    <div class="silhouette_icon_array_div">
+        {% if design.silhouette_hourglass_allowed %}
+            <div class="silhouette_icon_div">
+                <img src="{% static  'img/silhouette-icon-hourglass.png' %}" class="silhouette_icon_img"
+                alt="This design is available in hourglass silhouette">
+            </div>
+        {% endif %}
+        {% if design.silhouette_half_hourglass_allowed %}
+            <div class="silhouette_icon_div">
+                <img src="{% static  'img/silhouette-icon-half-hourglass.png' %}" class="silhouette_icon_img"
+                alt="This design is available in half-hourglass silhouette">
+            </div>
+        {% endif %}
+        {% if design.silhouette_aline_allowed %}
+            <div class="silhouette_icon_div">
+                <img src="{% static  'img/silhouette-icon-aline.png' %}" class="silhouette_icon_img"
+                alt="This design is available in A-line silhouette">
+            </div>
+        {% endif %}
+        {% if design.silhouette_straight_allowed %}
+            <div class="silhouette_icon_div">
+                <img src="{% static  'img/silhouette-icon-straight.png' %}" class="silhouette_icon_img"
+                alt="This design is available in straight silhouette">
+            </div>
+        {% endif %}
+        {% if design.silhouette_tapered_allowed %}
+            <div class="silhouette_icon_div">
+                <img src="{% static  'img/silhouette-icon-tapered.png' %}" class="silhouette_icon_img"
+                alt="This design is available in tapered silhouette">
+            </div>
+        {% endif %}
+    </div>
+    <a href="{% url 'design_wizard:personalize' design_slug=design.slug %}">
+        <p>{{ design.name }}</p>
+    </a>
+  </div>
+</div>

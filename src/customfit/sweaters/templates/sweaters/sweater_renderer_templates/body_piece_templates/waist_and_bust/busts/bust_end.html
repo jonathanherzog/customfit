@@ -1,0 +1,10 @@
+{% load pattern_conventions %}
+
+<p>
+  Remove all shaping markers.
+</p>
+{% if piece.bust_stitches.displayable %}
+  <p>
+    {{ piece.bust_stitches | count_fmt }} stitches total. 
+  </p>
+{% endif %}

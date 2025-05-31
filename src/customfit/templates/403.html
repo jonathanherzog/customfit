@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Permission denied{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <p>
+      Sorry, but you don't have permission to view this content.
+    </p>
+  {% else %}
+    <p>
+      You need to be logged in to your CustomFit account to see this content.
+    </p>
+    <a href="{% url "userauth:login" %}" class="btn-customfit" target="_blank">log in</a>
+    <a href="{{ registration_url }}" class="btn-customfit">sign up</a>
+  {% endif %}
+{% endblock %}

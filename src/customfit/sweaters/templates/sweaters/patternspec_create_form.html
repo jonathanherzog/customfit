@@ -1,0 +1,149 @@
+{% extends "design_wizard/patternspec_create_form.html" %}
+{% load static %}
+
+{% block extra_compressible_js %}
+  <script type="text/javascript" src="{% static 'js/custom_design.js' %}"></script>
+  <script type="text/javascript" src='{% static "js/toggle_form_help_text.js" %}'></script>
+  <script type="text/javascript">
+    var $j = jQuery.noConflict();
+
+    $j(document).ready(function () {
+      /* Set up variables
+      ------------------------------------------------------------------------*/
+      var body_selector = $j('#id_body');
+      var body_options = {{ form.body_options | safe }};
+
+      var enable_hem = true;
+      var silhouette_has_hem_options = true;
+      var body_has_hem_options = true;
+      var body_has_silhouette_options = true;
+
+      var hem_length_parent = $j('#div_id_torso_length');
+      var hem_length_extras = $j('#div_id_torso_length input:not(#id_torso_length_2)');
+      var hem_length_average = $j('#id_torso_length_2');
+      var hem_warning = $j('#hem_warning');
+
+      var silhouette_options = $j('#id_silhouette');
+      var fit_options = $j('#id_garment_fit');
+      var hourglass_fits = $j('#id_garment_fit option[value^="FIT_HOURGLASS"]');
+      var hourglass_silhouette = $j('#id_silhouette option[value="SILHOUETTE_HOURGLASS"]');
+      var half_hourglass_silhouette = $j('#id_silhouette option[value="SILHOUETTE_HALFGLASS"]');
+
+
+      var women_fits = $j('#id_garment_fit option[value^=FIT_WOMENS]');
+      var men_fits = $j('#id_garment_fit option[value^=FIT_MENS]');
+      var child_fits = $j('#id_garment_fit option[value^=FIT_CHILDS]');
+
+      /* Helper functions ahoy
+      ------------------------------------------------------------------------*/
+      function disable_hem_options () {
+          hem_length_parent.addClass('disabled');
+          hem_length_extras.attr('disabled', 'disabled');
+          hem_length_extras.prop('checked', false);
+          hem_length_average.prop('checked', true);
+      }
+
+      function enable_hem_options () {
+          enable_hem = silhouette_has_hem_options && body_has_hem_options;
+          if (enable_hem) {
+            hem_length_parent.removeClass('disabled');
+            hem_length_extras.removeAttr('disabled');
+          }
+      }
+
+      function show_hourglass_hem_options () {
+        silhouette_has_hem_options = true;
+        enable_hem_options();
+      }
+
+      function show_non_hourglass_hem_options () {
+        silhouette_has_hem_options = false;
+        disable_hem_options();
+      }
+
+      function reconcile_fit_options () {
+        // Synchronize garment fit options with body type and silhouette choice.
+        var silhouette = silhouette_options.val();
+        var body_pk = body_selector.val();
+        var selected_fit = $j('#id_garment_fit option:selected');
+
+        if (!silhouette || !body_pk) {
+          // Fit options depend on both silhouette and body; don't display them
+          // until we know our parameters, and deselect any previously selected
+          // options.
+          fit_options.attr('disabled','disabled');
+          selected_fit.removeAttr('selected');
+        } else {
+          fit_options.removeAttr('disabled');
+
+          if (( silhouette == hourglass_silhouette.val() || silhouette == half_hourglass_silhouette.val())) {
+            // If the silhouette is hourglass, only hourglass fits can be shown.
+            hourglass_fits.removeAttr('disabled').show();
+            women_fits.attr('disabled','disabled').hide();
+            men_fits.attr('disabled','disabled').hide();
+            child_fits.attr('disabled','disabled').hide();
+          } else {
+            // If the silhouette is non-hourglass, hourglass fits cannot be shown,
+            // and other choices depend on body type.
+            hourglass_fits.attr('disabled','disabled').hide();
+
+            try {
+              var type = body_options[body_pk]['type'];
+
+              if ( type == 'woman' ) {
+                women_fits.removeAttr('disabled').show();
+                men_fits.attr('disabled','disabled').hide();
+                child_fits.attr('disabled','disabled').hide();
+              } else if ( type == 'man') {
+                women_fits.attr('disabled','disabled').hide();
+                men_fits.removeAttr('disabled').show();
+                child_fits.attr('disabled','disabled').hide();
+              } else if ( type == 'child') {
+                women_fits.attr('disabled','disabled').hide();
+                men_fits.attr('disabled','disabled').hide();
+                child_fits.removeAttr('disabled').show();
+              } else {
+                women_fits.removeAttr('disabled').show();
+                men_fits.removeAttr('disabled').show();
+                child_fits.removeAttr('disabled').show();
+              }
+            } catch (err) {
+                // If there is no body type (e.g. because the user has selected the null
+                // body option), show everything.
+                women_fits.removeAttr('disabled').show();
+                men_fits.removeAttr('disabled').show();
+                child_fits.removeAttr('disabled').show();
+            }
+          }
+        }
+
+        // If the currently selected fit is incompatible with the body and
+        // silhouette, deselect it.
+        if ( selected_fit.attr('disabled') == 'disabled') {
+          selected_fit.removeAttr('selected');
+        }
+      }
+
+
+      /* Set up state on page load
+      ------------------------------------------------------------------------*/
+
+      reconcile_fit_options();
+
+      /* Perform actions on user events
+      ------------------------------------------------------------------------*/
+
+      // Reconcile fit options every time they select a new body.
+      body_selector.change(function () {
+        reconcile_fit_options()
+      });
+
+      // Reconcile fit options every time they select a new silhouette.
+      silhouette_options.change(function () {
+        var silhouette = $j(this).val();
+        reconcile_fit_options();
+      })
+    });
+
+  </script>
+{% endblock %}

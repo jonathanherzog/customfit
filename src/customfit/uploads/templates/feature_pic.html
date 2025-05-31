@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Feature picture{% endblock %}
+
+{% block content %}
+  <h1>Confirm feature</h1>
+  <section>
+    <div class="row">
+      <div class="col-sm-3 col-xs-12">
+        <img src="{{ picture.picture.url }}" class="thumbnail">
+      </div>
+      <div class="col-sm-9 col-xs-12">
+        <p>
+          Set this as the featured picture for {{ picture.object.name }}?
+        </p>
+        <form method="POST" action="#">
+          {% csrf_token %}<button type="submit" class="btn-customfit-action">Yes, feature it!</button>
+          <a class="btn-customfit-outline" href="{{ cancel_url }}">Actually, let's not.</a>
+        </form>
+      </span>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,35 @@
+                  <h3><a href="{{ stitch.get_absolute_url }}">{{ stitch.name }}</a></h3>
+
+                  {% if stitch.short_description %}
+                    <p>
+                      {{ stitch.short_description }}
+                    </p>
+                  {% endif %}
+
+                  <!-- begin links to related designs -->
+                  {% if visible_designs %}
+                    <p>
+                      <em>Designs using this stitch:</em> 
+                      {% for design in visible_designs %}
+                        <a href="{% url 'design_wizard:personalize' design.slug %}">
+                          {{ design.name }}</a>{% if not forloop.last %}, {% endif %}
+                      {% endfor %}
+                    </p>
+                  {% endif %}
+                  <!-- end links to related designs -->
+
+                  <!-- begin see-details button -->
+                  {% if stitch.chart %}
+                    <a href="{{ stitch.get_absolute_url }}">
+                      <button class="btn-customfit">
+                        see details &amp; chart
+                      </button>
+                    </a>
+                  {% else %}
+                    <a href="{{ stitch.get_absolute_url }}">
+                      <button class="btn-customfit">
+                        see details
+                      </button>
+                    </a>
+                  {% endif %}
+                  <!-- end see-details button -->

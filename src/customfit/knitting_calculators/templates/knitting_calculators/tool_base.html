@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+{% block title %}{{ tool_name }}{% endblock %}
+
+{% block extra_compressible_css %}
+  {% if not precompress_less %}
+    <link href="{% static 'less/customfit_forms.less' %}" media="all" rel="stylesheet/less" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>
+  {% else %}
+    <link href="{% static 'css/customfit_forms.css' %}" media="all" rel="stylesheet" type="text/css"/>
+  {% endif %}
+
+  <style type="text/css">
+    .inline-javascript-warning {
+      display: none;
+      float: right;
+    }
+
+    form .help-callout {
+      margin-left: 5px;
+      margin-right: 15px;
+    }
+
+    @media (max-width: 767px) {
+      .help-callout {
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+    }
+
+    legend {
+      margin-top: 0;
+    }
+
+    .greyscale {
+      color: #999;
+    }
+  </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <h3>{{ tool_name }}</h3>
+
+    {%  block calculator_description %}
+
+        This is a default description. You should overwrite this in a child template.
+
+    {% endblock %}
+
+    <div>
+        <h3>INPUT</h3>
+        {% crispy form %}
+    </div>
+
+    <h3>INSTRUCTIONS</h3>
+
+    {% block calculator_output %}
+        {%  if instruction_text %}
+            <div id="id_instruction_text">
+                {{ instruction_text }}
+            </div>
+        {% endif %}
+    {%  endblock %}
+
+    <div>
+    <a href="{% url 'calculators:tool_list' %}">go back to list</a>
+    </div>
+
+
+{% endblock %}
+
+
+{% block extra_compressible_js %}
+  <script type="text/javascript" src='{% static "js/toggle_form_help_text.js" %}'></script>
+    {% block calculator_specific_js %}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,9 @@
+*.log
+*.pot
+*.pyc
+.coverage
+.gitignore~
+initial_data_old.json
+env/
+.DS_Store
+*../.idea*

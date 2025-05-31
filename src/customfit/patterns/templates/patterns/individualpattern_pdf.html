@@ -1,0 +1,119 @@
+{% extends "pdf_base.html" %}
+
+{% block left_header %}
+    @top-left {
+        content: "{{ pattern.name }} - " counter(page);
+        font-size: 9pt;
+        margin: 0px;
+        line-height: 140%;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+    }
+{% endblock %}
+
+{% block left_footer %}
+    @bottom-left {
+        content: "This pattern generated especially for {{ pattern.user }}, on {{ pattern.creation_date | date:"M j, Y" }}. For personal use only.";
+        border-top: 1px solid #666;
+        font-size: 9pt;
+        padding-top: 2px;
+        line-height: 140%;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+    }
+{% endblock %}
+
+{% block custom_css %}
+
+    @page :first{
+        @top-left{
+            visibility: hidden;
+        }
+        @bottom-left {
+            visibility: hidden;
+        }
+    }
+
+    div.schematic-section {
+        page-break-before: always;
+        page-break-after: always;
+    }
+
+    img.schematic-image {
+        max-width:3in;
+        max-height:3in;
+        /* border: 1pt solid black; */
+    }
+
+    div.div-schematic-image {
+        float:left;
+        width:50%;
+        display:inline-block;
+    }
+
+    div.div-schematic-measurements {
+        float:right;
+        width:45%;
+        height:100%;
+        display: table-cell;
+        vertical-align: middle;
+        margin-top: 0.25in; /* To account for the white-space at the top of each schematic image */
+        margin-left: 5%;
+    }
+
+    div.div-schematic-image .schematic-image {
+        margin-left:auto;
+        margin-right:auto;
+        display:block;
+    }
+
+    div.div-schematic-piece-pair::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    div.div-schematic-piece-pair {
+        margin-bottom: .25in;
+    }
+
+    div.stitch-chart-section {
+    }
+
+    img.stitch-chart {
+        margin-left:auto;
+        margin-right:auto;
+        display:block;
+        max-width:100%;
+    }
+
+
+    #id-preamble {
+        page-break-after: always;
+    }
+{% endblock %}
+
+{% block title_text %}
+    <div id="id-header-text">
+        <h2 class="title">
+            {{ pattern_title | upper }}
+        </h2>
+        {% if designer %}
+            <h2 id="id-design-by"><small>
+                DESIGN BY {{ designer.full_name | upper }}
+            </small></h2>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <div id="id-preamble">
+    {{ preamble_text }}
+    </div>
+
+    <div class="two_column">
+        {{ instruction_text }}
+        {{ postamble_text }}
+    </div>
+
+    {{ chart_text }}
+{% endblock %}

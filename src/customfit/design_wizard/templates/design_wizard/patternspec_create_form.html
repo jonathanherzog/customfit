@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% comment %}
+    This template is not intented to be user-facing. Sub-templates that are meant to be user facing
+    should provide the following blocks:
+
+    * form_header
+
+{% endcomment %}
+
+{% block title %}Create a Pattern{% endblock %}
+
+{% block extra_compressible_css %}
+  {% if not precompress_less %}
+    <link href="{% static 'less/customfit_forms.less' %}" media="all" rel="stylesheet/less" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>
+  {% else %} 
+    <link href="{% static 'css/customfit_forms.css' %}" media="all" rel="stylesheet" type="text/css"/>
+  {% endif %}
+  <style type="text/css">
+
+    .disabled img {
+      -webkit-filter: grayscale(90%);
+         -moz-filter: grayscale(90%);
+           -o-filter: grayscale(90%);
+          -ms-filter: grayscale(90%);
+              filter: grayscale(90%); 
+    }
+
+    .disabled label {
+      cursor: inherit;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+    {% block form_header %}
+        <h2>Build your own pattern</h2>
+    {% endblock %}
+
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {% crispy form %}
+  </form>	
+{% endblock %} 
+
+
+{% block extra_compressible_js %}
+{% endblock %}

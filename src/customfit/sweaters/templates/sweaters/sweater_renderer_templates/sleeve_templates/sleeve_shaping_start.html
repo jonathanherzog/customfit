@@ -1,0 +1,11 @@
+{% load pattern_conventions %}
+<p>
+    Continue as established until sleeve measures {{ piece.row_before_first_shaping_row_height | length_fmt }},
+    {% if piece_is_graded %}
+        ending with a WS row.
+    {% else %}
+        ending with a WS row: {{ piece.row_before_first_shaping_row | count_fmt }} rows from beginning.
+    {% endif %}
+</p>
+
+<strong>Shape sleeve:</strong>

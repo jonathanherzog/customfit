@@ -1,0 +1,49 @@
+{% extends "bodies/body_generic_form.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+
+{% block title %}Create new measurement set{% endblock %}
+
+{% block form_header %}
+  <h2>Create new measurements</h2>
+{% endblock %}
+
+
+{% block start_with_standards %}
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-4">
+      <div class="help-callout">
+        <p>START WITH STANDARDS</p>
+
+        <p class="small extra-margins">
+          If you don't have full measurements, you might want to try using the
+          <a href="https://www.craftyarncouncil.com/standards/body-sizing">CYCA</a> standard body
+            measurements based on your
+          full bust/chest.
+        </p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-7 margin-top-20">
+		<p>
+			<strong>Essential measurements</strong> can be used to create straight-sided 
+			sweaters with long sleeves. Other sweaters will require <strong>extra measurements</strong>.
+            We'll ask for these as we need them, but we recommend that you add them now if you
+            think you'll need them later (for waist shaping, for example, or other sleeve/hem lengths).
+		</p>
+		<p>
+			Body circumferences should be your body's actual measurements at 
+			the points indicated. All lengths should be taken based on 
+			<strong>your preferences</strong>, as CustomFit will use them 
+			directly. Please enter all measurements in decimal form.
+		</p>
+		<p>
+			<strong>All Essential measurements are required</strong> to save the measurement 
+			set. After saving, you can add missing measurements but you won't 
+			be able to change existing numbers.
+	  	</p>
+    </div>
+  </div>
+{% endblock %}

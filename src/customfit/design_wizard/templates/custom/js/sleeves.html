@@ -1,0 +1,18 @@
+{% load static %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script type="text/javascript" src="{% static 'js/customfit.js' %}"></script>
+
+<script type="text/javascript">
+    customfit.setupImageRadio('.controls img');
+
+    // Settings
+    customfit.COMPILATION = '#wizard-sidebar-image';
+    customfit.PREFIX = '3-';
+    customfit.COMPILATION_CLASS += ' compilation-configured-absolute';
+    customfit.defaults = {
+        'garment_type': '{{ garment_type }}',
+        'neckline_style': '{{ neckline_style }}'
+    };
+</script>
+
+{% include "custom/js/common.html" %}

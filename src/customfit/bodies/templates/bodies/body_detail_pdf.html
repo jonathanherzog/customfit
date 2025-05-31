@@ -1,0 +1,28 @@
+{% extends "pdf_base.html" %}
+
+
+
+{% block left_footer %}
+    @bottom-left {
+        content: "Printed for {{ user_name }}";
+        border-top: 1px solid #666;
+        font-size: 9pt;
+        padding-top: 2px;
+        line-height: 140%;
+        font-family: Verdana', Arial, Helvetica, sans-serif;
+    }
+{% endblock %}
+
+
+{% block title_text %}
+    <div id="id-header-text">
+        <h2 class="title">
+            {{ body.name }}
+        </h2>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    {% include "bodies/measurements_table.html" %}
+{% endblock %}

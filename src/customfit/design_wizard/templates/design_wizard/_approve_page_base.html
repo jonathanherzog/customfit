@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load static %}
+{% load pattern_conventions %}
+{% load thumbnail %}
+
+{% comment %}
+    This template is not intented to be user-facing. Sub-templates that are meant to be user facing
+    should provide the following blocks:
+
+        * title
+        * summary_header
+
+    Optional blocks for sub-templates:
+
+        * subscription_nag
+        * approve_buttons
+        * even_more_compressible_js
+
+    Context variables:
+        * top_level_lengths: list of (name/val) pairs, where val is a length, to be included in the
+           top-level list of information
+        * schematic_template_name: name/path of a template that will contain the schematic diagrams
+            & associated numbers
+
+{% endcomment %}
+
+
+{% block title %}{% endblock %}
+
+{% block content %}
+  <!-- begin top info block -->
+    {%  block summary_header %}
+      <h2>SUMMARY: FINISHED DIMENSIONS</h2>
+    {%  endblock %}
+
+  <!-- begin top info block -->
+  <div class="row">
+    <div class="col-sm-3 col-xs-12">
+      <img src="{{ featured_image_url }}" class="img-rounded margin-top-0">
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      <p>
+        These final garment dimensions are <strong>based on your gauge and the design
+        you chose</strong>. They may have changed (just a little!) from the numbers on
+        the last page.
+      </p>
+        {% if schematic_template_name %}
+          <p>
+            You can see more detail below.
+          </p>
+        {% endif %}
+    </div>      
+    {# The offset ensures adequate separation from the previous column of text. #}
+    <div class="col-sm-4 col-sm-offset-1 col-xs-12">
+      <p class="margin-top-0 margin-bottom-5">
+        <strong>pattern name:</strong>
+      </p>
+      <p class="text-indent margin-top-0">
+        {{ pattern.name }}
+      </p>
+        {% for name, value in top_level_lengths %}
+          <p class="margin-bottom-5">
+            <strong>{{ name }}:</strong>
+          </p>
+          <p class="text-indent margin-top-0">
+            {{ value | length_fmt }}
+          </p>
+        {% endfor %}
+      <p class="margin-bottom-5 clearfix">
+        <strong class="pull-left">estimated yardage:&nbsp;</strong><span class="help-callout-circle-unpositioned-blue" id="trigger-yardage-help">?</span>
+      </p>
+      <p class="text-indent margin-top-0">
+        {{ pattern.yards | length_long_fmt}}
+      </p>
+      <div class="hidden text-indent" id="yardage-help">
+        {% if pattern.yardage_is_precise %}
+          <p>
+            This is our best guess, but yardage estimates can be tricky! If something seems off to you, consider checking this against <a href="http://knitbot.com/stashbot/">Stashbot</a> or another yardage estimator.
+          </p>
+        {% else %}
+          <p>
+            This is our best guess, but yardage estimates can be tricky! If something seems off to you, you can help CustomFit calculate a better estimate. <a href="{{ swatch.get_absolute_url }}">Edit your gauge</a> to add:
+          </p>
+
+          <ul>
+            {% if not swatch.length_per_hank %}
+              <li>
+                Length per hank
+              </li>
+            {% endif %}
+            {% if not swatch.weight_per_hank %}
+              <li>
+                Weight per hank
+              </li>
+            {% endif %}
+            {% if not swatch.full_swatch_weight %}
+              <li>
+                Weight of full swatch (in grams).
+              </li>
+            {% endif %}
+            {% if not swatch.full_swatch_height %}
+              <li>
+                Height of full swatch
+              </li>
+            {% endif %}
+            {% if not swatch.full_swatch_width %}
+              <li>
+                Width of full swatch
+              </li>
+            {% endif %}
+          </ul>
+
+          <p>
+            You can also check your estimate against <a href="http://knitbot.com/stashbot/">Stashbot</a> or another yardage estimator.
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <!-- end top info block -->
+
+
+    {% block approve_buttons %}
+    {% endblock %}
+
+  {% block subscription_nag %}
+  {% endblock %}
+
+  {% if schematic_template_name %}
+      <!-- begin schematic details -->
+      <h2>SUMMARY: FINISHED DIMENSIONS</h2>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <p class="small">
+            please note: schematic pictures are generic images for dimension location reference only
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-10">
+          {% include schematic_template_name %}
+        </div>
+      </div>
+      <!-- end schematic details -->
+  {% endif %}
+
+{% endblock %}
+
+{% block extra_compressible_js %}
+  <script type="text/javascript">
+    var $j = jQuery.noConflict();
+
+    $j(document).ready(function() {
+      var yardage_trigger = $j('#trigger-yardage-help');
+      var yardage_help = $j('#yardage-help');
+
+      yardage_trigger.click(function() {
+        yardage_help.toggleClass('hidden');
+      });
+    });
+  </script>
+
+    {% block even_more_compressible_js %}
+    {% endblock %}
+{% endblock %}

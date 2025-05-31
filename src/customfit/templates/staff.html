@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Staff Stuff</h1>
+  
+  <p>
+    Hi, {{ user.username }}!  Here's a page-o-links to the staff-only stuff you
+    can do, plus documentation of things requiring a bit more manual
+    intervention.
+  </p>
+  
+  <h2>Links to staff functions</h2>
+  <ul>
+    <li>
+      <a href="{% url 'admin:index' %}">Django admin interface</a>
+    </li>
+      <li> Graded patterns
+      <ul>
+        <li>
+          <a href="{% url 'graded_wizard:choose_design' %}">Make a graded pattern</a>
+        </li>
+        <li>
+          <a href="{% url 'graded_wizard:list_patterns' %}">See your graded patterns</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="{% url 'impersonate-search' %}">Impersonate a user</a>
+    </li>
+    <li>
+      <a href="{% url 'designs:create_collection' %}">Create a new collection</a>
+      (this assumes you've already created the designs, as below). Note that to <em>edit</em>
+      collections you'll have to use the admin interface; you can change the name field under
+      Collection, but you need to go to each individual Design and set their foreign key to the
+      correct Collection. Django admin didn't provide great features for this. tl;dr you will be
+      <em>much happier</em> if you plan the collection, create all the designs, create the
+      collection here, and don't need to edit it.)
+    </li>
+  </ul>
+  
+  <h2>Creating new designs</h2>
+  <p>
+    If you'd like to create a <b>new prefilled design</b>, you do that through the
+    admin interface:
+  </p>
+  <ul>
+    <li>
+      <a href="{% url 'admin:sweaters_sweaterdesign_add' %}">Add a new sweater design</a>.
+      Make sure you:
+    </li>
+    <ul>
+      <li>
+        Add a picture.
+      </li>
+      <li>
+        Add a description
+      </li>
+      <li>
+        DO set the 'visibility' to 'Viewable by all CF users' (or
+        subscribers only, if you like).
+      </li>
+    </ul>
+    <li>
+      Your design is now available for viewing at /designs/personalize/(NUMBER),
+      where (NUMBER) is the database ID of the design you just created. You 
+      can view this on the
+      <a href="{% url 'admin:sweaters_sweaterdesign_changelist' %}">design admin
+      page</a>.  Use the "By can be user visible only" filter to make it easier to
+      find.
+    </li>
+  </ul>
+    
+{% endblock %}

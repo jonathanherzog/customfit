@@ -1,0 +1,14 @@
+{% load pattern_conventions %}
+<p>
+    Work even until piece measures {{ piece.begin_decreases_height | length_fmt }},
+    {% if piece_is_graded %}
+         ending with a RS row.
+    {% else %}
+        {% if piece.decrease_marker_placement_height_in_rows %}
+            ending with a RS row:
+            {{ piece.decrease_marker_placement_height_in_rows | count_fmt }} rows from beginning.
+        {% else %}
+             ending with a RS row.
+        {% endif %}
+    {% endif %}
+</p>

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load static %}
+
+{% block title %}Make a pattern{% endblock title %}
+
+{% block content %}
+
+  <h2>Designs</h2>
+
+  <div class="row clear-columns">
+    {% for design in designs %}
+      {% include 'designs/choose_design_tile.html' %}
+    {% endfor %}
+  </div>
+  <div class="row margin-top-20">
+    <div class="col-xs-12 text-center">
+      <a href="{% url 'designs:all_designs' %}" class="btn-customfit-outline">see all designs</a>
+    </div>
+  </div>
+
+
+{% if collection_designs %}
+  <h2>The latest collection</h2>
+
+  <div class="row clear-columns">
+    {% for design in collection_designs %}
+      {% include 'designs/choose_design_tile.html' %}
+    {% endfor %}
+  </div>
+  {% if has_collections %}
+    <div class="row margin-top-20">
+      <div class="col-xs-12 text-center">
+        <a href="{% url 'designs:all_collections' %}" class="btn-customfit-outline">see all collections</a>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+
+<h2>Build your own design</h2>
+
+<div class="row">
+  <div class="col-xs-12">
+      {% for garment_name, myo_url, myo_image in myo_options %}
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 customfit-action-tile-rectangle extra-margins">
+                <a href="{{ myo_url }}">
+                    <img src="{% static myo_image | thumbnail_url:'col-md-3'  %}" class="choose-design-hero">
+                    <p>Make your own {{ garment_name }}</p>
+                </a>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

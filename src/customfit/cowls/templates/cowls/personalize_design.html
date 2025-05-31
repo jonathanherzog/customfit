@@ -1,0 +1,13 @@
+{% extends "design_wizard/personalize_design_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block below_design_image_icon_block %}
+    {% comment %}
+        This section intentionally left blank to repress silhouette icons
+    {% endcomment %}
+{% endblock %}
+
+{% block form_section %}
+     {% crispy form %}
+{% endblock %}
+

@@ -1,0 +1,77 @@
+{% load pattern_conventions %}
+
+{%  if show_shaping %}
+    <h4>Shape sleeve cap:</h4>
+{% endif %}
+
+{% if piece.armscye_x.any %}
+    <p>
+        BO {{ piece.armscye_x | count_fmt }} stitches at the beginning of the next 2 rows.
+    </p>
+{% endif %}
+
+{% if piece.armscye_y.any %}
+    <p>
+      BO {{ piece.armscye_y | count_fmt }} stitches at the beginning of the following
+      2 rows. {{ piece.pre_bead_game_stitch_count | count_fmt }} stitches remain.
+    </p>
+{% endif %}
+
+{% if piece.six_count_beads.any or piece.four_count_beads.any or piece.two_count_beads.any or piece.one_count_beads.any %}
+    <p>
+      Decrease 1 stitch at <em><strong>each end</strong></em> of
+      {% if piece.six_count_beads.any %}
+        every 3rd RS row {{ piece.six_count_beads | count_fmt }}
+        {% if piece.four_count_beads.any or piece.two_count_beads.any or piece.one_count_beads.any %}
+          times, then
+        {% else %}
+          times as follows:
+        {% endif %}
+      {% endif %}
+
+      {% if piece.four_count_beads.any %}
+        every other RS row {{ piece.four_count_beads | count_fmt }}
+        {% if piece.two_count_beads.any or piece.one_count_beads.any %}
+          times, then
+        {% else %}
+          times as follows:
+        {% endif %}
+      {% endif %}
+
+      {% if piece.two_count_beads.any %}
+         every RS row {{ piece.two_count_beads | count_fmt }}
+         {% if piece.one_count_beads.any %}
+          times, then
+        {% else %}
+          times as follows:
+        {% endif %}
+      {% endif %}
+
+      {% if piece.one_count_beads.any %}
+         every row {{ piece.one_count_beads | count_fmt }} times as follows:
+      {% endif %}
+    </p>
+    <p>
+    <em>Decrease row (RS):</em> Knit 1, ssk, work to last 3 sts, k2tog, k 1. Two stitches decreased.
+    </p>
+    {% if piece.one_count_beads.any %}
+      <p>
+         <em>Decrease row (WS):</em> Purl 1, p2tog-tbl, work to last 3 sts, p2tog, p 1. Two stitches decreased.
+      </p>
+    {% endif %}
+
+    <p>
+      {{ piece.post_bead_game_stitch_count | count_fmt }} stitches remain.
+    </p>
+{% endif %}
+
+{% if piece.armscye_d.any %}
+    <p>
+      BO {{ piece.armscye_d | count_fmt }} stitches at the beginning of the next 4 rows.
+        {{ piece.armscye_c | count_fmt }} stitches remain.
+    </p>
+{% endif %}
+
+<p>
+  BO all stitches.
+</p>

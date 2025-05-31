@@ -1,0 +1,14 @@
+{% extends 'design_wizard/personalize_design_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body_attributes %} class="personalize-individual"{% endblock %}
+
+{% block form_header %}
+  <h2 class="test-knitter-header">
+    {{ design.name }}{% if design.designer %} by {{ design.designer.full_name }}{% endif %}
+  </h2>
+{% endblock %}
+
+{% block form_section %}
+     {% crispy form %}
+{% endblock %}

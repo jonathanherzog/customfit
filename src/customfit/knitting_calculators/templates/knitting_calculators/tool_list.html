@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Handy Knitting Calculators{% endblock %}
+
+{% block content %}
+    {% if user.is_anonymous %}
+        <p>
+            CustomFit creates patterns for <strong>your</strong> gauge and size, instead of forcing you to match some
+            mythical "average" knitter. You can buy patterns one at a time, or subscribe to the site to get a certain
+            number of patterns each month. <strong>Subscribers also get access to the handy calculators below.</strong>
+            Want to know more? <a href="{{ subscription_info_url }}" target="_blank">Click here to learn about becoming
+            a CustomFit Maker.</a>
+        </p>
+    {% elif user.profile.is_individual_subscriber %}
+        <p>
+            <strong>Thanks for being a subscriber!</strong> In addition to your pattern generations, you get unlimited
+            access to a set of handy calculators. Want a calculator you don't see here?
+            <a href="mailto:{{ SUPPORT_EMAIL_BARE }}">Click here</a>, or drop me a note at {{ SUPPORT_EMAIL_BARE }},
+            to email me a suggestion.
+        </p>
+    {% elif user.profile.is_alpha_tester %}
+        <p>
+            <strong>Thanks for supporting CustomFit!</strong> In addition to your pattern generations,
+            you get unlimited access to a set of handy calculators. Want a calculator you don't see here?
+            <a href="mailto:{{ SUPPORT_EMAIL_BARE }}">Click here</a>, or drop me a note at {{ SUPPORT_EMAIL_BARE }},
+            to email me a suggestion.
+        </p>
+    {% else %}
+        <p>
+            In addition to a number of pattern generations each month, <strong>subscribers get access to a set of handy
+            calculators.</strong> Want to know more? <a href="{{ subscription_info_url }}" target="_blank">Click here to learn
+            about becoming a CustomFit Maker.</a>
+        </p>
+    {% endif %}
+
+    <h3>Handy Calculators</h3>
+    <ul>
+        <li>
+            <a href="{% url 'calculators:shaping_calculator' %}">Shaping placer</a>. Provide starting and ending stitch
+            counts, a total number of rows, and the number of stitches added or removed on each shaping row. Calculator
+            evenly spaces shaping.
+        </li>
+        <li>
+            <a href="{% url 'calculators:buttonhole_calculator' %}">Buttonhole spacer</a>. Provide the number of stitches
+            in your button band, the number of buttons, and the number of stitches each buttonhole uses. Calculator
+            evenly spaces buttons.
+        </li>
+        <li>
+            <a href="{% url 'calculators:armcap_shaping' %}">Sleeve cap generator.</a> Create sleeve cap instructions
+            for a set-in sleeve garment unique to your gauge and body. Instructions are within the calculator.
+        </li>
+        <li>
+            <a href="{% url 'calculators:pickup_calculator' %}">Pickup calculator.</a> Provide stitch gauge,
+            row gauge, and number of rows along a vertical edge. Calculator gives a total number of stitches to
+            pick up, and a ratio by which to pick up.
+        </li>
+        <li>
+            <a href="{% url 'calculators:gauge_calculator' %}">Gauge calculator.</a> Provide any two of: gauge,
+            length, stitch or row count, and get back the third. More detail within the calculator.
+        </li>
+    </ul>
+
+{% endblock %}
+

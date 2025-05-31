@@ -1,0 +1,16 @@
+{% load pattern_conventions %}
+<p>
+  Work even as established until piece measures {{ piece.hem_to_waist | length_fmt }},
+    {% if piece_is_graded %}
+      ending with a WS row.
+    {% else %}
+      ending with a WS row:
+      {% if piece.last_decrease_to_waist_in_rows.displayable %}
+        {{ piece.hem_to_waist_in_rows | count_fmt }} rows from beginning,
+        {{ piece.last_decrease_to_waist_in_rows | count_fmt }} rows from
+        (and including) decrease row.
+      {% else %}
+        {{ piece.hem_to_waist_in_rows | count_fmt }} rows from beginning.
+      {% endif %}
+    {% endif %}
+</p>

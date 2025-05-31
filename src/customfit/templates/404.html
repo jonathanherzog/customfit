@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Not found{% endblock %}
+
+{% block content %}
+  <h2>Aw, sadface!</h2>
+
+  <p>
+    We can't seem to find the page you're looking for. Sorry about that!
+  </p>
+
+  {% if user.is_authenticated %}
+	  <a href="{% url 'home_view' %}" class="btn-customfit">head back home</a>
+  {% else %}
+    <p>
+      Maybe you need a CustomFit account to see this page? 
+    </p>
+    <a href="{{ registration_url }}" class="btn-customfit" target="_blank">sign up here</a>
+  {% endif %}
+{% endblock %}

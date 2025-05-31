@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About CustomFit{% endblock %}
+
+{% block content %}
+
+<p class="lead-customfit">
+    <strong>Sweater knitting has never been so easy.</strong>
+  </p>
+
+  <p class="lead-customfit">
+     CustomFit lets you use <strong>any yarn</strong> you want, for <strong>any of our designs</strong>, and <strong>creates a pattern</strong> to your choices. We have patterns for <strong>men</strong>, <strong>kids</strong>, and <strong>women</strong> (with or without waist shaping). 
+  </p>
+  
+    <p class="lead-customfit">
+    Thousands of knitters have already made a great sweater (or three). Click on a design below to get started on yours!
+  </p>
+
+
+  <!-- begin sweater browse area -->
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Browse the designs</h2>
+      {% include 'gallery_include.html' %}
+    </div>
+  </div>
+  <!-- end sweater browse area -->
+
+  <!-- begin custom pattern area -->
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Create a custom pattern</h2>
+      <div class="row">
+        <div class="col-sm-4 col-xs-12">
+          <div class="customfit-action-tile-narrow">
+            <img src="{% static 'img/My_Gauge.png' %}">
+            <p>Written to your gauge, in your yarn.</p>
+          </div>      
+        </div>
+        <div class="col-sm-4 col-xs-12">
+          <div class="customfit-action-tile-narrow">
+            <img src="{% static 'img/My_Measurements.png' %}">
+            <p>
+              Sized to the wearer’s unique numbers or <a href="http://www.craftyarncouncil.com/">CYCA</a> standard measurements.
+              Your choice.
+            </p>
+          </div>      
+        </div>
+        <div class="col-sm-4 col-xs-12">
+          <div class="customfit-action-tile-narrow">
+            <img src="{% static 'img/My_Patterns.png' %}">
+            {% if request.user.is_authenticated %}
+              <p>
+                <a href="{% url 'universal_home' %}" class="btn-customfit-outline">get started!</a>
+              </p>
+            {% else %}
+              <p>Create a free account or log in here.</p>
+              <p>
+                <a href="{{ registration_url }}" class="btn-customfit-action" target="_blank">sign up</a>
+                <a href="{% url "userauth:login" %}" class="btn-customfit-outline">log in</a>
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end custom pattern area -->
+{% endblock %}

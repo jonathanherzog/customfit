@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block tags %}
+{% endblock %}
+
+{% block title %}Knitter's Toolbox: Welcome to CustomFit{% endblock %}
+
+{% block extra_compressible_css %}
+  {% comment %}
+    Without the menu, the header has way more white space than it needs.
+    Let's axe some of that.
+  {% endcomment %}
+  <style type="text/css">
+    @media screen and (max-width: 768px) {
+      header {
+        margin-top: -40px;
+      }      
+    }
+
+    @media screen and (min-width: 769px) {
+      header {
+        margin-top: -40px;
+        margin-bottom: -40px;
+      }      
+    }
+  </style>
+{% endblock %}
+
+{% comment %}
+  The header menu takes up a lot of vertical space which gets in the way of the call to
+  action for this page.
+{% endcomment %}
+{% block header %}
+  <header>
+  </header>
+{% endblock %}
+
+{% comment %}
+  A non-JS version of the subnav, since we don't load JS on this page in the interest
+  of speed. Will only be displayed for authenticated users, as base.html only has a
+  subnav block for authenticated users. Does not have an effect for unauthed users.
+{% endcomment %}
+{% block subnav %}
+  {% include "subnav_kt.html" %}
+{% endblock %}
+
+{% block content %}
+
+  {% if user.is_authenticated %}
+      <p>
+        Welcome back, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}!
+      </p>
+
+      <a href="{% url 'home_view' %}" class="btn-customfit-action">Get started</a>
+    </section>
+  {% else %}
+    <div class="row">
+      <div class="col-sm-9 col-sm-push-3 col-xs-12">
+        <p>
+          Like Knitter's Toolbox? Try CustomFit.
+        </p>
+
+        <p>
+          CustomFit builds a sweater pattern specifically matching <strong>your</strong> preferences and numbers.      
+        </p>
+
+        <ul>
+          <li>
+            Choose from <a href="{% url 'design_wizard:choose_type' %}">dozens of built-in designs</a> and <a href="{% url 'designs:all_collections' %}">collections</a>, or create your own
+          </li>
+          {% comment %}
+            We could use the page_url tag here as this is a page in the CMS, but we really don't
+            want to have to load all the CMS stuff on this page - it needs to be *fast* as its
+            planned audience is iPhone users. So, a bare URL instead. Living on the edge.
+          {% endcomment %}
+          <li>
+            Make an <a href="/customfit-fits-explained/">easy choice about fit</a> and we'll take care of all the numbers        
+          </li>
+          <li>
+            All of the pattern numbers match your gauge, not the other way around        
+          </li>
+        </ul>
+     
+        <p>
+          Want to knit your easiest, best-fitting sweater yet?
+        </p>
+
+        <div class="row">
+          <div class="col-sm-3 col-xs-12">
+            <a href="{{ registration_url }}" class="btn-customfit-action btn-block" target="_blank">Create your account</a>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% comment %}
+  We don't need to load any of the following resources for this page and we load times to be as
+  small as possible, so we override the default blocks with empty blocks.
+{% endcomment %}
+
+{% block js_jquery %}
+{% endblock %}
+
+{% block js_bootstrap %}
+{% endblock %}
+
+{% block fontawesome %}
+{% endblock %}
+
+{% block zenbox %}
+{% endblock %}

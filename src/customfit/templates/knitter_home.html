@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+
+
+{% block content %}
+
+ 
+  <p class="lead-customfit">
+    CustomFit <strong>writes patterns specifically to your numbers</strong>, not the designer's.
+      You can make a custom pattern for <strong>any of our designs</strong>, in <strong>any yarn you want</strong>,
+      for <strong>anyone you want</strong>.
+  </p>
+  
+  <p class="lead-customfit">
+	 So <strong>grab some favorite yarn</strong> and <strong>click on a design below</strong>,
+      and let's get knitting!
+  </p>
+
+
+  {% comment %}
+    This section shouldn't exist as specified in the wireframes until we have pattern support
+    for those shapes. However, in the interim, users still need to be able to get to sweater
+    designing!
+  {% endcomment %}
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        Choose a design
+      </h2>
+      {% include 'gallery_include.html' %}
+    </div>
+  </div>
+
+    <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        Useful Tips and Tools
+      </h2>
+       <div class="row">
+          <div class="col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+            <div class="customfit-action-tile-narrow">
+              <img src="{% static 'img/Homepage-getting-started.png' %}">
+              <p>getting started with CustomFit</p>
+            </div>
+          </div>
+        <a href="{% url 'design_wizard:choose_type' %}">
+          <div class="col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+            <div class="customfit-action-tile-narrow">
+              <img src="{% static 'img/Homepage-designs-pic.png' %}">
+              <p>make a pattern</p>
+            </div>
+          </div>
+        </a>
+        <a href="{% url 'calculators:tool_list' %}">
+          <div class="col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+            <div class="customfit-action-tile-narrow">
+              <img src="{% static 'img/Homepage-calculator-pic.jpg' %}">
+              <p>handy calculators</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        Manage your info
+      </h2>
+
+      <div class="row">
+        <a href="{{ measure_url }}">
+          <div class="col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+            <div class="customfit-action-tile-narrow">
+              <img src="{% static 'img/My_Measurements.png' %}">
+              <p>my measurements</p>
+            </div>
+          </div>
+        </a>
+        <a href="{{ swatch_url }}">
+          <div class="col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+            <div class="customfit-action-tile-narrow">
+              <img src="{% static 'img/My_Gauge.png' %}">
+              <p>my gauges</p>
+            </div>
+          </div>
+        </a>
+        <a href="{{ knit_url }}">
+          <div class="col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+            <div class="customfit-action-tile-narrow">
+              <img src="{% static 'img/My_Patterns.png' %}">
+              <p>my patterns</p>
+            </div>
+          </div>
+        </a>
+        <a href="{% url 'userauth:manage_account' %}">
+          <div class="col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+            <div class="customfit-action-tile-narrow">
+              <img src="{% static 'img/pile-of-sweaters-square.jpg' %}">
+              <p>my account</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

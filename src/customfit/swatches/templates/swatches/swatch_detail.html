@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}Your gauge: {{ swatch.name }}{% endblock %}
+
+{% block content %}
+  <h2>{{ swatch.name }}</h2>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6" id="lightbox_content">
+      <table class="table-customfit table-striped">
+        <tbody>
+          {% for detail in swatch.details %}
+            <tr>
+              <td>
+                {{ detail.name }}
+              </td>
+              <td>
+                {{ detail.value }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
+      <h3 class="margin-top-0">Gauge pictures</h3>
+      <div class="row clear-columns">
+        {% for picture in swatch.pictures.all %}
+          <div class="col-xs-12 col-sm-6">
+            <img src="{{ picture.picture | thumbnail_url:'col-md-2' }}" class="img-rounded">
+          </div>
+        {% endfor %}
+      </div>
+      <br />
+      <a href="{% url 'uploads:swatch_picture_upload' swatch.pk %}" class="btn-customfit-outline margin-top-0">upload a picture</a>        
+
+
+      <h3>Gauge notes</h3>
+      <p>
+        {{ swatch.notes }}
+      </p>
+      <a href="{% url 'swatches:swatch_note_update_view' swatch.pk %}" class="btn-customfit-outline margin-top-0">edit notes</a>        
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <a href="{% url 'swatches:swatch_delete_view' swatch.id %}" class="btn-customfit-outline">
+        <span class="glyphicon glyphicon-trash"></span> delete gauge
+      </a>        
+      <a href="{% url 'swatches:swatch_update_view' swatch.id %}" class="btn-customfit-outline">
+        <span class="glyphicon glyphicon-edit"></span> edit gauge
+      </a>
+    </div>
+  </div>
+
+{% endblock %}
+

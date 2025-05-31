@@ -1,0 +1,12 @@
+{% if piece.notes %}
+  <p>
+    {{ piece.notes }}
+  </p>
+  <a href="{% url 'patterns:individualpattern_note_update_view' piece.pk %}" class='btn btn-customfit-outline'>
+    Edit notes
+  </a>
+{% else %}
+  <a href="{% url 'patterns:individualpattern_note_update_view' piece.pk %}" class='btn btn-customfit-outline'>
+    add notes
+  </a>
+{% endif %}

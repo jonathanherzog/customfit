@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load md2 %}
+{% block title %} {{ stitch.name }}{% endblock %}
+
+{% block content %}
+  {# no header is needed since stitch notes include stitch names as headers #}
+  <section>
+    <div class="row">
+      {% if stitch.photo %}
+        <div class="col-sm-6 col-xs-12">
+          {{ stitch.notes | markdown }}
+        </div>
+        <div class="col-sm-6 col-xs-12 margin-top-20">
+          <img src="{{ stitch.photo | thumbnail_url:'col-md-6' }}" class="thumbnail" alt="{{ stitch.name }} fabric">
+        </div>
+      {% else %}
+        <div class="col-xs-12">
+          {{ stitch.notes | markdown }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if stitch.short_description or stitch.get_visible_designs %}
+      <div class="row">
+        <div class="col-xs-12">
+
+          {% if stitch.short_description %}
+            <p>
+              <em>About {{ stitch.name }}:</em> {{ stitch.short_description }}
+            </p>
+          {% endif %}
+
+          {% if stitch.get_visible_designs %}
+            <p>
+              <em>Designs using this stitch:</em> 
+              {% for design in stitch.get_visible_designs %}
+                <a href="{% url 'design_wizard:personalize' design.slug %}">
+                  {{ design.name }}</a>{% if not forloop.last %}, {% endif %}
+              {% endfor %}            
+            </p>
+          {% endif %}
+
+        </div>
+      </div>
+    {% endif %}
+
+    {% if stitch.chart %}
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>Chart for {{ stitch.name }}</h3>
+          <img src="{{ stitch.chart.url }}" alt="stitch chart image">
+        </div>
+      </div>
+    {% endif %}
+
+  </section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load static %}
+{% load pattern_conventions %}
+
+{% comment %}
+  This template is for rendering schematic images for PDFs only. The template for web rendering is
+  schematic_measurements_web.html. CSS classes are found in
+  patterns/templates/patterns/individualpattern_pdf.html
+{% endcomment %}
+
+<div class="div-schematic-piece-pair">
+    <div class="div-schematic-image">
+            <img src="{% static schematic_image %}" class="schematic-image" id="id-schematic-image-cowl">
+    </div>
+    <div class="div-schematic-measurements">
+        <!-- begin dimensions -->
+        <strong>cowl dimensions</strong>
+        <ul>
+        {% for dimension in dimensions %}
+            {% if dimension.1 %}
+                  <li>{{ dimension.0 }}: {{ dimension.1 | length_fmt }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+        <!-- end dimensions -->
+    </div>
+</div>
+
+

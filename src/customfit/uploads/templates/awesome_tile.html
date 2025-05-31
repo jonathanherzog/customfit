@@ -1,0 +1,20 @@
+{% load thumbnail %}
+
+<div class="col-md-3 col-sm-4 col-xs-12">
+  <div class="customfit-action-tile customfit-action-tile-rectangle">
+    {% if awesome.design %}<a href="/design/personalize/{{ awesome.design.slug }}">{% endif %}<img src="{{ awesome.picture | thumbnail_url:'awesome-crop' }}" alt="{{ awesome.user.username }} looking awesome in CustomFit">{% if awesome.design %}</a>{% endif %}
+    <p>
+      {% if awesome.user.first_name %}{{ awesome.user.first_name | capfirst }}{% else %}{{ awesome.user.username }}{% endif %}'s 
+      {% if awesome.design %}
+      <a class="design-name" href="/design/personalize/{{ awesome.design.slug }}">{{ awesome.design.name }}</a>
+      {% else %}
+      Custom&nbsp;Design
+      {% endif %}
+    </p>
+    {% if awesome.quote %}
+    <blockquote>
+        {{ awesome.quote }}
+    </blockquote>
+    {% endif %}
+  </div>
+</div>

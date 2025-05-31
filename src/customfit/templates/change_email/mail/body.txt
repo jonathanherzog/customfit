@@ -1,0 +1,13 @@
+Want to change your CustomFit email address? 
+
+...No? Hm, we got an email change request for CustomFit user {{ user.username }} at this email address. You can safely ignore this message, and your CustomFit email will remain the same. 
+
+...Yes? Good! Click this link to confirm your CustomFit email change:
+
+{{ protocol }}://{{ current_site }}/accounts/email/change/confirm/{{ signature }}
+
+This link will expire on {{ timeout_date }}
+
+Happy sweatering!
+
+-The CustomFit team

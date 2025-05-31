@@ -1,0 +1,24 @@
+{# Provides the action buttons in the pattern list view. #}
+{% load thumbnail %}
+
+<div class="col-xs-12 col-sm-4 col-md-3">
+  <div class="customfit-action-tile-narrow">
+    <a href="{% url 'bodies:body_detail_view' object.id %}">
+      <img src="{% if object.preferred_picture_file %}{{ object.preferred_picture_file | thumbnail_url:'col-md-3-square' }}{% else %}{{ object.preferred_picture_url }}{% endif %}" alt="picture for {{ object.name }}">
+    </a>
+    <h4>
+      <a href="{% url 'bodies:body_detail_view' object.id %}">
+        {{ object.name }}
+      </a>
+    </h4>
+    <a href="{% url 'bodies:body_detail_view' object.id %}" class="btn-customfit btn-block">
+      view/add details
+    </a>
+    <a href="{% url 'uploads:body_picture_upload' object.id %}" class="btn-customfit-outline btn-block">
+      manage pictures
+    </a>
+    <a href="{% url 'bodies:body_delete_view' object.id %}" class="btn-customfit-outline btn-block">
+      delete
+    </a>
+  </div>  
+</div>

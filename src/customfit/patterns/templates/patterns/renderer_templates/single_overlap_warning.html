@@ -1,0 +1,26 @@
+{% load pattern_conventions %}
+
+<p>
+    {% if overlap_is_full %}
+        <strong><em>Before you begin,</em></strong> please note that some instructions will overlap.
+            In particular,
+            {{ first_element.display_name }} will overlap {{ second_element.display_name }}.
+    {% else %}
+        <strong><em>Before you begin,</em></strong> please note that instructions will overlap for some sizes.
+        In particular,
+        {{ first_element.display_name }} may overlap {{ second_element.display_name }}.
+    {% endif %}
+    {%  if first_element.start_rows ==  first_element.end_rows %}
+        {{ first_element.display_name|capfirst }} occurs on row {{ first_element.start_rows | count_fmt }}.
+    {% else %}
+        {{ first_element.display_name|capfirst }} begins on row {{ first_element.start_rows | count_fmt }} and
+        ends on row {{ first_element.end_rows | count_fmt}}.
+    {% endif %}
+    {% if second_element.start_rows ==  second_element.end_rows %}
+        {{ second_element.display_name |capfirst}} occurs on row {{ second_element.start_rows | count_fmt}}.
+        Please read ahead.
+    {% else %}
+        {{ second_element.display_name |capfirst}} begins on row {{ second_element.start_rows | count_fmt}} and
+        ends on row {{ second_element.end_rows | count_fmt}}. Please read ahead.
+    {% endif %}
+</p>

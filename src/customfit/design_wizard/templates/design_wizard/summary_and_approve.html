@@ -1,0 +1,31 @@
+{% extends "design_wizard/_approve_page_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block approve_buttons %}
+  <!-- begin actions -->
+  <div class="row margin-top-20">
+    <div class="col-md-4 col-md-offset-2 col-xs-12 text-right text-centered-phone">
+
+
+      <form method="post">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+
+    </div>
+    <div class="col-md-4 col-xs-12 text-left text-centered-phone">
+      <a href="{% url 'design_wizard:tweak' pk=igp_id %}" class="btn-customfit-outline">go back to fit information</a>
+    </div>
+  </div>
+  <!-- end actions -->
+{% endblock %}
+
+
+{% block title %}
+    Finished dimensions
+{% endblock %}
+
+{%  block summary_header %}
+  <h2>SUMMARY: FINISHED DIMENSIONS</h2>
+{%  endblock %}
+

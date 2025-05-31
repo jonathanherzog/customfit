@@ -1,0 +1,17 @@
+{% load thumbnail %}
+
+<li class="col-md-4 col-sm-6 col-xs-12">
+  <div class="customfit-action-tile-narrow">
+    <a href="{{ object.get_absolute_url }}">
+    {% if object.preferred_picture_file %}
+      <img src="{{ object.preferred_picture_file | thumbnail_url:'col-md-4-crop' }}" alt="picture for {{ object.name }}">
+    {% else %}
+      <img src="{{ object.preferred_picture_url }}" alt="picture for {{ object.name }}">
+    {% endif %}
+    </a>
+    <div>
+      <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+      {% include listview_action_template %}
+    </div>
+  </div>
+</li>

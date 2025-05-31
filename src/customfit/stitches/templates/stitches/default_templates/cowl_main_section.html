@@ -1,0 +1,16 @@
+{% load pattern_conventions %}
+
+
+<p>
+    <strong>Next round:</strong> Work all sts in {{ piece.main_stitch_name }} around.
+</p>
+<p>
+    Continue even until cowl measures
+{% if piece_is_graded %}
+    {{ piece.cast_on_to_main_section_end_in_inches | length_fmt }} from CO edge.
+{% else %}
+    {{ piece.cast_on_to_main_section_end_in_inches | length_fmt }} from CO edge
+    ({{ piece.last_main_section_row | count_fmt }} rounds from beginning).
+{% endif %}
+</p>
+{{ stitch_transition_text }}

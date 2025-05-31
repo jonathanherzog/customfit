@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load utils %}
+{% load cache %}
+
+{% block title %}{{ header }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-2 hidden-xs">
+      <div class="customfit-action-tile">
+        <img src="{{ header_image_url }}" alt="{{ header_alt_text}}">
+      </div>
+    </div>
+    <div class="col-md-9 col-sm-10 col-xs-12">
+      {{ header_text | safe }}
+      <a href="{{ create_url }}" class="btn-customfit-outline hidden-xs">create new</a>
+    </div>
+    <div class="visible-xs">
+      <p class="text-center">
+        <a href="{{ create_url }}" class="btn-customfit-outline">create new</a>
+      </p>     
+    </div>
+  </div>
+
+  <h2>{{ label }}</h2>      
+  <div class="row clear-columns">
+    {% if object_list %}
+      {% for object in object_list %}
+        {% include listview_action_template %}
+      {% endfor %}
+    {% endif %}
+
+    {% if extra_actions %}
+      <div class="col-xs-12">
+        {{ extra_actions | safe }}
+      </div>
+    {% endif %}
+  </div>
+
+{% endblock %}
+
+{% block extra_compressible_js %}
+  {% if object_list %}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/customfit.js' %}"></script>
+  {% endif %}
+
+{% endblock %}

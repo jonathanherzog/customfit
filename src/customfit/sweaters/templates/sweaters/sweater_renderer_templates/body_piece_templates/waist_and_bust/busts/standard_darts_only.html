@@ -1,0 +1,17 @@
+{% load pattern_conventions %}
+
+<p>
+  <em>Increase row (RS)</em>: {{ increase_row_standard_dart }}
+  {{ stitches_per_single_dart | capfirst }} increased.
+</p>
+
+{% if num_bust_standard_increase_repetitions %}
+  <p>
+    Repeat Increase row every 
+    {{ piece.rows_between_bust_standard_increase_rows_plus_one | count_fmt }} rows 
+    {{ piece.num_bust_standard_increase_repetitions | count_fmt }} more times: 
+    {{ piece.num_bust_increase_rows_knitter_instructions | count_fmt }}
+    total increase rows worked. 
+  </p>
+{% endif %}
+

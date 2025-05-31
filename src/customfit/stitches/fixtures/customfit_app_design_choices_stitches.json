@@ -1,0 +1,885 @@
+[
+{
+    "pk": 40, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n<p>\r\n\t<em>Button-band and Neckline Trim:</em>\r\n</p>\r\n<p>\r\n\tBeginning at hem of Right Front and using needles two sizes larger than \r\n\tmain needle size, pick up and knit around entire\r\n\tbutton-band and neckline edge as follows:\r\n</p>\r\n<p> \r\n\tStitches should be picked up and knit at the rate of 1 stitch for every \r\n\tbound-off stitch, 3 out of every 4 stitches along the diagonal, and 2 out \r\n\tof every 3 stitches along vertical sections. Place markers while picking\r\n\tup stitches as follows:\r\n</p>\r\n<p>\r\n\tUsing larger needles, pick up approximately {{ button_band.stitches }} \r\n\tstitches along right front button band edge, place marker; pick up \r\n\tapproximately {{ button_band.neckline_pickup_stitches }} along neck edge, \r\n\tplace marker; pick up approximately {{ button_band.stitches }} along left \r\n\tfront edge. Approximately {{ button_band.total_veeneck_cardigan_stitches }} \r\n\tstitches; this exact number is not crucial, <strong>but should be an even \r\n\t\tnumber of stitches</strong>. \r\n</p>\r\n{% if button_band.num_buttonholes != 0 %}\r\n\t<p>\r\n\t\tWork even in {{ button_band.edging_stitch_patterntext}} for \r\n\t\t{{ button_band.half_height | length_fmt }} \r\n\t\t(approximately {{button_band.half_height_in_rows_ws}} rows), \r\n\t\tending with a WS row.\r\n\t</p>\r\n\t{% if button_band.evenly_spaced_buttonholes %}\r\n\t\t<p>\r\n\t\t\t<em>Buttonhole row (RS):</em> Work \r\n\t\t\t{{ button_band.stitches_before_first_buttonhole }} stitches, \r\n\t\t\t*k2tog, yo, k {{ button_band.inter_buttonhole_stitches }} sts, \r\n\t\t\trep from * {{ button_band.num_interior_buttonholes }} times, \r\n\t\t\t[k2tog, yo] once more, work to first marker, slip first marker, \r\n\t\t\tthen work to end. \r\n\t\t\t{{ button_band.num_buttonholes }} buttonholes spaced evenly across \r\n\t\t\tright front. \r\n\t\t</p>\r\n\t\t<p>\r\n\t\t\t<strong>Note:</strong> buttonhole instructions should\r\n\t\t\tbe modified if you did not pick up the specified number of stitches\r\n\t\t\talong the right front button band edge.\r\n\t\t</p>\r\n\t{% else %}\r\n\t\t<p>\r\n\t\t\tOn last row, place marker at bottom of each desired button hole.\r\n\t\t</p>\r\n\t\t<p>\r\n\t\t\t<em>Buttonhole row (RS):</em> *Work to buttonhole marker, *k2tog, yo.\r\n\t\t\tRep from * for each marker, work to end of buttonhole.\r\n\t\t</p>\r\n\t{% endif %}\r\n{% endif %}\t\r\n<p>\r\n\tWork as established in {{ button_band.edging_stitch_patterntext}} until trim measures \r\n\t{{ button_band.height | length_fmt}} (approximately \r\n\t{{ button_band.height_in_rows}} rows). BO all stitches. \r\n</p>\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-22T01:47:09.617Z", 
+        "name": "Rosette button band veeneck template", 
+        "creation_date": "2014-08-22T01:46:54Z"
+    }
+},
+{
+    "pk": 39, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n<p>\r\n\t<em>Right Front Button-band:</em>\r\n</p>\r\n<p>\r\n\tUsing needles two sizes larger than main needle size, an dbeginning at hem \r\n\tof Right Front, pick up and knit button-band as follows: Pick up and knit \r\n\tstitches at the rate of 2 for every 3 rows\r\n\talong button band edge from hem to neck, \r\n\tapproximately {{ button_band.stitches }} stitches. (This number is not \r\n\tcrucial, <strong>but should be an even number</strong>. Buttonhole \r\n\tinstructions should be modified if you do not achieve this exact number.) \r\n</p>\r\n{% if button_band.num_buttonholes != 0 %}\r\n\t<p>\r\n\t\tWork even in {{ button_band.edging_stitch_patterntext}} for \r\n\t\t{{ button_band.half_height | length_fmt }} \r\n\t\t(approximately {{ button_band.half_height_in_rows }} rows), \r\n\t\tending with a WS row.\r\n\t</p>\r\n\t{% if button_band.evenly_spaced_buttonholes %}\r\n\t\t<p>\r\n\t\t\t<em>Buttonhole row (RS):</em> Work \r\n\t\t\t{{ button_band.stitches_before_first_buttonhole }} stitches, \r\n\t\t\t*k2tog, yo, work {{ button_band.inter_buttonhole_stitches }} sts, \r\n\t\t\trep from * {{ button_band.num_interior_buttonholes }} times, \r\n\t\t\t[k2tog, yo] once more, work to end. \r\n\t\t\t{{ button_band.num_buttonholes }} buttonholes spaced evenly across \r\n\t\t\tfront. <em>(Note: If you prefer a different buttonhole than an \r\n\t\t\t\teyelet buttonhole, please feel free to substitute it.)</em>\r\n\t\t</p>\r\n\t{% else %}\r\n\t\t<p>\r\n\t\t\tOn last row, place marker at bottom of each desired button hole.\r\n\t\t</p>\r\n\t\t<p>\r\n\t\t\t<em>Buttonhole row (RS):</em> *Work to marker, *k2tog, yo.\r\n\t\t\tRep from * for each marker, work to end.\r\n\t\t</p>\r\n\t{% endif %}\r\n{% endif %}\t\r\n<p>\r\n\tWork even in {{ button_band.edging_stitch_patterntext}} until button band measures\r\n\ta total of \r\n\t{{ button_band.height | length_fmt }}\r\n\t({{ button_band.height_in_rows }} rows). BO all stitches.</p>\r\n<p>\r\n\t<em>Left Front Button-band:</em> \r\n</p>\r\n<p>\r\n\tUsing needles one size larger than main needle size, and beginning at neck \r\n\tof Left Front, pick up and knit button-band as \r\n\tfollows: Pick up and knit stitches at the rate of 2 for every 3 rows along\r\n\t button band edge from neck to hem, \r\n\tapproximately {{ button_band.stitches }} stitches. (This number is not \r\n\tcrucial, <strong>but should respect stitch counts \r\n\tfor your stitch pattern</strong>. Buttonhole instructions should be \r\n\tmodified if you do not achieve this exact number.)\r\n</p>\r\n<p>\r\n\tWork even in {{ button_band.edging_stitch_patterntext}} for \r\n\t{{ button_band.height | length_fmt }} \r\n\t(approximately {{ button_band.height_in_rows }} rows). BO all stitches.\r\n</p>\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-22T01:46:49.873Z", 
+        "name": "Rosette button band template", 
+        "creation_date": "2014-08-22T01:46:39Z"
+    }
+},
+{
+    "pk": 36, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n{% with design=piece.get_design %}\r\n<p>\r\n\t<em>Trim Neckline:</em>\r\n</p>\r\n\r\n<p>\r\n\tUsing needles two sizes larger than main needle size and eginning at right \r\n\tneck edge, pick up and knit stitches around the neckline \t\r\n\tat the following rates: 1 stitch for every bound-off stitch, 3 out of \t\t\r\n\tevery 4 stitches along the diagonal, and 2 out of every 3 stitches along \t\r\n\tvertical sections. Approximately \r\n\t{{ piece.total_neckline_pickup_stitches }} stitches picked up total.\r\n\t<em>(This exact number is not crucial, <strong>but should be an even \r\n\t\tnumber</strong>.)</em>\r\n</p>\r\n\r\n<p>\r\n\t{% if not design.is_cardigan %}\r\n\t\t{# pullover #}\r\n\t\r\n\t\tJoin for working in the round.\r\n\t\t{% if veeneck_point_instructions %}\t\t\r\n\t\t\t{# V-neck pullover #}\r\n\t\t\tWork in \r\n\t\t\t{{ design.neck_edging_stitch_patterntext }} for\r\n\t\t\t{{ design.neck_edging_height | length_fmt }}\r\n\t\t\t({{ piece.neck_edging_height_in_rows }} rounds), \r\n\t\t\tworking a double decrease at center neck point every other round.\r\n\t\t{% else %}\t\t\r\n\t\t\t{# non-v-neck pullover #}\r\n\t\t\tWork in \r\n\t\t\t{{ design.neck_edging_stitch_patterntext }} for\r\n\t\t\t{{ design.neck_edging_height | length_fmt }}\r\n\t\t\t({{ piece.neck_edging_height_in_rows }} rounds).\r\n\t\t{% endif %}\r\n\t{% else %}\r\n\t\t{% comment %}\r\n\t\t\tCardigan. The code in renders.py ensures that this is not\r\n\t\t\ta v-neck cardigan, so we only need to give the non-v-neck\r\n\t\t\tinstructions.\r\n\t\t{% endcomment %}\r\n\t\tWork in \r\n\t\t{{ design.neck_edging_stitch_patterntext }} for\r\n\t\t{{ design.neck_edging_height | length_fmt }}\r\n\t\t({{ piece.neck_edging_height_in_rows }} rows).\r\n\t{% endif %}\r\n\tBO all sts.\r\n</p>\r\n\r\n{% endwith %}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-22T01:45:59.515Z", 
+        "name": "Rosette neckline template", 
+        "creation_date": "2014-08-22T01:45:48Z"
+    }
+},
+{
+    "pk": 37, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n{% with design=piece.get_design %}\r\n\r\n<p>\r\n \t<em>Trim Armholes:</em>\r\n</p>\r\n\r\n\t<p>\r\n\t\tUsing needles two sizes larger and beginning at underarm seam, pick \r\n\t\tup and knit {{ piece.total_armhole_stitches }} sts\r\n\t\taround armhole with a circular needle. \r\n\t</p>\r\n\t<p>\r\n\t\tJoin for working in the round, being careful not to twist. Work even in \r\n\t\t{{ design.armhole_edging_stitch_patterntext }} for \r\n\t\t{{ design.armhole_edging_height | length_fmt }}, \r\n\t\tthen BO all sts. \r\n\t</p>\r\n\t<p>\r\n\t\tRepeat for other armhole.\r\n\t</p> \r\n\r\n{% endwith %}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-22T01:46:16.331Z", 
+        "name": "Rosette armhole template", 
+        "creation_date": "2014-08-22T01:46:04Z"
+    }
+},
+{
+    "pk": 38, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t<p>\r\n\t\tUsing needles two sizes larger than main needle size, CO \r\n\t\t{{ piece.cast_ons }} stitches using long tail or other \r\n\t\tcast-on method of your choice. Work even in\r\n\t\t{{ piece.hem_stitch_patterntext }} for\r\n\t\t{{ piece.wrist_hem_height | length_fmt }} \r\n\t\t({{ piece.wrist_hem_height_in_rows }} rows), ending with a WS \r\n\t\trow. Switch to main needle size. \r\n\t</p>\r\n\t{{ stitch_transition_text }}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-22T01:46:33.302Z", 
+        "name": "Rosette sleeve hem template", 
+        "creation_date": "2014-08-22T01:46:22Z"
+    }
+},
+{
+    "pk": 35, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t\r\n\t<p>\r\n\t\tUsing needles two sizes larger than main needle size, CO \r\n\t\t{{ piece.cast_ons }} stitches using long tail cast-on\r\n\t\tor other cast-on method of your choice. Work even in \r\n\t\t{{ piece.hem_stitch_patterntext }} for \r\n\t\t{{ piece.waist_hem_height | length_fmt }} \r\n\t\t({{ piece.waist_hem_height_in_rows }} rows from beginning), \r\n\t\tending with a WS row. Switch to main needle size. \r\n\t</p>\r\n\t{{ stitch_transition_text }}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-22T01:45:29.909Z", 
+        "name": "Rosette waist hem template", 
+        "creation_date": "2014-08-22T01:44:55Z"
+    }
+},
+{
+    "pk": 33, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t<p>\r\n\t\tCO {{ piece.cast_ons }} stitches using long-tail cast-on or \r\n\t\tother method of your choice. Work even in stitch pattern of \r\n\t\tyour choice until piece measures \r\n\t\t{{ piece.wrist_hem_height | length_fmt }} \r\n\t\t({{ piece.wrist_hem_height_in_rows }} rows), ending \r\n\t\twith a WS row.\r\n\t</p>\r\n\t{{ stitch_transition_text }}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-21T04:17:45.033Z", 
+        "name": "Other stitch sleeve hem template", 
+        "creation_date": "2014-08-21T04:17:33Z"
+    }
+},
+{
+    "pk": 34, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t\r\n\t<p>\r\n\t\tCO {{ piece.cast_ons }} stitches using long-tail cast-on or \r\n\t\tother method of your choice. Work even in stitch pattern of \r\n\t\tyour choice until piece measures \r\n\t\t{{ piece.waist_hem_height | length_fmt }} \r\n\t\t({{ piece.waist_hem_height_in_rows}} rows from beginning), \r\n\t\tending with a WS row.\r\n\t</p>\r\n\t{{ stitch_transition_text }}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-21T04:18:08.442Z", 
+        "name": "Other stitch waist hem template", 
+        "creation_date": "2014-08-21T04:17:56Z"
+    }
+},
+{
+    "pk": 31, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t<p>\r\n\t\tCO {{ piece.cast_ons }} stitches. Work even in Garter Stitch for four \r\n\t\trows, then switch to Open Mesh Lace and work until piece measures \r\n\t\t{{ piece.wrist_hem_height | length_fmt }} \r\n\t\t({{ piece.wrist_hem_height_in_rows }} rows), ending with a WS row.\r\n\t</p>\r\n\t{{ stitch_transition_text }}\r\n\t\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T02:06:15.887Z", 
+        "name": "Open Mesh Lace sleeve hem template", 
+        "creation_date": "2014-08-18T02:06:06Z"
+    }
+},
+{
+    "pk": 32, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t\r\n\t<p>\r\n\t\tCO {{ piece.cast_ons }} stitches. Work even in Garter Stitch for 4 \r\n\t\trows, then switch to Open Mesh Lace and work until piece measures\r\n\t\t{{ piece.waist_hem_height | length_fmt }} \r\n\t\t({{ piece.waist_hem_height_in_rows }} rows from beginning), \r\n\t\tending with a WS row.\r\n\t</p>\r\n\t{{ stitch_transition_text }}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T02:06:36.871Z", 
+        "name": "Open Mesh Lace waist hem template", 
+        "creation_date": "2014-08-18T02:06:25Z"
+    }
+},
+{
+    "pk": 27, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n{% with design=piece.get_design %}\r\n\r\n\r\n{% if piece.vee_neck %}\r\n\t<p>\r\n\t\tBeginning at hem of Right Front, pick up and knit around entire\r\n\t\tbutton-band and neckline edge as follows:\r\n\t</p>\r\n\t<p> \r\n\t\tStitches should be picked up and knit at the rate of 1 stitch for every \r\n\t\tstitch and row around entire neckline. Place \r\n\t\t{{ design.number_of_buttons }} markers for buttonholes as\r\n\t\tdesired on Right Front edge.\r\n\t</p>\r\n{% else %}\r\n\t<p>\r\n\t\t<em>Right Front Button-band:</em>\r\n\t</p>\r\n\t<p>\r\n\t\tBeginning at hem of Right Front, pick up and knit along Right\r\n\t\tFront cardigan edge as follows:\r\n\t</p>\r\n\t<p> \r\n\t\tStitches should be picked up and knit at the rate of 1 stitch for every \r\n\t\trow along button band edge. Place {{ design.number_of_buttons }} \r\n\t\tmarkers for buttonholes as desired.\r\n\t</p>\r\n{% endif %}\r\n\r\n<p>\r\n\tUsing double-pointed needles, CO 3 sts. You will now work an applied \r\n\ti-cord around the cardigan edge. Knit 2 on dpns, slip one stitch \r\n\tknitwise, knit first stitch from circular needle onto dpn, psso. \r\n\tSlide stitches to the right-hand side of the dpn.\r\n</p>\r\n<p>\r\n\tUsing the other dpn, knit 2, sl1 knitwise, knit second stitch from \r\n\tcircular needle onto dpn, psso. Slide stitches to the right-hand side \r\n\tof the dpn. \r\n</p>\r\n<p>\r\n\tContinue in this manner until all cardigan edge stitches have been \r\n\tworked, detaching and working i-cord for 2 rows at each button-hole\r\n\tmarker. You have a clean, finished edge. Cut yarn and sew in i-cord \r\n\tends.\r\n</p> \r\n\r\n{% if not piece.vee_neck %}\r\n\t<p>\r\n\t\tRepeat for Left Cardigan front, omitting buttonholes.\r\n\t</p> \r\n{% endif %}\r\n\r\n{% endwith %}\r\n\r\n\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:58:14.139Z", 
+        "name": "ICord buttonband template", 
+        "creation_date": "2014-08-18T01:58:01Z"
+    }
+},
+{
+    "pk": 28, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n{% with design=piece.get_design %}\r\n\r\n<p>\r\n \t<em>Trim Armholes:</em>\r\n</p>\r\n\r\n\t<p>\r\n\t\tBeginning at underarm seam, pick up and knit 1 stitch in every\r\n\t\tstitch and every row around armhole.\r\n\t</p>\r\n\t<p>\r\n\t\tUsing double-pointed needles, CO 3 sts. You will now work an applied \r\n\t\ti-cord around the armhole edge. Knit 2 on dpns, slip one stitch \r\n\t\tknitwise, knit first stitch from circular needle onto dpn, psso. \r\n\t\tSlide stitches to the right-hand side of the dpn.\r\n\t</p>\r\n\t<p>\r\n\t\tUsing the other dpn, knit 2, sl1 knitwise, knit second stitch from \r\n\t\tcircular needle onto dpn, psso. Slide stitches to the right-hand side \r\n\t\tof the dpn. \r\n\t</p>\r\n\t<p>\r\n\t\tContinue in this manner until all armhole stitches have been worked. \r\n\t\tBind off 3 remaining i-cord stitches. Cut yarn and weave in \r\n\t\tends.\r\n\t</p> \r\n\t<p>\r\n\t\tRepeat for other armhole.\r\n\t</p> \r\n\r\n{% endwith %}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:58:30.246Z", 
+        "name": "Icord armhole template", 
+        "creation_date": "2014-08-18T01:58:21Z"
+    }
+},
+{
+    "pk": 26, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\r\n<p>\r\n\t<em>Button-band and Neckline Trim:</em>\r\n</p>\r\n<p>\r\n\tBeginning at hem of Right Front, pick up and knit around entire\r\n\tbutton-band and neckline edge as follows:\r\n</p>\r\n<p> \r\n\tStitches should be picked up and knit at the rate of 1 stitch for every \r\n\tbound-off stitch, 3 out of every 4 stitches along the diagonal, and 2 out \r\n\tof every 3 stitches along vertical sections. Place markers while picking\r\n\tup stitches as follows:\r\n</p>\r\n<p>\r\n\tPick up approximately {{ button_band.stitches }} stitches along right\r\n\tfront button band edge, place marker; pick up approximately \r\n\t{{ button_band.neckline_pickup_stitches }} along neck edge, place marker;\r\n\tpick up approximately {{ button_band.stitches }} along left front edge.\r\n\tApproximately {{ button_band.total_veeneck_cardigan_stitches }} stitches;\r\n\tthis exact number is not crucial. \r\n</p>\r\n\r\n{% if button_band.num_buttonholes != 0 %}\r\n\t<p>\r\n\t\tWork even in Stockinette Stitch for \r\n\t\t{{ button_band.half_height | length_fmt }}\r\n\t\t(approximately {{ button_band.half_height_in_rows_ws }} rows), \r\n\t\tending with a WS row.\r\n\t</p>\r\n\r\n\t{% if button_band.evenly_spaced_buttonholes %}\r\n\t\t<p>\r\n\t\t\t<em>Buttonhole row (RS):</em> Work \r\n\t\t\t{{ button_band.stitches_before_first_buttonhole }} stitches, \r\n\t\t\t*k2tog, yo, k {{ button_band.inter_buttonhole_stitches }} sts, \r\n\t\t\trep from * {{ button_band.num_interior_buttonholes }} times, \r\n\t\t\t[k2tog, yo] once more, work to first marker, slip first marker, \r\n\t\t\tthen work to end. {{ button_band.num_buttonholes }} buttonholes \r\n\t\t\tspaced evenly across right front. \r\n\t\t</p>\r\n\t\t<p>\r\n\t\t\t<strong>Note:</strong> Buttonhole instructions should\r\n\t\t\tbe modified if you did not pick up the specified number of stitches\r\n\t\t\talong the right front button band edge. If you prefer a different \r\n\t\t\tbuttonhole than an \r\n\t\t\teyelet buttonhole, please feel free to substitute it.\r\n\t\t</p>\r\n\t{% else %}\r\n\t\t<p>\r\n\t\t\tOn last row, place marker at bottom of each desired button hole.\r\n\t\t</p>\r\n\t\t<p>\r\n\t\t\t<em>Buttonhole row (RS):</em> *Work to buttonhole marker, *k2tog, \r\n\t\t\tyo; rep from * for each marker, work to end of buttonhole.\r\n\t\t</p>\r\n\t{% endif %}\r\n\t<p> \r\n\t\tContinue in Stockinette Stitch until button band measures \r\n\t\t{{ button_band.height | length_fmt }}, ending with a RS row. \r\n\t\tKnit one WS row to create turning ridge. \r\n\t</p>\r\n\t<p>\r\n\t\tSwitch to smaller needles \r\n\t\tand work in Stockinette Stitch until button band measures \r\n\t\t{{ button_band.half_height | length_fmt }}, repeat Buttonhole row, \r\n\t\tthen work even in Stockinette Stitch on smaller needles until \r\n\t\tinside portion of button band measures \r\n\t\t{{ button_band.height | length_fmt }}. BO all stitches.\r\n\t</p>\r\n\r\n{% else %}\t\r\n\r\n<p>\r\n\tWork as established in Stockinette Stitch until trim measures \r\n\t{{ button_band.height | length_fmt}}, ending with a RS row. Knit one \r\n\tWS row to create turning ridge. Switch to smaller needles and work even \r\n\tin Stockinette Stitch until inside portion of button band also measures \r\n\t{{ button_band.height | length_fmt}}\r\n\t(approximately {{ button_band.height_in_rows }} rows). BO all stitches.\r\n</p>\r\n\r\n{% endif %}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:54:36.280Z", 
+        "name": "Folded Hem veeneck buttonband template", 
+        "creation_date": "2014-08-18T01:54:18Z"
+    }
+},
+{
+    "pk": 25, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\r\n<p>\r\n\t<em>Right Front Button-band:</em>\r\n</p>\r\n\r\n<p>\r\n\tBeginning at hem of Right Front, pick up and knit button-band  \r\n\tas follows: Pick up and knit stitches at the rate of 2 for every 3 rows\r\n\talong button band edge from hem to neck, \r\n\tapproximately {{ button_band.stitches }} stitches. (This number is not \r\n\tcrucial, but buttonhole instructions should be \r\n\tmodified if you do not achieve this exact number.) \r\n</p>\r\n\r\n{% if button_band.num_buttonholes != 0 %}\r\n\t<p>\r\n\t\tWork even in Stockinette Stitch for \r\n\t\t{{ button_band.half_height | length_fmt }}\r\n\t\t(approximately {{ button_band.half_height_in_rows_ws }} rows) \r\n\t\tending with a WS row.\r\n\t</p>\r\n\t{% if button_band.evenly_spaced_buttonholes %}\r\n\r\n\t\t<p>\r\n\t\t\t<em>Buttonhole row (RS):</em> Work \r\n\t\t\t{{ button_band.stitches_before_first_buttonhole }} stitches, \r\n\t\t\t*k2tog, yo, work {{ button_band.inter_buttonhole_stitches }} sts, \r\n\t\t\trep from * {{ button_band.num_interior_buttonholes }} times, \r\n\t\t\t[k2tog, yo] once more, work to end. \r\n\t\t\t{{ button_band.num_buttonholes }} buttonholes spaced evenly across \r\n\t\t\tfront. <em>(Note: If you prefer a different buttonhole than an \r\n\t\t\teyelet buttonhole, please feel free to substitute it.)</em>\r\n\t\t</p>\r\n\t{% else %}\r\n\r\n\t\t<p>\r\n\t\t\tOn last row, place marker at bottom of each desired button hole.\r\n\t\t</p>\r\n\t\t<p>\r\n\t\t\t<em>Buttonhole row (RS):</em> *Work to marker, *k2tog, yo.\r\n\t\t\tRep from * for each marker, work to end. <em>(Note: If you prefer \r\n\t\t\ta different buttonhole than an eyelet buttonhole, please feel \r\n\t\t\tfree to substitute it.)</em>\r\n\t\t</p>\r\n\r\n\t{% endif %}\r\n\t<p> \r\n\t\tContinue in Stockinette Stitch until button band measures \r\n\t\t{{ button_band.height | length_fmt }}, ending with a RS row. \r\n\t\tKnit one WS row to create turning ridge. \r\n\t</p>\r\n\t<p>\r\n\t\tSwitch to smaller needles \r\n\t\tand work in Stockinette Stitch until button band measures \r\n\t\t{{ button_band.half_height | length_fmt }}, repeat Buttonhole row, \r\n\t\tthen work even in Stockinette Stitch on smaller needles until \r\n\t\tinside portion of button band measures \r\n\t\t{{ button_band.height | length_fmt }}\r\n\t\t(approximately {{ button_band.height_in_rows }} rows). BO all stitches.\r\n\t</p>\r\n\r\n\r\n{% else %}\t\r\n\r\n\t<p>\r\n\t\tWork even in Stockinette Stitch until button band measures\r\n\t\ta total of {{ button_band.height | length_fmt }}, ending with a RS row. \r\n\t\tKnit one WS row to create a turning ridge. Switch to smaller needles \r\n\t\tand work even in Stockinette Stitch until inside portion of button \r\n\t\tband measures {{ button_band.height | length_fmt }}\r\n\t\t(approximately {{ button_band.height_in_rows }} rows). BO all stitches.\r\n\t</p>\r\n\r\n{% endif %}\r\n\r\n\r\n\r\n<p>\r\n\t<em>Left Front Button-band:</em> \r\n</p>\r\n<p>\r\n\r\n\tBeginning at neck of Left Front, pick up and knit button-band as \r\n\tfollows: Pick up and knit stitches at the rate of 2 for every 3 rows along\r\n\tbutton band edge from neck to hem, \r\n\tapproximately {{ button_band.stitches }} stitches. (This number is not \r\n\tcrucial, but should match Right Front Button-band.)\r\n</p>\r\n<p>\r\n\tWork even in Stockinette Stitch for \r\n\t{{ button_band.height | length_fmt }}, ending with a RS row. Knit one WS \r\n\trow to create a turning ridge. Switch to smaller needles and work even in \r\n\tStockinette Stitch until inside portion of button band also measures \r\n\t{{ button_band.height | length_fmt }}\r\n\t(approximately {{ button_band.height_in_rows }} rows). BO all stitches.\r\n</p>\r\n\r\n\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:53:21.052Z", 
+        "name": "Folded Hem button band template", 
+        "creation_date": "2014-08-18T01:53:08Z"
+    }
+},
+{
+    "pk": 24, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "\r\n{% load pattern_conventions %}\r\n{% with design=piece.get_design %}\r\n\r\n<p>\r\n\t<em>Trim Neckline:</em>\r\n</p>\r\n\r\n\r\n<p>\r\n\tBeginning at right neck edge, pick up and knit stitches around the neckline \t\r\n\tat the following rates: 1 stitch for every bound-off stitch, 3 out of \t\t\r\n\tevery 4 stitches along the diagonal, and 2 out of every 3 stitches along \t\r\n\tvertical sections. Approximately \r\n\t{{ piece.total_neckline_pickup_stitches }} stitches picked up total.\r\n\t<em>(This exact number is not crucial, <strong>but should respect stitch \r\n\tcounts for your stitch pattern</strong>.)</em>\r\n</p>\r\n\r\n<p>\r\n\t{% if not design.is_cardigan %}\r\n\t\t{# pullover #}\r\n\t\tJoin for working in the round, being careful not to twist. Purl one \r\n\t\tround. \r\n\r\n\t\t{% if veeneck_point_instructions %}\t\t\r\n\t\t\t{# V-neck pullover #}\r\n\r\n\t\t\tSwitch to smaller needles and work in \r\n\t\t\tStockinette Stitch for\r\n\t\t\t{{ design.neck_edging_height | length_fmt }}\r\n\t\t\t({{ piece.neck_edging_height_in_rows }} rounds), \r\n\t\t\tworking a double decrease at center neck point every other round.\r\n\r\n\t\t{% else %}\t\t\r\n\t\t\t{# non-v-neck pullover #}\r\n\r\n\t\t\tSwitch to smaller needles and work in Stockinette Stitch for\r\n\t\t\t{{ design.neck_edging_height | length_fmt }}\r\n\t\t\t({{ piece.neck_edging_height_in_rows }} rounds).\r\n\t\t{% endif %}\r\n\r\n\t{% else %}\r\n\t\t{% comment %}\r\n\t\t\tCardigan. The code in renders.py ensures that this is not\r\n\t\t\ta v-neck cardigan, so we only need to give the non-v-neck\r\n\t\t\tinstructions.\r\n\t\t{% endcomment %}\r\n\r\n\t\tPurl one WS row to create a turning ridge. Swith to smaller \r\n\t\tneedles and work in \r\n\t\tStockinette Stitch for\r\n\t\t{{ design.neck_edging_height | length_fmt }}\r\n\t\t({{ piece.neck_edging_height_in_rows }} rows).\r\n\t{% endif %}\r\n\r\n\tBO all sts.\r\n\r\n</p>\r\n\r\n{% endwith %}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:52:59.339Z", 
+        "name": "Folded Hem neckline template", 
+        "creation_date": "2014-08-18T01:52:50Z"
+    }
+},
+{
+    "pk": 23, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "\r\n{% load pattern_conventions %}\r\n{% with design=piece.get_design %}\r\n\r\n\r\n<p>\r\n \t<em>Trim Armholes:</em>\r\n</p>\r\n<p>\r\n\tBeginning at underarm seam, pick up and knit \r\n\t{{ piece.total_armhole_stitches }} sts\r\n\taround armhole with a circular needle. \r\n</p>\r\n<p>\r\n\tJoin for working in the round, being careful not to twist. \r\n\tPurl one round to create the turning round. Switch to smaller needles. \r\n\tContinue in Stockinette Stitch until internal portion of folded hem \r\n\tmeasures {{ design.armhole_edging_height | length_fmt }}. BO all sts. \r\n</p>\r\n<p>\r\n\tRepeat for other armhole.\r\n</p> \r\n\r\n{% endwith %}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:52:43.017Z", 
+        "name": "Folded Hem armhole template", 
+        "creation_date": "2014-08-18T01:52:16Z"
+    }
+},
+{
+    "pk": 22, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t\r\n<p>\r\n\t\tUsing needles one size smaller than main, CO {{ piece.cast_ons }} \r\n\t\tsts. Work even in Stockinette stitch until piece measures \r\n\t\t{{ piece.wrist_hem_height | length_fmt }} \r\n\t\t({{ piece.wrist_hem_height_in_rows }} rows)\r\n\t\tfrom CO edge, \r\n\t\tending with a WS row. Work 1 further RS row even. Switch to main needle \r\n        size and knit one WS row\r\n\t\tto create a turning ridge. <em>(Note: All further lengths should be \r\n\t\tmeasured to turning ridge, NOT initial CO. Further row counts\r\n        should be counted beginning with the first row after the turning \r\n        ridge.)</em> \r\n</p>\r\n\t{{ stitch_transition_text }}\r\n<p>\r\n\t\tWork even until piece measures \r\n\t\t{{ piece.wrist_hem_height | length_fmt }} \r\n\t\t({{ piece.wrist_hem_height_in_rows }} rows)\r\n\t\tfrom beginning, \r\n\t\tending with a WS row. \r\n\t\r\n</p>\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:52:00.227Z", 
+        "name": "Folded hem sleeve hem", 
+        "creation_date": "2014-08-18T01:51:49Z"
+    }
+},
+{
+    "pk": 21, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t\r\n\t<p>\r\n\t\tUsing needles one size smaller than main needle size, CO \r\n\t\t{{ piece.cast_ons }} stitches. Work even in Stockinette stitch until \r\n\t\tpiece measures {{ piece.waist_hem_height | length_fmt }} \r\n\t\t({{ piece.waist_hem_height_in_rows }} rows) from CO edge, \r\n\t\tending with a WS row. Work 1 further RS row even. \r\n\r\n    \tSwitch to main needle size and knit one WS row\r\n\t\tto create a turning ridge. <strong>(Note: All further lengths should \r\n\t\tbe measured to turning ridge, NOT initial CO. Further row counts\r\n        should be counted beginning with the first row after the turning \r\n        ridge.)</strong> \r\n\r\n\r\n\t</p>\t\t\r\n\t{{ stitch_transition_text }}\r\n\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:51:47.010Z", 
+        "name": "Folded Hem waist hem", 
+        "creation_date": "2014-08-18T01:51:26Z"
+    }
+},
+{
+    "pk": 19, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t<p>\r\n\t\tCO {{ piece.cast_ons }} stitches. Mark the largest multiple of 4 plus 1 \r\n\t\tstitches possible in your cast-on count. Work 4 rows even in Garter \r\n\t\tStitch. \r\n\t</p>\r\n\t<p>\r\n\t\tSwitch to Daisy Stitch, keeping any edge stitches in Stockinette, and \r\n\t\twork until piece measures {{ piece.wrist_hem_height | length_fmt }} \r\n\t\t(approximately {{ piece.wrist_hem_height_in_rows }} rows), ending with \r\n\t\ta WS row. <em>(Note: Row count is approximate as your Daisy Stitch row \r\n\t\t\tgauge may be different than your main pattern row gauge. If this is \r\n\t\t\tthe case, subsequent row counts will differ as well.)</em>\r\n\t</p>\r\n\t{{ stitch_transition_text }}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:48:34.013Z", 
+        "name": "Daisy Stitch sleeve hem", 
+        "creation_date": "2014-08-18T01:48:20Z"
+    }
+},
+{
+    "pk": 20, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t\r\n\t<p>\r\n\t\tCO {{ piece.cast_ons }} stitches. Mark the largest multiple of 4 plus 1 \r\n\t\tstitches possible in your cast-on count. Work 4 rows even in Garter \r\n\t\tStitch. \r\n\t</p>\r\n\t<p>\r\n\t\tSwitch to Daisy Stitch, keeping any edge stitches in Stockinette, and \r\n\t\twork until piece measures \r\n\t\t{{ piece.waist_hem_height | length_fmt }} \r\n\t\t(approximately {{ piece.waist_hem_height_in_rows }} rows from beginning), \r\n\t\tending with a WS row. <em>(Note: Row count is approximate as your Daisy Stitch row \r\n\t\t\tgauge may be different than your main pattern row gauge. If this is \r\n\t\t\tthe case, subsequent row counts will differ as well.)</em>\r\n\t</p>\r\n\t{{ stitch_transition_text }}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T01:49:02.121Z", 
+        "name": "Daisy Stitch waist hem", 
+        "creation_date": "2014-08-18T01:48:46Z"
+    }
+},
+{
+    "pk": 29, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t<p>\r\n\t\tCO {{ piece.cast_ons }} stitches using tubular cast-on, \r\n\t\tlong tail, or other \r\n\t\tcast-on method of your choice. Work even in 1x1 rib for \r\n\t\t{{ piece.wrist_hem_height | length_fmt }} \r\n\t\t({{ piece.wrist_hem_height_in_rows }} rows), ending with a WS row.\r\n\t</p>\r\n\t\r\n\t{{ stitch_transition_text }}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T02:01:22.094Z", 
+        "name": "One by One Ribbing sleeve hem template", 
+        "creation_date": "2014-08-18T02:01:06Z"
+    }
+},
+{
+    "pk": 30, 
+    "model": "dbtemplates.template", 
+    "fields": {
+        "content": "{% load pattern_conventions %}\r\n\t\r\n\t<p>\r\n\t\tCO {{ piece.cast_ons }} stitches using tubular cast-on, long tail, or other \r\n\t\tcast-on method of your choice. Work even in {{ piece.hem_stitch_patterntext }}  for \r\n\t\t{{ piece.waist_hem_height | length_fmt }} \r\n\t\t({{ piece.waist_hem_height_in_rows }} rows from beginning), \r\n\t\tending with a WS row.\r\n\t</p>\r\n\t\t\r\n\t{{ stitch_transition_text }}\r\n", 
+        "sites": [], 
+        "last_changed": "2014-08-18T02:01:39.961Z", 
+        "name": "One by One Ribbing waist hem template", 
+        "creation_date": "2014-08-18T02:01:28Z"
+    }
+},
+{
+    "pk": 40, 
+    "model": "stitches.buttonbandveenecktemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 39, 
+    "model": "stitches.buttonbandtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 36, 
+    "model": "stitches.trimnecklinetemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 37, 
+    "model": "stitches.trimarmholetemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 38, 
+    "model": "stitches.sleevehemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 35, 
+    "model": "stitches.waisthemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 33, 
+    "model": "stitches.sleevehemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 34, 
+    "model": "stitches.waisthemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 31, 
+    "model": "stitches.sleevehemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 32, 
+    "model": "stitches.waisthemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 27, 
+    "model": "stitches.buttonbandtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 28, 
+    "model": "stitches.trimarmholetemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 26, 
+    "model": "stitches.buttonbandveenecktemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 25, 
+    "model": "stitches.buttonbandtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 24, 
+    "model": "stitches.trimnecklinetemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 23, 
+    "model": "stitches.trimarmholetemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 22, 
+    "model": "stitches.sleevehemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 21, 
+    "model": "stitches.waisthemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 19, 
+    "model": "stitches.sleevehemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 20, 
+    "model": "stitches.waisthemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 29, 
+    "model": "stitches.sleevehemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 30, 
+    "model": "stitches.waisthemtemplate", 
+    "fields": {
+        "sites": []
+    }
+},
+{
+    "pk": 10, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "Twisted 1x1 Ribbing", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Twisted 1 x 1 Ribbing (even number of stitches):\r\n\r\n**_Row 1 (RS):_** \\*Knit 1 tbl, purl 1; repeat to end.\r\n\r\n**_Row 2 (WS):_** \\*Knit 1, purl 1 tbl; repeat to end.  \r\n\r\n### Twisted 1 x 1 Ribbing (odd number of stitches):\r\n\r\n**_Row 1 (RS):_** \\*Knit 1 tbl, purl 1;  repeat to last stitch, end k 1 tbl. \r\n\r\n**_Row 2 (WS):_** \\*Purl 1 tbl, knit 1;repeat to last stitch, end p 1 tbl.\r\n\r\n_Note: When working Twisted 1x1 Ribbing in the round, ensure an even number of stitches, and work Row 1 on all stitches for all rounds._\r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "ribbing_stitch", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 13, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": true, 
+        "repeats_mod_y": 1, 
+        "name": "Sugar Cube Stitch", 
+        "is_neckline_hem_stitch": false, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Sugar Cube stitch:\r\n\r\nThe Sugar Cube Pattern Stitch is a simple, Stockinette-based stitch pattern with occasional \"cubes\" of Reverse Stockinette. It is listed as a multiple of 8 stitches, but working the stitch pattern over a different number of stitches is easy - just continue your pattern as established until the end of the row. (Charted version of stitch pattern is available at the end of the pattern.)\r\n\r\nShaping in Sugar Cube pattern is also simple. Work the shaping as specified in your CustomFit pattern, keeping all remaining stitches in Sugar Cube as established. As you increase stitches back in, insert them back into the Sugar Cube pattern, too. \r\n\r\nSugar Cube Pattern Stitch (multiple of 8 stitches) \r\n\r\n**_Rows 1 and 5 (RS):_** Knit.\r\n\r\n**_Rows 2, 4, 6, 8 (WS):_** K the knit sts and p the purl sts. \r\n\r\n**_Row 3:_** K 1, \\*p 2, k 6; rep from * to final 7 sts, p 2, k 5.\r\n\r\n**_Row 7:_** K 5, \\*p 2, k 6; rep from \\* to last 3 sts, end p 2, k 1. \r\n\r\nRep rows 1 - 8.\r\n", 
+        "is_buttonband_hem_stitch": false, 
+        "stitch_type": "textured_stitch", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": false, 
+        "is_waist_hem_stitch": false, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": false, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 12, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": true, 
+        "repeats_mod_y": 1, 
+        "name": "Stockinette", 
+        "is_neckline_hem_stitch": false, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "", 
+        "is_buttonband_hem_stitch": false, 
+        "stitch_type": "other_stitch_type", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": false, 
+        "is_waist_hem_stitch": false, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": false, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 9, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "Seed Stitch", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Seed Stitch (even number of stitches):\r\n\r\n**_Row 1 (RS):_** \\*Knit 1, purl 1; repeat to end.\r\n\r\n**_Row 2 (WS):_** \\*Purl 1, knit 1; repeat to end.  \r\n\r\n### Seed Stitch (odd number of stitches):\r\n\r\n**_Row 1:_** \\*Knit 1, purl 1; repeat to last stitch, end k 1. Repeat Row 1.\r\n\r\n_(Note: Generally when working Seed Stitch, after working the first row one should knit the purl stitches and purl the knit stitches.)_\r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "textured_stitch", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 16, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": true, 
+        "repeats_mod_y": 2, 
+        "name": "Rosette Stitch", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": 36, 
+        "photo": "", 
+        "notes": "### Rosette stitch (even no. sts):\r\n\r\n**_Row 1 and 3 (RS):_** Knit.\r\n\r\n**_Rows 2 (WS):_** \\*P2tog, leave on needle; K2tog on same 2 sts and slide both off needles; rep from \\*.\r\n\r\n**_Rows 4 (WS):_** P1, rep from \\* of Row 2, end p1.\r\n\r\n**Note: Rosette Stitch MUST be worked on needles two sizes larger than your main needle size, to ensure a gauge consistent with Stockinette Stitch.**", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "textured_stitch", 
+        "user_visible": false, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": 38, 
+        "_button_band_veeneck_template": 40, 
+        "_waist_hem_stitch_template": 35, 
+        "_button_band_template": 39, 
+        "_trim_armhole_template": 37, 
+        "is_panel_stitch": true, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 8, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "Reverse Stockinette", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Reverse Stockinette\r\n\r\n_**Note:**_ Please be aware that Reverse Stockinette edgings will roll. The rolling will curve inward toward the WS of your garment when worn, and will cause the piece to be shorter than row gauge would typically indicate. \r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "other_stitch_type", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 7, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": true, 
+        "repeats_mod_y": 1, 
+        "name": "Other Stitch", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "other_stitch_type", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": 33, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": 34, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 6, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 3, 
+        "name": "Open Mesh Lace", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Open Mesh Lace (multiple of 3 stitches):\r\n\r\n**_Row 1 (RS):_** \\*Purl 1, ssk, yo; rep from \\* to end. \r\n\r\n**_Rows 2 and 4 (WS):_** \\*Purl 2, knit 1; rep from \\* to end.\r\n\r\n**_Row 3 (RS):_** \\*Purl 1, yo, k2tog; rep from \\* to end. \r\n\r\nRepeat rows 1 - 4. \r\n\r\nIf your cast-on is: \r\n\r\n+ A multiple of 3 stitches plus 1, work an additional \"knit one\" at the end of your first row. Keep this stitch in Stockinette Stitch.\r\n+ A multiple of 3 stitches plus 2, work an additional \"knit one\" at the beginning _and_ end of your first row. Keep these stitches in Stockinette Stitch throughout.\r\n\r\nIf you use Open Mesh Lace to trim a neckline, you may wish to work decreases to ensure your neck edge doesn't flare. We've included optional charts for such decreases, as inspiration. Please feel free to disregard the optional charts if you so choose. \r\n\r\nOpen Mesh Lace works best as a cardigan trim when the cardigan has no buttons. If using Open Mesh Lace on a cardigan with buttons, either place the eyelet buttonholes within a final Garter Stitch edge, or work traditional cast-on, bind-off buttonholes.\r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "lace_stitch", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": 31, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": 32, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": false, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 4, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "Icord Stitch", 
+        "is_neckline_hem_stitch": false, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "other_stitch_type", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": false, 
+        "is_waist_hem_stitch": false, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": 27, 
+        "_trim_armhole_template": 28, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 17, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "Garter Stripe Stitch", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Garter Stripe Pattern:\r\n\r\n_Please note! Colors are begun on WS rows to properly form the stripes. When working in the round, introduce new colors on your \u201cpurl\u201d rounds._\r\n\r\n**_Row 1-3 (RS-WS-RS):_** K in MC. \r\n\r\n**_Rows 4-5:_**  K in CC.\r\n\r\n**_Rows 6-11:_** K in MC.\r\n\r\n**_Rows 12-15:_** K in CC.\r\n\r\n**_Rows 16-21:_** K in MC.\r\n\r\nRepeat rows 4-21 for pattern.\r\n\r\n### Garter Stripe Pattern (Neck):\r\n\r\n**_Row 1-2 (RS-WS):_** P in MC; k in MC.\r\n\r\n**_Row 3-4:_** P in CC; k in CC.\r\n\r\n**_Row 5-10:_** P in MC; k in MC; repeat twice.\r\n\r\n**_Row 11-14:_** P in CC; k in MC; repeat once.\r\n\r\n**_Row 15-20:_** P in MC; k in MC; repeat twice.\r\n\r\nRepeat rows 3-20 for pattern.\r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "other_stitch_type", 
+        "user_visible": false, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": false, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 3, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "Garter Stitch", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Garter Stitch:\r\n\r\nWhen worked flat, knit all rows. When worked in the round, knit one round, then purl one round. *(Note: Garter Stitch gauge often differs from Stockinette Stitch gauge, so row counts (which are computed based on your main pattern swatch) may be different than specified.)*\r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "other_stitch_type", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 2, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "Folded hem", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": 24, 
+        "photo": "", 
+        "notes": "### Folded Hems:\r\n\r\nPlease note that you should work all internal portions of the folded hems on needles one size down from your main needle size - this helps the hem lay flat after seaming. \r\n\r\nI find it easiest to work folded hems flat, block them folded shut, and then seamed. Use a simple and flexible whip stitch for the seaming. \r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "other_stitch_type", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": 22, 
+        "_button_band_veeneck_template": 26, 
+        "_waist_hem_stitch_template": 21, 
+        "_button_band_template": 25, 
+        "_trim_armhole_template": 23, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 1, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 4, 
+        "name": "Daisy Stitch", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Daisy Stitch (multiple of 4 stitches plus 1):\r\n\r\n**_Rows 1 and 3 (RS):_** Knit.\r\n\r\n**_Row 2 (WS):_** Knit 1, \\*p3tog leaving stitches on the needle, yo, purl the same 3 sts together again and slip them off the needle, k 1; rep from \\* to end.\r\n\r\n**_Row 4 (WS):_** Knit 1, purl 1, k 1, \\*p3tog leaving stitches on the needle, yo, p the same 3 sts together again and slip them off the needle, k 1; rep from \\* to last 2 sts, end p 1, k 1.\r\n\r\nRepeat rows 1 - 4.\r\n\r\n**Notes:** To work Daisy Stitch in the round, CO a multiple of 4 stitches, eliminating the final k 1 on Rows 2 and 4.\r\n\r\nDaisy Stitch works best as a cardigan trim when the cardigan has no buttons. If using Daisy Stitch on a cardigan with buttons, either place the eyelet buttonholes within a final Garter Stitch edge, or work traditional cast-on, bind-off buttonholes.\r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "textured_stitch", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": 19, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": 20, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": false, 
+        "repeats_x_mod": 1
+    }
+},
+{
+    "pk": 18, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "Candle Flame Stitch", 
+        "is_neckline_hem_stitch": false, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "", 
+        "is_buttonband_hem_stitch": false, 
+        "stitch_type": "lace_stitch", 
+        "user_visible": false, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": false, 
+        "is_waist_hem_stitch": false, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": true, 
+        "is_armhole_hem_stitch": false, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 14, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": true, 
+        "repeats_mod_y": 4, 
+        "name": "Cabled Check Stitch", 
+        "is_neckline_hem_stitch": false, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Cabled Check Stitch (multiple of 4 stitches):\r\n\r\n**_Left Twist:_** Sl 1 st to CN and hold to front; k1, k1 from CN\r\n\r\n**_Right Twist:_** Sl 1 st to CN and hold to back; k1, k1 from CN\r\n\r\n**_Row 1 (RS):_** \\*Left Twist, p 2; repeat from \\* to end. \r\n\r\n**_Row 2 (WS):_** \\*K 2, p 2; repeat from \\* to end.\r\n\r\n**_Row 3 (RS):_**  \\*K 2, p 2; repeat from \\* to end. \r\n\r\n**_Row 4 (WS):_** \\*P 2, k 2; repeat from \\* to end.\r\n\r\n**_Row 5 (RS):_** \\*P 2, Right Twist; repeat from \\* to end. \r\n\r\n**_Row 6 (WS):_** \\*P 2, k 2; repeat from \\* to end.\r\n\r\n**_Row 7 (RS):_** \\*P 2, k 2; repeat from \\* to end. \r\n\r\n**_Row 8 (WS):_** \\*K 2, p 2; repeat from \\* to end.\r\n\r\n(Charted version of stitch pattern is available at the end of the pattern.)\r\n", 
+        "is_buttonband_hem_stitch": false, 
+        "stitch_type": "textured_stitch", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": false, 
+        "is_waist_hem_stitch": false, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": false, 
+        "repeats_x_mod": 1
+    }
+},
+{
+    "pk": 15, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": true, 
+        "repeats_mod_y": 4, 
+        "name": "Broken Rib Stitch", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### Broken Rib stitch (multiple of 4 stitches):\r\n\r\n**_Row 1 (RS):_** \\*K 2, p 2; rep from \\* to end. \r\n\r\n**_Rows 2 (WS):_** \\*Purl.\r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "ribbing_stitch", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 11, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "2x2 Ribbing", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "2 x 2 Ribbing (multiple of 4 stitches):\r\n\r\n**_Row 1 (RS):_** \\*Knit 2, purl 2; repeat from \\* to end.\r\n\r\n**_Row 2 (WS):_** \\*Knit 2, purl 2; repeat from \\* to end.  \r\n\r\n**_Note:_** When working seamed pieces, a cast-on number that is a multiple of 4 plus 2 stitches is preferred.\r\n\r\nIf your cast-on is: \r\n\r\n+ A multiple of 4 stitches plus 1, work an additional \"knit one\" at the beginning of your first row.\r\n+ A multiple of 4 stitches plus 2, work as specified to last 2 stitches of Row 1, end k 2.\r\n+ A multiple of 4 stitches plus 3, work as specified to last 3 stitches of Row 1, end k 2, p 1.\r\n\r\nIn all cases, WS rows should be worked as follows: Knit the knit stitches and purl the purl stitches. \r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "ribbing_stitch", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": null, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": null, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+},
+{
+    "pk": 5, 
+    "model": "stitches.stitch", 
+    "fields": {
+        "is_allover_stitch": false, 
+        "repeats_mod_y": 1, 
+        "name": "1x1 Ribbing", 
+        "is_neckline_hem_stitch": true, 
+        "_trim_neckline_template": null, 
+        "photo": "", 
+        "notes": "### 1 x 1 Ribbing (even number of stitches):\r\n\r\n**_Row 1:_** \\*Knit 1, purl 1; repeat to end. \r\n\r\nRepeat Row 1 for pattern.\r\n\r\n### 1x1 Ribbing (odd number of stitches):\r\n\r\n**_Row 1 (RS):_** \\*Knit 1, purl 1; repeat to last stitch, end k 1. \r\n\r\n**_Row 2 (WS):_** \\*Purl 1, knit 1; repeat to last stitch, end p 1. \r\n", 
+        "is_buttonband_hem_stitch": true, 
+        "stitch_type": "ribbing_stitch", 
+        "user_visible": true, 
+        "chart": "", 
+        "is_sleeve_hem_stitch": true, 
+        "is_waist_hem_stitch": true, 
+        "_sleeve_hem_template": 29, 
+        "_button_band_veeneck_template": null, 
+        "_waist_hem_stitch_template": 30, 
+        "_button_band_template": null, 
+        "_trim_armhole_template": null, 
+        "is_panel_stitch": false, 
+        "is_armhole_hem_stitch": true, 
+        "repeats_x_mod": 0
+    }
+}
+]
+

@@ -1,0 +1,47 @@
+{% load pattern_conventions %}
+<p>
+  <em>Increase Row One (RS)</em>: 
+  {{ increase_text_double_dart_standard_dart }}
+  {{ stitches_per_double_dart | capfirst }} increased. 
+    
+  {% if num_bust_non_double_dart_increase_repetitions %}
+  
+      Work 3 rows even. 
+    </p>
+    {% if num_bust_non_double_dart_increase_repetitions_minus_one %}
+      <p>
+        Repeat the last 4 rows 
+        {{ piece.num_bust_non_double_dart_increase_repetitions_minus_one | count_fmt }} 
+        more times.
+      </p>
+    {% endif %}
+    <p>
+      Work Increase Row One once more.  
+  {% endif %}
+
+  Work 1 row even.
+</p>
+
+{% if num_bust_double_dart_increase_rows  %}
+    <p>
+    Repeat the following 4 rows a total of
+    {{ piece.num_bust_double_dart_increase_rows | count_fmt }}
+    times:
+    </p>
+{% endif %}
+
+
+<p>        
+  <em>Increase Row Two (RS)</em>: 
+  {{ increase_text_double_dart_double_dart }}
+  {{ stitches_per_double_dart | capfirst }} increased.
+  Work 1 row even.
+</p>
+<p>          
+  Work Increase row One. Work 1 row even. 
+</p>
+  
+<p>
+  When all shaping is complete, {{ piece.num_bust_increase_rows_knitter_instructions | count_fmt }} total
+  increase rows worked since waist.
+</p>

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2>Edit {{ swatch.name }}</h2>
+
+  <div class="col-md-7 col-sm-6 col-xs-12">
+    <table class="table-customfit table-striped">
+      <thead>
+        <tr>
+          <th colspan="2">Non-editable fields</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for field in non_editable_fields %}
+          <tr>
+            <td>
+              {{ field.name }}
+            </td>
+            <td>
+              {{ field.value }}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <table class="table-customfit table-striped">
+      <thead>
+        <tr>
+          <th colspan="2">Editable fields</th>
+        </tr>
+      </thead>
+    </table>    
+    <form method="post">
+      {% csrf_token %}
+      {% crispy form %}
+    </form>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-1">
+    {% for picture in swatch.pictures.all %}
+      <img src="{{ picture.picture.url }}" 
+      alt="picture {{ forloop.counter }} for {{ object.name }}" class="img-responsive img-rounded">
+      {% if forloop.last %}{% if forloop.last < max_pictures %}
+      <p class="text-center">
+         <a href="{% url 'uploads:swatch_picture_upload' swatch.pk %}" class="btn-customfit-outline">
+        upload a picture</a>          
+      </p>
+      <p class="text-center small">
+        (Save your swatch edits before uploading!)
+      </p>
+      {% endif %}{% endif %}
+    {% empty %}
+      <p class="text-center">
+         <a href="{% url 'uploads:swatch_picture_upload' swatch.pk %}" class="btn-customfit-outline">
+        upload a picture</a>          
+      </p>
+      <p class="text-center small">
+        (Save your swatch edits before uploading!)
+      </p>
+    {% endfor %}
+  </div>
+{% endblock %}

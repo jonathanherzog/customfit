@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% comment %}
+    This template is not intented to be user-facing. Sub-templates that are meant to be user facing
+    should provide the following blocks:
+
+    * subscriptions
+
+{% endcomment %}
+
+{% block extra_compressible_css %}
+    <style type="text/css">
+        {# align tops of headers with tops of right-column content #}
+        h3 {
+            margin-top: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Manage your CustomFit account{% endblock %}
+
+{% block content %}
+    <section id="manage-account">
+        <h2>Manage account</h2>
+
+        <hr/>
+
+        {% block subscriptions %}
+        {% endblock %}
+
+        <hr/>
+
+        <!-- begin profile -->
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <h3>Profile</h3>
+            </div>
+            <div class="col-sm-8 col-xs-12">
+                Set your prefered measurement system (imperial or metric) <a href="{{ cf_profile_url }}" target="_blank">here</a>.
+            </div>
+        </div>
+        <!-- end profile -->
+
+        <hr/>
+
+    </section>
+{% endblock %}

@@ -1,0 +1,278 @@
+{% extends "design_wizard/tweak_page_base.html" %}
+{% load pattern_conventions %}
+
+{% block patternspec_info %}
+      <p class="margin-top-0 margin-bottom-5">
+        <strong>pattern name:</strong>
+      </p>
+      <p class="text-indent margin-top-0">
+        {{ object.name }}
+      </p>
+      <p class="margin-bottom-5">
+        <strong>height:</strong>
+      </p>
+      <p class="text-indent margin-top-0">
+        {{ object.spec_height_text }}
+      </p>
+      <p class="margin-bottom-5">
+        <strong>circumference:</strong>
+      </p>
+      <p class="text-indent margin-top-0">
+        {{ object.spec_circ_text }}
+      </p>
+      <p class="margin-bottom-5">
+        <strong>gauge:</strong>
+      </p>
+      <p class="text-indent margin-top-0">
+        <a href="{{ object.swatch.get_absolute_url }}">{{ object.swatch }}</a>
+      </p>
+{% endblock %}
+
+
+{% block sizing_recommendations_summary %}
+    <!-- begin target garment dimensions -->
+    <div class="col-xs-12">
+      <p class="text-center">
+        <strong>
+          target garment dimensions
+        </strong>
+
+      </p>
+      <table class="table-hover table-center">
+        <tbody>
+          <tr>
+            <td class="text-right pad-right">Height</td>
+            <td>{{ object.height | length_fmt }}</td>
+          </tr>
+          <tr>
+            <td class="text-right pad-right">circumference</td>
+            <td>{{ object.circumference | length_fmt }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end target garment dimensions -->
+{% endblock %}
+
+
+
+
+
+{% block extra_compressible_js %}
+<script type="text/javascript">
+  /* Restore inputs to original values.
+
+     Depends on the fact that crispy adds a 'value' attribute with the initial
+     input value by default. This attribute does not change when users change
+     the input value.
+  */
+  var $j = jQuery.noConflict();
+
+  $j(document).ready(function() {
+    var restore = $j('#button-id-restore');
+    var inputs = $j('input:not([type="submit"]):not([type="button"]):visible');
+
+    {% autoescape off %}
+      {# HTML escaping would otherwise turn the apostrophe character around field names into &#39;. #}
+      var restore_data = {{ restore_data }};
+    {% endautoescape %}
+
+    restore.click(function() {
+      inputs.each(function() {
+        // Restore original values.
+        var original = restore_data[$j(this).attr('id')];
+        $j(this).val(original.toFixed(2));
+        update_cross_chest();
+
+        // Recalculate & redisplay circ totals and ease display.
+        var circ_display = $j(this).parents('.circ-group').find('.display_circ');
+        var ease_display = $j(this).parents('.ease-group').find('.display_ease');
+        circ_inputs = circ_display.parents('.circ-group').find('input');
+        ease_inputs = circ_display.parents('.ease-group').find('input');
+
+        var circ_total = update_circs(circ_display, circ_inputs);
+        update_eases(ease_display, circ_total);
+      });
+
+      // Recaldulate & redisplay waist-to-armhole total.
+      set_waist_to_armhole();
+    });
+  });
+</script>
+
+<!-- Add +/- icons -->
+<script type="text/javascript">
+
+  var $j = jQuery.noConflict();
+
+  $j(document).ready(function() {
+    inputs = $j('.form-group');
+
+    inputs.each(function() {
+      var id = $j(this).attr('id');
+      var plus = '<span class="glyphicon glyphicon-plus glyphicon-customfit float-right" aria-hidden="true" aria-label="increase measurement" id="glyphicon-' + id + '-plus"></span>';
+      var minus = '<span class="glyphicon glyphicon-minus glyphicon-customfit float-right" aria-hidden="true" aria-label="decrease measurement" id="glyphicon-'+ id +'-minus"></span>';
+
+      $j(this).append(plus).append('&nbsp;').append(minus);
+    });
+  });
+</script>
+
+<!-- Make +/- icons work and auto-updating numbers auto-update. -->
+<script type="text/javascript">
+  var $j = jQuery.noConflict();
+
+  var display_imperial = '{{ display_imperial }}';
+
+  if ( display_imperial == 'True' ) {
+    /* Adjust by quarter-inches if the user uses imperial measurements. */
+    amt = 0.25;
+  } else {
+    /* Or adjust by half-cms if the user uses metric. */
+    amt = 0.5;
+  }
+
+  /* Cache these so we can auto-update hem to armhole. */
+  var waist_to_armhole = $j('#waist_to_armhole');
+  var hem_to_waist = $j('#id_waist_height_back');
+  var hem_to_armhole = $j('#id_armpit_height');
+
+  var hem_waist_glyphicons = hem_to_waist.parents('.form-group').find('.glyphicon');
+  var hem_armhole_glyphicons = hem_to_armhole.parents('.form-group').find('.glyphicon');
+
+  var id_shoulder_width = $j('#id_shoulder_width');
+  var id_back_neck_opening_width = $j('#id_back_neck_opening_width');
+  var display_cross_chest = $j('#display_cross_chest');
+  var cross_chest_inputs = $j('#cross_chest input')
+
+  /* Update the circ display area. Called after users change inputs. */
+  function update_circs(display, inputs) {
+    if ( display.size() > 0 ) {
+      var total = 0;
+      inputs.each(function() {
+        total += parseFloat($j(this).val());
+      });
+      display.html(total.toFixed(2));
+    }
+
+    return total;
+  }
+
+  /* Update the ease display area. Called after users change inputs. */
+  function update_eases(display, total) {
+    /* If the update_circs function has already been called, we have a total.
+       If not - i.e. because there is no circ display on this value group, as with
+       bicep circ - we need to get the total garment circ before we can update.
+    */
+    if ( total === undefined ) {
+      var local_inputs = display.parents('.ease-group').find('input');
+      total = 0;
+      local_inputs.each(function() {
+        total += parseFloat($j(this).val());
+      });
+    }
+
+    if ( display.size() > 0 ) {
+      /* ease = garment - body */
+      var ease = total - parseFloat(display.attr('data-body-original'));
+      display.html(ease.toFixed(2));
+    }
+  }
+
+  /* Update the cross-chest number. This uses different arithmetic than other
+     circs, so it needs its own function.
+
+     The cross-chest section does NOT have a .circ-group or .ease-group class,
+     so it will not be updated by the update_circs and update_eases functions.
+  */
+  function update_cross_chest() {
+    var cross_chest_total = 2*id_shoulder_width.val() + parseFloat(id_back_neck_opening_width.val()) // the 2* coerces it to float
+    display_cross_chest.html(cross_chest_total.toFixed(2));
+  }
+
+  function increase(input, circ_display, ease_display, amount) {
+    if (amount === undefined) {
+      amount = amt;
+    }
+
+    var orig_val = parseFloat(input.val());
+    input.val((orig_val + amount).toFixed(2));
+
+    circ_inputs = circ_display.parents('.circ-group').find('input');
+
+    var circ_total = update_circs(circ_display, circ_inputs);
+    update_eases(ease_display, circ_total);
+    update_cross_chest();
+  }
+
+  function decrease(input, circ_display, ease_display) {
+    amount = amt * -1;
+    increase(input, circ_display, ease_display, amount);
+  }
+
+  function store_original_measurements() {
+    /* Remember original body dimensions so we can calculate eases later */
+    var eases = $j('.ease-group');
+    var eases_original = []
+    eases.each(function() {
+      /* Body dimensions are garment dimensions minus eases. We're going to use
+         jQuery objects as array keys for ease of retrieval later.
+      */
+      var local_inputs = $j(this).find('input');
+      var body_dimension = 0;
+      local_inputs.each(function() {
+        body_dimension += parseFloat($j(this).val());
+      });
+      var ease = parseFloat($j(this).find('.display_ease').html());
+      $j(this).find('.display_ease').attr('data-body-original', body_dimension - ease);
+    });
+  }
+
+  function set_waist_to_armhole() {
+    var total = parseFloat(hem_to_armhole.val()) - parseFloat(hem_to_waist.val());
+    total = total.toFixed(2); // round to two decimal places to hide float wackiness
+    waist_to_armhole.html(total);
+  }
+
+  $j(document).ready(function() {
+    var icons = $j('.form-group .glyphicon');
+    var inputs = $j('input');
+
+    store_original_measurements();
+    set_waist_to_armhole();
+
+    /* Update circs and eases when users click the +/- icons. */
+    icons.click(function() {
+      /* Get the input associated with this +/- icon - that is, the
+         input that's a child of the same .form-group element. */
+      var associated_input = $j(this).parents('.form-group').find('input');
+      var circ_display = $j(this).parents('.circ-group').find('.display_circ');
+      var ease_display = $j(this).parents('.ease-group').find('.display_ease');
+
+      var id = $j(this).attr('id');
+      if (id.indexOf('-plus') >= 0) {
+        increase(associated_input, circ_display, ease_display);
+      } else if (id.indexOf('-minus') >= 0) {
+        decrease(associated_input, circ_display, ease_display);
+      }
+      set_waist_to_armhole();
+    });
+
+    /* Update circs and eases when users use built-in HTML form controls. */
+    inputs.blur(function() {
+      var circ_display = $j(this).parents('.circ-group').find('.display_circ');
+      var ease_display = $j(this).parents('.ease-group').find('.display_ease');
+      circ_inputs = circ_display.parents('.circ-group').find('input');
+      ease_inputs = circ_display.parents('.ease-group').find('input');
+
+      var circ_total = update_circs(circ_display, circ_inputs);
+      update_eases(ease_display, circ_total);
+    });
+
+    cross_chest_inputs.blur(function () { update_cross_chest(); });
+
+    hem_to_waist.blur(function() { set_waist_to_armhole(); });
+    waist_to_armhole.blur(function() { set_waist_to_armhole(); });
+  });
+</script>
+{% endblock %}

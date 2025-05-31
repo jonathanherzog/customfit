@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Edit note for {{ object.name }}</h2>
+
+<div id="lightbox_content">
+  <form action="" method="post">{% csrf_token %}
+    {{ form | crispy }}
+    <input class="btn-customfit-action" type="submit" value="Update" />
+  </form>
+</div>
+{% endblock %}

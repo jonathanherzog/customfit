@@ -1,0 +1,68 @@
+/* accordion styling */
+.accordion-heading {
+  background-color: #f5f5f5;
+}
+
+.accordion-heading:hover {
+  background-color: #f0f0f0;
+}
+
+.accordion a.accordion-toggle {
+  line-height: 2em;
+}
+
+.accordion .caret {
+  margin-top: 0.9em;
+}
+
+/* gallery */
+
+.span4 > #gallery {
+  position: relative;
+}
+#gallery {
+  padding: 0px;
+  margin: 10px 0px;
+}
+
+#gallery.row-fluid {
+  width: 100%;
+}
+
+#gallery .span6 {
+  margin-top: 4px;
+}
+
+#gallery .span6:nth-child(2n+1){
+  width: 46.93617021276595%;
+  margin-right: 4%;
+}
+
+#gallery .span6:nth-child(2n){
+  width: 46.93617021276595%;
+  margin-right: -8px; /* Corrects for padding/border on main image so they right-align. */
+}
+
+#gallery .thumbnail {
+  -webkit-transition: border-color 1s;
+          transition: border-color 1s;
+}
+
+#gallery .thumbnail:hover {
+  border-color: #f7941d;
+  cursor: pointer;
+}
+
+.modal {
+  width: auto;
+  left: 50%;
+  margin-left: -33.333333%; /* sized for landscape, not portrait */
+}
+
+.modal-body {
+  max-height: 550px;
+}
+
+.modal.fade.in {
+  top: 5%;
+}

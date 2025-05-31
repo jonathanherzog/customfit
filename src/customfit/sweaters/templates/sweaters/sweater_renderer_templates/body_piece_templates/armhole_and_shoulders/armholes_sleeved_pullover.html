@@ -1,0 +1,26 @@
+{% load pattern_conventions %}        
+
+<p>
+	BO {{ piece.armhole_x | count_fmt }} stitches at the beginning of the next 2 rows.
+	
+	{% if piece.armhole_y.any %}
+    	BO {{ piece.armhole_y | count_fmt }} stitches at the beginning of following 2 rows.
+	{% endif %}
+
+    {% if piece.armhole_z.any %}
+        Decrease 1 stitch at <em><strong>each end</strong></em> of every RS row
+        {{ piece.armhole_z | count_fmt }} times as follows:
+    {% endif %}
+</p>
+
+{% if piece.armhole_z.any %}
+<p>
+    <em>Decrease row (RS):</em> {{ decrease_text_armhole_rs_twosts }} {{ stitches_per_armhole_dec_twosts | capfirst }} decreased.
+</p>
+{% endif %}
+
+<p>
+{% if piece.cross_chest_stitches.any %}
+		{{ piece.cross_chest_stitches | count_fmt }} stitches remain.
+	{% endif %}
+</p>

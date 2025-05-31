@@ -1,0 +1,12 @@
+{% load pattern_conventions %}
+
+{% comment %}
+    DOES NOT INHERIT FROM design_choices_base.html!
+{% endcomment %}
+
+    <li>
+        <strong>Materials:</strong> {{ piece.yards | length_long_fmt }} yarn that works to the specified gauge.
+    </li>
+  <li>
+    <strong>Notions: </strong> {{ notions }}
+  </li>

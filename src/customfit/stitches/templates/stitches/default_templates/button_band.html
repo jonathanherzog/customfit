@@ -1,0 +1,79 @@
+{% load pattern_conventions %}
+<p>
+  <em>Right Front Button-band:</em>
+</p>
+<p>
+  Beginning at hem of Right Front, pick up and knit button-band  
+  as follows: Pick up and knit stitches at the rate of 2 for every 3 rows
+  along button band edge from hem to neck, 
+  approximately {{ button_band.stitches | count_fmt }} stitches. (This number is not 
+  crucial, <strong>but should respect stitch counts 
+  for your stitch pattern</strong>.
+    {% if num_buttonholes > 0 %}
+    Buttonhole instructions should be
+    modified if you do not achieve this exact number.{% endif %})
+</p>
+{% if num_buttonholes > 0 %}
+  <p>
+    Work even in {{ button_band.edging_stitch_patterntext }} for 
+{% if piece_is_graded %}
+    {{ button_band.half_height | length_fmt }},
+{% else %}
+    {{ button_band.half_height | length_fmt }}
+    (approximately {{ button_band.half_height_in_rows | count_fmt }} rows),
+{% endif %}
+    ending with a WS row.
+  </p>
+  {% if evenly_spaced_buttonholes %}
+    <p>
+      <em>Buttonhole row (RS):</em> Work 
+      {{ button_band.stitches_before_first_buttonhole | count_fmt }} stitches, 
+      *k2tog, yo, work {{ button_band.inter_buttonhole_stitches | count_fmt }} sts, 
+      rep from * {{ button_band.num_interior_buttonholes | count_fmt }} more times, 
+      [k2tog, yo] once more, work to end. 
+      {{ button_band.num_buttonholes | count_fmt }} buttonholes spaced evenly across 
+      front. <em>(Note: If you prefer a different buttonhole than an 
+      eyelet buttonhole, please feel free to substitute it.)</em>
+    </p>
+  {% else %}
+    <p>
+      On last row, place marker at bottom of each desired button hole.
+    </p>
+    <p>
+      <em>Buttonhole row (RS):</em> *Work to marker, *k2tog, yo.
+      Rep from * for each marker, work to end.
+    </p>
+  {% endif %}
+{% endif %}  
+<p>
+  Work even in {{ button_band.edging_stitch_patterntext }} until button band measures
+  a total of 
+{% if piece_is_graded %}
+  {{ button_band.height | length_fmt }}.
+{% else %}
+  {{ button_band.height | length_fmt }}
+  ({{ button_band.height_in_rows | count_fmt }} rows).
+{% endif %}
+    BO all stitches.</p>
+<p>
+  <em>Left Front Button-band:</em> 
+</p>
+<p>
+  Beginning at neck of Left Front, pick up and knit button-band as 
+  follows: Pick up and knit stitches at the rate of 2 for every 3 rows along
+  button band edge from neck to hem, 
+  approximately {{ button_band.stitches | count_fmt }} stitches. (This number is not 
+  crucial, <strong>but should respect stitch counts 
+  for your stitch pattern</strong>. Buttonhole instructions should be 
+  modified if you do not achieve this exact number.)
+</p>
+<p>
+  Work even in {{ button_band.edging_stitch_patterntext }} for 
+{% if piece_is_graded %}
+  {{ button_band.height | length_fmt }}.
+{% else %}
+  {{ button_band.height | length_fmt }}
+  (approximately {{ button_band.height_in_rows | count_fmt }} rows).
+{% endif %}
+    BO all stitches.
+</p>

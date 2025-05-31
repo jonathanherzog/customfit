@@ -1,0 +1,108 @@
+{% load pattern_conventions %}
+<p>
+	For most women, I have seen that when sufficient vertical darts are 
+	added to the sweater, horizontal (or short row) darts become unnecessary. (This is
+	especially true if the fit is "average" or "close", since the nature of these fits 
+	will keep the garment properly anchored on your body.)
+</p>
+<p>
+	That said, some knitters feel differently and are much more comfortable 
+	with both vertical and horizontal bust darts. For proper placement, start working the
+	dart a couple of inches below the fullest part of your bust. This will ensure wrapped
+	stitches stay on the under-side of the bust, where they are less noticeable. 
+</p>
+<p>
+	If you’d like to add horizontal / short row bust darts to your sweater, here’s how: 
+</p>
+
+{% if piece.is_cardigan %}
+
+	<p>
+		<strong>For Right Front:</strong>
+	</p>
+	<p>
+		Place one marker approximately 1&quot; / 2.5 cm in from the armhole 
+		edge of your knitting.
+	</p>
+	<p>
+		<em>Dart set-up row one (RS):</em> Work to marker, wrap and turn.
+	</p>
+	<p>
+		<em>Dart set-up row two (WS):</em> Work even to neck edge.
+	</p>
+	<ul>
+	{% for height_in_inches, stitches_between_wraps, unused, half_num_wraps in piece.bust_dart_params %}
+		<li>
+		<p>
+			<em>To work {{ height_in_inches | length_fmt }} of short row dart:</em> 
+		</p>
+		<p>
+			<em>Dart row one (RS):</em> Work to {{ stitches_between_wraps | count_fmt }} stitches 
+			before the last wrapped stitch, wrap and turn.
+		<p>
+			<em>Dart row two (WS):</em> Work even to neck edge.
+		</p>
+		<p>
+			Repeat Dart rows one and two until a total of 
+			{{ half_num_wraps | count_fmt }} wraps have been worked; 
+			{{ half_num_wraps | count_fmt }} wraps will be 
+			worked on other cardigan piece, too.
+		</p>
+		</li>
+	{% endfor %}
+	</ul> 
+	<p>
+	<strong>For Left Front</strong>, repeat these instructions, except work short rows on 
+	WS rows, and work RS rows even.
+	</p>
+{% else %}
+	<p>
+		When you’re ready to work the dart (typically ~2&quot; / 5 cm below 
+		the fullest part of your bust), place two markers approximately 1&quot; / 2.5 cm 
+		in from the outside edges of your knitting.
+	</p>
+	<p>
+		<em>Dart set-up row one (RS):</em> Work to last marker, wrap and turn. 
+	</p>
+	<p>
+		<em>Dart set-up row two (WS):</em> Work to last marker, wrap and turn. 
+	</p>
+	<ul>
+	{% for height_in_inches, stitches_between_wraps, height_in_rows, half_num_wraps in piece.bust_dart_params %}
+		<li>
+		<p>
+			<em>To work {{ height_in_inches | length_fmt }} of short row dart:</em> 
+		</p>
+		<p>
+			<em>Dart row one (RS):</em> Work to {{ stitches_between_wraps | count_fmt }} stitches 
+			before the last wrapped stitch, wrap and turn. 
+		</p>
+		<p>
+			<em>Dart row two (WS):</em> Work to {{ stitches_between_wraps | count_fmt }} stitches 
+			before the last wrapped stitch, wrap and turn. 
+		</p>
+		<p>
+			Repeat Dart rows one and two until a total of 
+			{{ height_in_rows | count_fmt }} wraps have been worked; 
+			{{ half_num_wraps | count_fmt }} wraps worked on each side. 
+		</p>
+		</li>
+	{% endfor %}
+	</ul>
+
+	<p>
+		<strong>All darts:</strong> 
+	</p>
+	<p>
+		<em>Close the dart as follows:</em> 
+	</p>
+	<p>
+		<em>Dart closing row one (RS):</em> Work to end of row, working all wraps with 
+		their stitches. 
+	</p>
+	<p>
+		<em>Dart closing row two  (WS):</em> Work to end of row, working all wraps with 
+		their stitches.
+	</p>
+
+{% endif %}

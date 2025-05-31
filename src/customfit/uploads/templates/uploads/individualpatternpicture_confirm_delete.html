@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Delete picture{% endblock %}
+
+{% block content %}
+  <h1>Confirm deletion</h1>
+
+  <p>
+    Are you sure you want to delete this picture of {{ object.object.name }}?
+  </p>
+
+  <form method="POST" action="{% url 'uploads:individual_pattern_picture_delete' object.id %}">
+    {% csrf_token %}<button type="submit" class="btn-customfit-danger">Yes, delete it!</button>
+    <a class="btn-customfit-outline" href="{% url 'uploads:individual_pattern_picture_edit' object.object.id %}">Actually, let's not.</a>
+  </form>
+{% endblock %}

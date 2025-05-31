@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Re-do your {% if design.name %}{{ design.name }}{% else %}pattern{% endif %}{% endblock title %}
+
+{% block extra_compressible_css %}
+  <style type="text/css">
+    .form-actions {
+      margin-top: 20px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>Re-do your {% if design.name %}{{ design.name }}{% else %}pattern{% endif %}</h2>
+
+    <p>
+        Make a mistake when you generated your pattern? No worries! <strong>You can change any of the
+        options listed here and re-generate your pattern</strong>.
+    </p>
+
+    {% block warning_paragraph %}
+    <p>
+        This can be done <strong>only once</strong>, and <strong>replaces your current pattern entirely</strong>,
+        so be sure to choose carefully. Before you re-do, you can create a
+        <a href="{% url 'bodies:body_create_view' %}">new (updated) measurement set</a> or a
+        <a href="{% url 'swatches:swatch_create_view' %}">new (updated) gauge</a> to use.
+    </p>
+    {% endblock %}
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {% crispy form %}
+  </form>
+
+
+{% endblock content %}
+
+{% block extra_compressible_js %}
+  {{ block.super }}
+{% endblock %}

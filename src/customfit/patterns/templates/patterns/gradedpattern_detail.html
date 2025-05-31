@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load thumbnail %}
+{% load pattern_conventions %}
+
+{% block title %}{{ pattern.name }}{% endblock %}
+{% block content %}
+  {% if request.user.is_staff %}
+    <div class="row customfit-admin">
+        Hi, {{ user.username }}! You can <a href="{% url 'admin:sweaters_sweaterpattern_change' pattern.id %}">see this pattern in the admin site</a>.
+    </div>
+  {% endif %}
+
+  <h1>{{ pattern.name }} {% if designer %}<small>Design by {{ designer.full_name }}</small>{% endif %}</h1>
+
+  <h2>Pattern summary</h2>
+
+  <!-- begin pattern summary -->
+  <div class="row">
+
+    <!-- begin pattern info -->
+    <div class="col-md-5 col-sm-4 col-xs-12">
+      <p class="margin-top-0 margin-bottom-5">
+        <strong>Pattern name:</strong>
+      </p>
+      <p class="text-indent margin-top-0">
+        {{ pattern.name }}
+      </p>
+
+    {% if pattern.grade_list_for_pattern_summary %}
+        <p class="margin-top-0 margin-bottom-5">
+            <strong>Finished bust circumferences:</strong>
+        </p>
+        <ul>
+            <li> {{ pattern.grade_list_for_pattern_summary | length_fmt }}</li>
+        </ul>
+    {% endif %}
+
+      {% if pattern.body %}
+        <p class="margin-top-0 margin-bottom-5">
+            <strong>measurements:</strong>
+        </p>
+        <p class="text-indent margin-top-0">
+            <a href="{{ pattern.body.get_absolute_url }}">{{ pattern.body }}</a>
+        </p>
+      {% endif %}
+
+      <p class="margin-top-0 margin-bottom-5">
+        <strong>Gauge:</strong>
+      </p>
+        <ul>
+            <li>{{ pattern.stitch_gauge_four_inches | count_fmt}} and {{ pattern.row_gauge_four_inches | count_fmt}}
+                rows over 4&quot;/10cm in
+                {% if pattern.main_stitch %}
+                    {{ pattern.main_stitch.name }}
+                {% else %}
+                    Stockinette
+                {% endif %}
+            </li>
+        </ul>
+
+
+    </div>
+    <!-- end pattern info -->
+
+    <!-- begin pattern actions -->
+    <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-1 col-xs-12">
+      {% if pattern.archived %}
+        <a href="{% url 'patterns:individualpattern_unarchive_action' pattern.id %}" class="btn-customfit-outline btn-block">
+          Unarchive this pattern
+        </a>
+      {% else %}
+        <a href="{% url 'patterns:individualpattern_archive_action' pattern.id %}" class="btn-customfit-outline btn-block">
+          Archive this pattern
+        </a>
+      {% endif %}
+    </div>
+    <!-- end pattern actions -->
+  </div>
+  <!-- end pattern summary -->
+
+  <h2>Pattern detail</h2>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-10">
+      <div class="patterntext">
+        {{ pattern_text }}    
+      </div>      
+    </div>
+  </div>
+
+{% endblock %}
+

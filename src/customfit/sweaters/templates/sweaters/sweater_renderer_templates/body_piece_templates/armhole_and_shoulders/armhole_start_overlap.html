@@ -1,0 +1,27 @@
+{% load pattern_conventions %}
+
+<p>
+    Continue as established until piece measures {{ piece.hem_to_armhole_shaping_start | length_fmt }},
+    {% if piece_is_graded %}
+        ending with a {{ pre_armhole_row_parity }} row.
+    {% else %}
+      ending with a {{ pre_armhole_row_parity }} row:
+      {% if neckline_to_armhole_in_rows.displayable %}
+        {{ hem_to_armhole_in_rows | count_fmt }} rows from beginning and
+        {{ neckline_to_armhole_in_rows | count_fmt }} rows from neckline.
+      {% elif last_increase_to_armhole_in_rows.displayable %}
+        {{ hem_to_armhole_in_rows | count_fmt }} rows from beginning and
+        {{ last_increase_to_armhole_in_rows | count_fmt }} rows from (and including)
+        last increase row.
+      {% elif last_decrease_to_armhole_in_rows.displayable %}
+        {{ hem_to_armhole_in_rows | count_fmt }} rows from beginning and
+        {{ last_decrease_to_armhole_in_rows | count_fmt }} rows from (and including)
+        last decrease row.
+      {% else %}
+        {{ hem_to_armhole_in_rows | count_fmt }} rows from beginning.
+      {% endif %}
+    {% endif %}
+</p>
+<p>
+    <strong>Shape Armhole:</strong>
+</p>

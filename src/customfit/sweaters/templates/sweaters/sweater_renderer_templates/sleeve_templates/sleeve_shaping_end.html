@@ -1,0 +1,9 @@
+{% load pattern_conventions %}
+
+<p>
+{% if sleeve_is_tapered %}
+    {{ piece.bicep_stitches | count_fmt }} stitches total.
+{% else %}
+    {{ piece.bicep_stitches | count_fmt }} stitches remain.
+{% endif %}
+</p>

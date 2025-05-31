@@ -1,0 +1,8 @@
+{% load md2 %}
+{{ designer_notes | markdown}}
+
+{% if credits %}
+<p>
+	{{ credits }}
+</p>
+{% endif %}

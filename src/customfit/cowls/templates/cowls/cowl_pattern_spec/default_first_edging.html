@@ -1,0 +1,18 @@
+{% load pattern_conventions %}
+
+
+<p>
+    CO {{ piece.cast_on_stitches | count_fmt }} sts. Place marker and join for working in the
+    round, being careful not to twist.
+</p>
+<p>
+    Continue in {{ piece.edging_stitch_name }}
+    {%  if piece_is_graded %}
+    until
+    piece measures {{ piece.actual_edging_height | length_fmt }} from CO edge.
+    {% else %}
+    for {{ piece.edging_height_in_rows | count_fmt }} rounds, or until
+    piece measures {{ piece.actual_edging_height | length_fmt }} from CO edge.
+    {% endif %}
+</p>
+{{ stitch_transition_text }}

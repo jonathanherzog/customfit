@@ -1,0 +1,39 @@
+{% load pattern_conventions %}
+
+
+{% if is_left_side %}
+    <p>
+    <em>Marker placement row (WS):</em> Work {{ piece.inter_marker | count_fmt }} stitches, pm,
+    work {{ piece.pre_marker | count_fmt }} stitches to end.
+    </p>
+{% elif is_right_side %}
+    <p>
+    <em>Marker placement row (WS):</em> Work {{ piece.pre_marker | count_fmt }} stitches, pm,
+    work {{ piece.inter_marker | count_fmt }} stitches to end.
+  </p>
+{% else %}
+    <p>
+    <em>Marker placement row (WS):</em> Work {{ piece.pre_marker | count_fmt }} stitches, pm,
+    work {{ piece.inter_marker | count_fmt }} stitches, pm, 
+    work {{ piece.post_marker | count_fmt }} stitches to end.
+    </p>
+{% endif %}
+
+<p>
+    <strong>Shape waist:</strong>
+</p>
+<p>
+  <em>Decrease row (RS)</em>:  {{ decrease_text_single_dart }}
+  {{ stitches_per_single_dart |capfirst }} decreased.
+</p>
+{% if waist_standard_decrease_repetitions %}
+    <p>
+    Repeat decrease row every 
+    {{ piece.rows_between_standard_waist_decrease_rows_plus_one | count_fmt }} rows 
+    {{ piece.num_waist_standard_decrease_repetitions | count_fmt }} additional
+    time{{ piece.num_waist_standard_decrease_repetitions | pluralize_counts }}:
+    {{ piece.num_waist_decrease_rows_knitter_instructions | count_fmt }}
+    total decrease rows worked. {{ piece.waist_stitches | count_fmt }} stitches remain. 
+  </p>
+{% endif %}
+

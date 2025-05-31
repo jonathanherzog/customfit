@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %}Our ever-growing list of collections!{% endblock title %}
+
+{% block content %}
+<h2>
+  Our ever-growing list of collections.
+</h2>
+
+  {% for collection in collections %}
+    <h3>{{ collection.name }}</h3>
+    <div class="row clear-columns">
+      {% for design in collection.visible_designs %}
+        {% include 'sweaters/choose_sweater_design_tile.html' %}
+      {% endfor %}
+   	</div>
+  {% endfor %}
+
+{% endblock content %}

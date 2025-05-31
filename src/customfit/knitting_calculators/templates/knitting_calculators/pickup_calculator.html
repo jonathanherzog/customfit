@@ -1,0 +1,132 @@
+{% extends 'knitting_calculators/tool_base.html' %}
+
+{%  block calculator_description %}
+
+    <p>
+        This calculator takes a stitch-gauge, a row-gauge, and the number of rows along
+        an edge. In return, it gives you instructions for picking up stitches.
+    </p>
+
+{% endblock %}
+
+
+{% block calculator_output %}
+
+    {% if spacing_error_message %}
+
+        <div>
+        {{ spacing_error_message }}
+        </div>
+    {% endif %}
+
+
+    {% if show_knitting_instructions %}
+        <div id="id_instruction_text">
+        <ul>
+            <li>pick up {{ stitches_to_pick_up }} stitch{{ stitches_to_pick_up|pluralize:"es" }}</li>
+            {%  if row_pickup_rate > 1 %}
+                <li>
+                    (approx {{ stitch_pickup_rate }} st{{ stitch_pickup_rate|pluralize }}
+                    out of every {{ row_pickup_rate }} rows)
+                </li>
+            {%  else %}
+                <li>
+                    (approx {{ stitch_pickup_rate }} st{{ stitch_pickup_rate|pluralize }} every row)
+                </li>
+            {% endif %}
+        </ul>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+
+{% block calculator_specific_js %}
+  <script type="text/javascript">
+    var $j = jQuery.noConflict();
+
+    $j(document).ready(function () {
+      /* Set up variables
+      ------------------------------------------------------------------------*/
+
+      var edge_input_type_selector = $j('#id_edge_input_type');
+      var inches_row = $j('#id_edge_in_inches_row');
+      var cms_row = $j('#id_edge_in_cms_row');
+      var count_row = $j('#id_rows_on_edge_row');
+
+      var inches_input_field = $j('#id_edge_in_inches');
+      var cms_input_field = $j('#id_edge_in_cms');
+      var count_input_field = $j('#id_rows_on_edge');
+
+      /* Helper functions ahoy
+      ------------------------------------------------------------------------*/
+
+      function hide_row (row_el, field_el) {
+          row_el.hide('fast');
+          field_el.val("");
+      }
+
+      function show_row (row_el) {
+          row_el.show("fast");
+      }
+
+      function show_inches () {
+          show_row(inches_row);
+      }
+      function hide_inches () {
+          hide_row(inches_row, inches_input_field);
+      }
+
+      function show_cms () {
+          show_row(cms_row);
+      }
+      function hide_cms () {
+          hide_row(cms_row, cms_input_field);
+      }
+
+      function show_count () {
+          show_row(count_row);
+      }
+      function hide_count () {
+          hide_row(count_row, count_input_field);
+      }
+
+      function update_page (input_type_requested) {
+        switch(input_type_requested) {
+            case '{{ inches_string }}':
+                hide_count();
+                hide_cms();
+                show_inches();
+                break;
+            case '{{ cms_string }}':
+                hide_inches();
+                hide_count();
+                show_cms();
+                break;
+            case '{{ count_string }}':
+                hide_inches();
+                hide_cms();
+                show_count();
+                break;
+        }
+      }
+
+      /* Set up state on page load
+      ------------------------------------------------------------------------*/
+
+      var edge_input_type = edge_input_type_selector.val();
+      update_page(edge_input_type);
+
+
+      /* Perform actions on user events
+      ------------------------------------------------------------------------*/
+
+      // Update the visibility of the rows every time they change the output-type selected
+      edge_input_type_selector.change(function () {
+        var input_type = $j(this).val();
+        update_page(input_type);
+      })
+    });
+
+  </script>
+{% endblock %}

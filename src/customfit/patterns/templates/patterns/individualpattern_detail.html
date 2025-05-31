@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}{{ pattern.name }}{% endblock %}
+{% block content %}
+  {% if request.user.is_staff %}
+    <div class="row customfit-admin">
+        Hi, {{ user.username }}! You can <a href="{% url 'admin:sweaters_sweaterpattern_change' pattern.id %}">see this pattern in the admin site</a>.
+    </div>
+  {% endif %}
+
+  <h1>{{ pattern.name }} {% if designer %}<small>Design by {{ designer.full_name }}</small>{% endif %}</h1>
+
+  <h2>Pattern summary</h2>
+
+  <!-- begin pattern summary -->
+  <div class="row">
+    <!-- begin picture -->
+    <div class="col-md-3 col-sm-3 col-xs-12">
+      <img src="{{ pattern.preferred_picture_url }}" class="margin-top-0">
+      <a href="{{ manage_pictures_url }}" class="btn-customfit-outline btn-block">Manage pictures</a>
+    </div>
+    <!-- end picture -->
+
+    <!-- begin pattern info -->
+    <div class="col-md-5 col-sm-4 col-xs-12">
+      <p class="margin-top-0 margin-bottom-5">
+        <strong>pattern name:</strong>
+      </p>
+      <p class="text-indent margin-top-0">
+        {{ pattern.name }}
+      </p>
+
+      {% if pattern.body %}
+        <p class="margin-top-0 margin-bottom-5">
+            <strong>measurements:</strong>
+        </p>
+        <p class="text-indent margin-top-0">
+            <a href="{{ pattern.body.get_absolute_url }}">{{ pattern.body }}</a>
+        </p>
+      {% endif %}
+
+      <p class="margin-top-0 margin-bottom-5">
+        <strong>gauge:</strong>
+      </p>
+      <p class="text-indent margin-top-0">
+        <a href="{{ pattern.swatch.get_absolute_url }}">{{ pattern.swatch }}</a>
+      </p>
+
+    </div>
+    <!-- end pattern info -->
+
+    <!-- begin pattern actions -->
+    <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-1 col-xs-12">
+      <a href="{% url 'patterns:individualpattern_shortpdf_view' pattern.id %}" class="btn-customfit-action btn-block">
+        Get PDF
+      </a>
+      <a href="{% url 'patterns:individualpattern_pdf_view' pattern.id %}" class="btn-customfit-outline btn-block">
+        Get expanded PDF
+      </a>
+      {% if pattern.archived %}
+        <a href="{% url 'patterns:individualpattern_unarchive_action' pattern.id %}" class="btn-customfit-outline btn-block">
+          Unarchive this pattern
+        </a>
+      {% else %}
+        <a href="{% url 'patterns:individualpattern_archive_action' pattern.id %}" class="btn-customfit-outline btn-block">
+          Archive this pattern
+        </a>
+      {% endif %}
+      {% if pattern.redo_possible %}
+          <a href="{% url 'design_wizard:redo_start' pattern.id %}" class="btn-customfit-outline btn-block">
+            Redo this pattern <br/>
+              {% if pattern.redo_days_left == 0 %}
+                  <i>(last day!)</i>
+              {% else %}
+                  <i>({{ pattern.redo_days_left }} day{{ pattern.redo_days_left | pluralize }} left)</i>
+               {% endif %}
+        </a>
+      {% endif %}
+    </div>
+    <!-- end pattern actions -->
+  </div>
+  <!-- end pattern summary -->
+
+  <h2>Pattern detail</h2>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-10">
+      <div class="pull-right col-sm-2 col-sm-offset-2 col-md-3 col-md-offset-1">
+        {% for picture in pattern.pictures.all %}
+            <img src="{{ picture.picture | thumbnail_url:'col-md-2-square' }}" class="pull-right img-customfit" />
+        {% endfor %}
+      </div>
+      <div class="patterntext">
+        {{ pattern_text }}    
+      </div>      
+    </div>
+  </div>
+
+{% endblock %}
+

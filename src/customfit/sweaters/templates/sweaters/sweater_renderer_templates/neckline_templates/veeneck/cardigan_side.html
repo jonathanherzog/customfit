@@ -1,0 +1,26 @@
+{% load pattern_conventions %}
+{% if decrease_rows %}
+  {% if decrease_repeats %}
+    <p>
+      Beginning with a RS row, decrease 1 stitch at neck edge of this row 
+      and then every {{ piece.rows_per_decrease | count_fmt }} rows 
+      {{ piece.decrease_repeats | count_fmt }} additional times as follows:
+    </p>
+    <p><em>Decrease row (RS):</em> {{ decrease_text_neckline_rs }}</p>
+
+      {% if piece.rows_per_decrease_odd.any %}
+        <p><strong>NOTE: Some decreases will fall on WS rows.</strong></p>
+        <p><em>Decrease row (WS):</em> {{ decrease_text_neckline_ws }}</p>
+      {% endif %}
+
+   <p>
+      {{ piece.decrease_rows | count_fmt }} total decrease rows worked.
+    </p>
+  {% else %}
+    <p>
+      Beginning with a RS row, decrease 1 stitch at neck edge of this row as follows:
+    </p>
+    <p><em>Decrease row (RS):</em> {{ decrease_text_neckline_rs }}</p>
+  {% endif %}
+{% endif %}
+

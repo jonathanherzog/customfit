@@ -1,0 +1,80 @@
+{% extends 'design_wizard/redo_pattern_select_changes.html' %}
+
+
+
+{% block extra_compressible_js %}
+  {{ block.super }}
+
+    {% if silhouette != 'SILHOUETTE_HOURGLASS' and silhouette != 'SILHOUETTE_HALFGLASS' %}
+        {% comment %}
+            If the silhouette is hourglass or half-hourglass, then the form shows only hourglass fits
+        {% endcomment %}
+        <!-- begin fit-compatibilty script -->
+        <script type="text/javascript">
+        var $j = jQuery.noConflict();
+
+        $j(document).ready(function () {
+          var body_options = {{ body_options | safe }};
+          var body_selector = $j('#id_body');
+
+          var women_fits = $j('#id_garment_fit option[value^=FIT_WOMENS]');
+          var men_fits = $j('#id_garment_fit option[value^=FIT_MENS]');
+          var child_fits = $j('#id_garment_fit option[value^=FIT_CHILDS]');
+
+          /* Garment fit options
+          ----------------------------------------------------------------------- */
+          function _fix_fit_display_for (body_id) {
+            var selected_fit = $j('#id_garment_fit option:selected');
+
+            try {
+                var type = body_options[body_id]['type'];
+
+                if (type == 'woman') {
+                    women_fits.removeAttr('disabled').show();
+                    men_fits.attr('disabled', 'disabled').hide();
+                    child_fits.attr('disabled', 'disabled').hide();
+                } else if (type == 'man') {
+                    women_fits.attr('disabled', 'disabled').hide();
+                    men_fits.removeAttr('disabled').show();
+                    child_fits.attr('disabled', 'disabled').hide();
+                } else if (type == 'child') {
+                    women_fits.attr('disabled', 'disabled').hide();
+                    men_fits.attr('disabled', 'disabled').hide();
+                    child_fits.removeAttr('disabled').show();
+                } else {
+                    women_fits.removeAttr('disabled').show();
+                    men_fits.removeAttr('disabled').show();
+                    child_fits.removeAttr('disabled').show();
+                }
+            } catch (err) {
+                // If there is no body type (e.g. because the user has selected the null
+                // body option), show everything.
+                women_fits.removeAttr('disabled').show();
+                men_fits.removeAttr('disabled').show();
+                child_fits.removeAttr('disabled').show();
+            }
+
+            // If the currently selected fit is incompatible with the body or silhouette, deselect it.
+            if ( selected_fit.attr('disabled') == 'disabled') {
+              selected_fit.removeAttr('selected');
+            }
+          }
+
+          /* Initialize options on load
+          ----------------------------------------------------------------------- */
+          var body_id = body_selector.children(':selected').attr('value');
+          _fix_fit_display_for(body_id);
+
+          /* Change options when new bodies are selected
+          ----------------------------------------------------------------------- */
+          body_selector.change(function () {
+            var body_id = $j(this).children(':selected').attr('value');
+            _fix_fit_display_for(body_id);
+          });
+
+
+        });
+        </script>
+        <!-- end fit-compatibilty script -->
+    {% endif %}
+{% endblock %}

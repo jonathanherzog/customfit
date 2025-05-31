@@ -1,0 +1,11 @@
+{% load thumbnail %}
+{% load static %}
+
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 isotope-grid-item {{ design.isotope_classes }}">
+  <div class="customfit-action-tile-rectangle extra-margins">
+    <a href="{% url 'design_wizard:personalize' design_slug=design.slug %}">
+        <img src="{{ design.image | thumbnail_url:'col-md-3' }}" alt="{{ design.name }}" class="choose-design-hero">
+        <p>{{ design.name }}</p>
+    </a>
+  </div>
+</div>

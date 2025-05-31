@@ -1,0 +1,3 @@
+Looking for customfit_500.css? It is derived from
+static/less/customfit_500.less during the heroku build, and then
+copied here in a post-build hook (see bin/run_less).

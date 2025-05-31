@@ -1,0 +1,18 @@
+<h4>My pictures for {{ object.name }}</h4>
+
+<div class="row clear-columns">
+  {% for picture in object.pictures.all %}
+    <div class="col-md-4 col-xs-12">
+        {% if picture.featured %}
+          <i class="icon-star pull-right"></i>
+        {% endif %}
+        <img src="{{ picture.picture.url }}" alt="picture #{{ forloop.counter }} for {{ object.name }}">
+    </div>
+  {% empty %}
+    <div class="col-xs-12">
+        There aren't any pictures for {{ object.name }} yet.  Why not <a href="{% url picture_upload_url object.pk %}">upload one</a>?
+    </div>
+  {% endfor %}
+</div>
+
+<a href="{{ manage_pictures_url }}" class="btn-customfit">Manage pictures</a>

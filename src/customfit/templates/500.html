@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error{% endblock %}
+
+
+{% comment %}
+    Because we user Heroku, we actually need to have two error
+    pages: one that Django will use when it catches an error, and one that
+    Heroku will use when Django itself crashes or falls into an infinite loop.
+    This file is the first. The second is a static page at static/error-pages/site-error.html
+    which is put in S3 by 'collectstatic'. Why maintain both? Because we want
+    to use Sentry to display an error-report tag to the user. We can do that here,
+    because this is processed by Django, but we can't use it in the static page.
+{% endcomment %}
+
+{% block content %}
+  <p>
+    Something went wrong!
+  </p>
+
+  <p>Thanks!</p>
+
+
+{% endblock %}

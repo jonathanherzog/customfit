@@ -1,0 +1,13 @@
+<!-- A stripped-down version of the subnav which doesn't require JS, since we don't
+     load JS on the Knitter's Toolbox landing page. -->
+
+<div class="navbar-left navbar-text left-justify">
+  <em>hi, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}!</em>
+</div>
+<ul class="navbar-right right-justify">
+  <li>
+    <a class="dropdown-toggle" href="{% url 'home_view' %}">
+      my customfit
+    </a>            
+  </li>      
+</ul>

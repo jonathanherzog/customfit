@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Are you sure?</h2>
+
+  <p>
+    Deleting gauges is <i>irrevocable</i>.  Once you delete this
+    gauge, it's gone.
+  </p>
+
+  {% if swatch.patterns %}
+      <p>(Don't worry; the patterns you've made from this gauge won't be deleted.)</p>
+  {% endif %}
+
+  <form action="" method="post"> 
+  {% csrf_token %} 
+    <input type="submit" class="btn-customfit-danger" value="Yes, delete it!"/>
+  </form>
+{% endblock %}

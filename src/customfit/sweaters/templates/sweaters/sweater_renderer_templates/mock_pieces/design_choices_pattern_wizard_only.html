@@ -1,0 +1,131 @@
+{% load pattern_conventions %}
+
+{% comment %}
+    This was factored out of design_choices_base.html for historical reasons, but currently
+    (Aug 2018) seems only to be used (by inclusion) there. Maybe it's time to fold it back in
+    to that template?
+{% endcomment %}
+
+<h2>Design Info</h2>
+
+<ul>
+    {% if pspec.design_origin %}
+        <li>
+            {{ pspec.design_origin.name }}
+        </li>
+    {% endif %}
+    <li>
+        {{ pspec.fit_patterntext }}
+    </li>
+    {% if not pspec.design_origin %}
+        <li>
+            {{ pspec.silhouette_patterntext }}
+        </li>
+
+        <li> Style:
+            {% if piece.is_cardigan %}
+                Cardigan
+            {% else %}
+                Pullover
+            {% endif %}
+        </li>
+    {% endif %}
+
+    <li>
+        Length: {{ pspec.torso_length_patterntext }}
+    </li>
+
+    <li>
+        Construction: 
+        {% if pspec.is_set_in_sleeve %}
+            Set-in sleeve
+        {% elif pspec.is_drop_shoulder %}
+            Drop shoulder
+        {% else %}
+            Other Construction       
+        {% endif %}
+    </li>
+
+    {% if pspec.is_drop_shoulder %}
+        <li>
+        Drop-shoulder armhole: {{ pspec.drop_shoulder_armhole_length_patterntext }} length
+            (additional {{ drop_shoulder_additional_length | length_fmt }})
+        </li>
+
+    {% endif %}
+
+    {% if pspec.has_sleeves %}
+        <li>
+            Sleeves: {{ pspec.sleeve_length_patterntext }}
+        </li>
+        {% else %}
+        <li>
+            Sleeves: Vest
+        </li>
+    {% endif %}
+
+    <li>
+        Neck style: {{ pspec.neckline_style_patterntext }}
+    </li>
+    <li>
+        Neck depth: {{ pspec.neckline_depth | length_fmt }} {{ pspec.neckline_depth_orientation_patterntext | lower }}
+    </li>
+
+    {% if not pspec.design_origin %}
+        <li>
+            Finishing:
+            <ul>
+                <li>
+                    Hem edging and height:
+                    {{ pspec.hip_edging_stitch_patterntext }},
+                    {{ pspec.hip_edging_height | length_fmt }}
+                </li>
+
+                {% if piece.has_sleeves %}
+                    {% if pspec.sleeve_edging_stitch and pspec.sleeve_edging_height > 0 %}
+                        <li>
+                            Sleeve edging and height:
+                            {{ pspec.sleeve_edging_stitch_patterntext }},
+                            {{ pspec.sleeve_edging_height | length_fmt }}
+                        </li>
+                    {% endif %}
+                {% else %}
+                    {% if pspec.armhole_edging_stitch and pspec.armhole_edging_height > 0 %}
+                        <li>
+                            Armhole edging and height:
+                            {{ pspec.armhole_edging_stitch_patterntext }},
+                            {{ pspec.armhole_edging_height | length_fmt }}
+                        </li>
+                    {% endif %}
+                {% endif %}
+
+                {% if not piece.is_veeneck_cardigan %}
+                    {% if pspec.neck_edging_stitch and pspec.neck_edging_height > 0 %}
+                        <li>
+                            Neck edging and height:
+                            {{ pspec.neck_edging_stitch_patterntext }},
+                            {{ pspec.neck_edging_height | length_fmt }}
+                        </li>
+                    {% endif %}
+                {% endif %}
+
+                {% if piece.is_cardigan %}
+                    {% if pspec.button_band_allowance %}
+                        <li>
+                            Button band allowance:
+                            {{ pspec.button_band_allowance | length_fmt }}
+                        </li>
+                    {% endif %}
+                    {% if pspec.button_band_edging_height %}
+                        <li>
+                            Button band edging and height:
+                            {{ pspec.button_band_edging_stitch_patterntext }},
+                            {{ pspec.button_band_edging_height |  length_fmt }}
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>
+

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2>Upload photo</h2>
+
+  {% if add_more %}
+    <form enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <input type="submit" class="btn-customfit-action">
+    </form>
+  {% else %}
+    Whoops, you can't upload any more photos for this object.
+  {% endif %}
+{% endblock %}

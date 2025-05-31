@@ -1,0 +1,38 @@
+{% load thumbnail %}
+{% load static %}
+{% comment %}
+  This expects 10 Designs to be provided by the view in the context-variable
+  designs, or for designs to evaluate to False.
+
+  In conjunction with customfit.css, it will provide a row of 5 portrait images on
+  desktops; 3 on tablet; and 1 on mobile. The remaining images will scroll. The
+  scrollbar is suppressed on desktop (the see all link gets the point across)
+  but visible on tablet and phone. It's Tinder for sweaters!
+  
+{% endcomment %}
+
+    {% if designs %}
+      <div class="gallery-container">
+        <div>
+          {% for design in designs %}
+              <div>
+              <a href="{{ design.get_absolute_url }}">
+                <img src="{{ design.image | thumbnail_url:'col-md-3-square' }}" class="img-customfit" alt="{{ design.name }}" />
+              </a>
+              </div>
+          {% endfor %}
+        </div>      
+      </div>
+    {% else %}
+        <div class="col-xs-12">
+            <div class="customfit-action-tile-narrow">
+              <a href="{% url 'design_wizard:choose_type' %}">
+                  <img src="{% static 'img/My_Patterns.png' %}">
+              </a>
+            </div>
+        </div>
+    {% endif %}
+
+    <p class="text-center extra-margins-large">
+    	<small><a href="{% url 'design_wizard:choose_type' %}">(get started)</a></small>
+    </p>

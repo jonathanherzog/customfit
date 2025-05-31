@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block content %}
+
+    <h2>We can’t make your pattern yet!</h2>
+    <p>
+        {{ patternspec.body }} doesn't have all the measurements we need yet! Can we get them now?
+	</p>
+	
+	<p>
+     	To proceed, you can either add the missing
+		measurement{{  num_missing_measurements | pluralize }}, or change the
+     	pattern to your {{ default_lengths }}.
+	</p>
+
+
+
+  <div id="form_container">
+    <div class="row margin-top-20">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3 hide-help-text">
+        <hr />
+        {% crispy form %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <h3>Need help?</h3>        
+      </div>
+      <div class="col-xs-12 col-sm-3 col-sm-offset-3">
+        <img src="{% static 'img/Measurements-Help-Missing-Sweater-Lengths.jpg' %}">
+      </div>
+      <div class="col-xs-12 col-sm-3">
+        <img src="{% static 'img/Measurements-Help-Missing-Sleeve-Lengths.jpg' %}">
+      </div>
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <p>
+          <a href="https://www.youtube.com/playlist?list=PLFfNXgEam89BYbu7oYibZqIl-ykaKbWSi">Watch
+          our videos</a> for complete instructions.
+        </p>  
+      </div>
+    </div>
+  </div>
+{% endblock %}

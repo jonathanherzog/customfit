@@ -1,0 +1,297 @@
+{% extends "design_wizard/personalize_design_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load pattern_conventions %}
+
+
+{% block extra_compressible_css %}
+    {{ block.super }}
+  <style type="text/css">
+    .help-callout-circle {
+        float: right;
+        margin-top: 0px;
+        margin-left: 5px;
+    }
+  </style>
+{% endblock %}
+
+{% block below_design_image_icon_block %}
+ <div class="col-xs-6 below-design-images-silhouette-icons">
+  {% if design.silhouette_hourglass_allowed %}
+    <div class="silhouette_icon_div">
+        <img src="{% static  'img/silhouette-icon-hourglass.png' %}" class="silhouette_icon_img"
+        alt="This design is available in hourglass silhouette">
+    </div>
+    {% endif %}
+  {% if design.silhouette_half_hourglass_allowed %}
+    <div class="silhouette_icon_div">
+        <img src="{% static  'img/silhouette-icon-half-hourglass.png' %}" class="silhouette_icon_img"
+        alt="This design is available in half-hourglass silhouette">
+    </div>
+    {% endif %}
+    {% if design.silhouette_aline_allowed %}
+        <div class="silhouette_icon_div">
+            <img src="{% static  'img/silhouette-icon-aline.png' %}" class="silhouette_icon_img"
+            alt="This design is available in A-line silhouette">
+        </div>
+    {% endif %}
+    {% if design.silhouette_straight_allowed %}
+        <div class="silhouette_icon_div">
+            <img src="{% static  'img/silhouette-icon-straight.png' %}" class="silhouette_icon_img"
+            alt="This design is available in straight silhouette">
+        </div>
+    {% endif %}
+    {% if design.silhouette_tapered_allowed %}
+        <div class="silhouette_icon_div">
+            <img src="{% static  'img/silhouette-icon-tapered.png' %}" class="silhouette_icon_img"
+            alt="This design is available in tapered silhouette">
+        </div>
+    {% endif %}
+  </div>
+{% endblock %}
+
+
+{% block form_section %}
+     {% crispy form %}
+{% endblock %}
+
+{% block post_form_block %}
+  <p>
+    <em>
+        {{ design.supported_silhouettes_patterntext }}
+    </em>
+  </p>
+{% endblock %}
+
+{% block design_choices_panel_body_block %}
+  {% comment %}
+    We cannot merely include sweater_renderer_templates/mock_pieces/design_choices_pattern_wizard_only
+    because that template presumes a pattern, not a mere design.
+  {% endcomment %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="design_choices_heading">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#design_choices" aria-expanded="false" aria-controls="design_choices">
+                    <strong><span class="caret"></span> design choices</strong>
+                </a>
+            </h4>
+        </div>
+        <div id="design_choices" class="panel-collapse collapse" role="tabpanel" aria-labelledby="design_choices_heading">
+            <div class="panel-body">
+                <p>
+                    {{ design.name }} uses the following design choices:
+                </p>
+                <ul>
+                    <li> Style:
+                        {% if design.is_cardigan %}
+                            cardigan
+                        {% else %}
+                            pullover
+                        {% endif %}
+                    </li>
+                    {% if design.supported_silhouettes_patterntext %}
+                        <li>
+                            Silhouettes: {{ design.supported_silhouettes_patterntext }}
+                        </li>
+                    {% endif %}
+                    <li>
+                        Length: {{ design.torso_length_patterntext }}
+                    </li>
+
+                    {% if design.has_sleeves %}
+                        <li>
+                            Sleeves: {{ design.sleeve_length_patterntext_short_form }}
+                            {{ design.get_sleeve_shape_display | lower }}
+                        </li>
+                    {% endif %}
+
+                    <li>
+                        Neck style: {{ design.neckline_style_patterntext}}
+                    </li>
+                    {% if design.neckline_depth %}
+                        {% if design.neckline_depth >= 1  or design.neckline_depth_orientation != "BELOW_SHOULDERS" %}
+                            <li>
+                                Neck depth: {{ design.neckline_depth | length_fmt }}
+                                {{ design.neckline_depth_orientation_patterntext | lower }}
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+                    <!-- begin trims -->
+                    <li>
+                        Finishing:
+                        <ul>
+                            {% if design.hip_edging_height and design.hip_edging_height > 0 %}
+                                <li>
+                                    Hem edging and height:
+                                    {{ design.hip_edging_stitch_patterntext }},
+                                    {{ design.hip_edging_height | length_fmt }}
+                                </li>
+                            {% endif %}
+
+                            {% if design.has_sleeves %}
+                                {% if design.sleeve_edging_stitch and design.sleeve_edging_height > 0 %}
+                                    <li>
+                                        Sleeve edging and height:
+                                        {{ design.sleeve_edging_stitch_patterntext }},
+                                        {{ design.sleeve_edging_height | length_fmt }}
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                {% if design.armhole_edging_stitch and design.armhole_edging_height > 0 %}
+                                    <li>
+                                        Armhole edging and height:
+                                        {{ design.armhole_edging_stitch_patterntext }},
+                                        {{ design.armhole_edging_height | length_fmt }}
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+
+                            {% comment %}
+                                Show neck-edging iff there is a neck-edge:
+                                Not a v-neck cardigan, AND the design has both
+                                a neck-stitch and neck-edging height.
+                            {% endcomment %}
+                            {% if not design.is_veeneck or not design.is_cardigan %}
+                                {% if design.neck_edging_stitch and design.neck_edging_height > 0 %}
+                                    <li>
+                                        Neck edging and height:
+                                        {{ design.neck_edging_stitch_patterntext }},
+                                        {{ design.neck_edging_height | length_fmt }}
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+
+                            {% if design.is_cardigan %}
+                                {% if design.button_band_allowance and design.button_band_allowance > 0 %}
+                                    <li>
+                                        Button band allowance:
+                                        {{ design.button_band_allowance | length_fmt }}
+                                    </li>
+                                {% endif %}
+                                {% if design.button_band_edging_height and design.button_band_edging_height > 0 %}
+                                    <li>
+                                        Button band edging and height:
+                                        {{ design.button_band_edging_stitch_patterntext }},
+                                        {{ design.button_band_edging_height |  length_fmt }}
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <!-- end trims -->
+
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js_jquery %}
+  {{ block.super }}
+
+  {% comment %}
+    All measurement sets may be used with all sleeve lengths; if they're missing
+    the needed length, we will prompt them on the next screen.
+
+    Only measurement sets with a full hourglass measurement can customize hem
+    lengths, due to the way the lengths logic operates right now (all lengths
+    measured from waist).
+
+    Therefore the optional-lengths accordion is always available, but the hem
+    length selector may not be.
+  {% endcomment %}
+
+<script type="text/javascript">
+var $j = jQuery.noConflict();
+
+$j(document).ready(function () {
+  var body_options = {{ body_options | safe }};
+  var body_selector = $j('#id_body');
+  var silhouette_selector = $j('#id_silhouette');
+
+  var women_fits = $j('#id_garment_fit option[value^=FIT_WOMENS]');
+  var men_fits = $j('#id_garment_fit option[value^=FIT_MENS]');
+  var child_fits = $j('#id_garment_fit option[value^=FIT_CHILDS]');
+  var hourglass_fits = $j('#id_garment_fit option[value^=FIT_HOURGLASS]');
+
+  /* Garment fit options
+  ----------------------------------------------------------------------- */
+  function _fix_fit_display_for (body_id, silhouette) {
+    var selected_fit = $j('#id_garment_fit option:selected');
+
+    if ((silhouette == 'SILHOUETTE_HOURGLASS' || silhouette == 'SILHOUETTE_HALFGLASS')) {
+        women_fits.attr('disabled','disabled').hide();
+        men_fits.attr('disabled','disabled').hide();
+        child_fits.attr('disabled','disabled').hide();
+        hourglass_fits.removeAttr('disabled').show();
+    }
+    else {
+        hourglass_fits.attr('disabled','disabled').hide();
+        try {
+            var type = body_options[body_id]['type'];
+            if (type == 'woman') {
+                women_fits.removeAttr('disabled').show();
+                men_fits.attr('disabled', 'disabled').hide();
+                child_fits.attr('disabled', 'disabled').hide();
+            } else if (type == 'man') {
+                women_fits.attr('disabled', 'disabled').hide();
+                men_fits.removeAttr('disabled').show();
+                child_fits.attr('disabled', 'disabled').hide();
+            } else if (type == 'child') {
+                women_fits.attr('disabled', 'disabled').hide();
+                men_fits.attr('disabled', 'disabled').hide();
+                child_fits.removeAttr('disabled').show();
+            } else {
+                women_fits.removeAttr('disabled').show();
+                men_fits.removeAttr('disabled').show();
+                child_fits.removeAttr('disabled').show();
+            }
+        } catch (err) {
+            // If there is no body type (e.g. because the user has selected the null
+            // body option), show everything.
+            women_fits.removeAttr('disabled').show();
+            men_fits.removeAttr('disabled').show();
+            child_fits.removeAttr('disabled').show();
+        }
+    }
+
+    // If the currently selected fit is incompatible with the body or silhouette, deselect it.
+    if ( selected_fit.attr('disabled') == 'disabled') {
+      selected_fit.removeAttr('selected');
+    }
+  }
+
+  /* Initialize options on load
+  ----------------------------------------------------------------------- */
+  var body_id = body_selector.children(':selected').attr('value');
+  var silhouette_value = silhouette_selector.children(':selected').attr('value')
+  _fix_fit_display_for(body_id, silhouette_value);
+
+  /* Change options when new bodies are selected
+  ----------------------------------------------------------------------- */
+  body_selector.change(function () {
+    var body_id = $j(this).children(':selected').attr('value');
+    var silhouette_value = silhouette_selector.children(':selected').attr('value')
+    _fix_fit_display_for(body_id, silhouette_value);
+  });
+
+  /* Change options when new silhouettes are selected
+  ----------------------------------------------------------------------- */
+  silhouette_selector.change(function () {
+    var silhouette_value = $j(this).children(':selected').attr('value');
+    var body_id = body_selector.children(':selected').attr('value')
+    _fix_fit_display_for(body_id, silhouette_value);
+  });
+
+});
+</script>
+{% endblock %}
+
+
+
+
+{% block extra_compressible_js %}
+  <script type="text/javascript" src='{% static "js/toggle_form_help_text.js" %}'></script>
+{% endblock %}

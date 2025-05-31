@@ -1,0 +1,7 @@
+{% load pattern_conventions %}
+{% if piece.side_bindoffs %}
+  <p>
+    Work as established, decreasing 1 stitch at the neck edge every
+    RS row {{ piece.side_bindoffs | count_fmt }} times.
+  </p>
+{% endif %}

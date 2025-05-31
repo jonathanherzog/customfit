@@ -1,0 +1,69 @@
+{% extends 'knitting_calculators/tool_base.html' %}
+
+{%  block calculator_description %}
+
+    <p>
+        This calculator takes a starting and ending stitch count, a number of rows over which to shape, a number of
+        stitches shaped on each row, and spreads the shaping as widely as possible <em>with an equal rate of shaping
+        throughout</em>. This means that you may have "work straight" rows at the beginning and/or end of your shaping
+        interval. Generally, this works out fine for neckline, sleeve, and body shaping in a sweater. For other
+        projects where perfectly-smooth shaping is required, I'll write an additional calculator in the future.
+    </p>
+
+    <p>
+        If you're working waist or bust shaping on a sweater within the middle of the fabric (vs. on an edge), and the
+        rate is less than 4, please work your shaping along multiple dart lines to ensure the fabric doesn't pucker.
+    </p>
+
+{% endblock %}
+
+{% block calculator_output %}
+
+    {% if shaping_error_message %}
+
+        <div>
+        {{ shaping_error_message }}
+        </div>
+    {% endif %}
+
+    {% if show_knitting_instructions %}
+        <div id="id_instruction_text">
+        <ul>
+        {% if rows_before_first_shaping_row %}
+            <li>Work {{ rows_before_first_shaping_row }} row{{ rows_before_first_shaping_row|pluralize }} even</li>
+        {% endif %}
+
+        {% if num_shaping_rows == 0 %}
+            {% comment %}
+                Do nothing
+            {% endcomment %}
+        {% elif num_shaping_rows ==  1 %}
+            <li>Work {{ shaping_word }} row</li>
+        {% else %}
+            {% if inter_shaping_rows == 0 %}
+                <li>Work {{ shaping_word }} row {{ num_shaping_rows }} times</li>
+            {% else %}
+                {% if num_shaping_rows == 2 %}
+                    <li>
+                        Work {{ shaping_word }} row,
+                        work {{ inter_shaping_rows }} row{{ inter_shaping_rows|pluralize }} even,
+                        work {{ shaping_word }} row
+                    </li>
+                {% else %}
+                    <li>
+                        [Work {{ shaping_word }} row,
+                        work {{ inter_shaping_rows }} row{{ inter_shaping_rows|pluralize }} even]
+                        {{ num_shaping_repeats }} times,
+                        work {{ shaping_word }} row
+                    </li>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+        {% if rows_after_last_shaping_row %}
+            <li>Work {{ rows_after_last_shaping_row }} row{{ rows_after_last_shaping_row|pluralize }} even</li>
+        {% endif %}
+        </ul>
+        </div>
+    {% endif %}
+{% endblock %}

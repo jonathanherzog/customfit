@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load utils %}
+{% load cache %}
+
+{% block title %}Your Patterns{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-2 hidden-xs">
+      <div class="customfit-action-tile">
+        <img src="{% static "img/My_Patterns.png" %}" alt="Generic photograph of sweaters">
+      </div>
+    </div>
+    <div class="col-md-9 col-sm-10 col-xs-12">
+        <p class='margin-top-20'>
+            Here are your CustomFit patterns - both the ones you still need to customize,
+            and the ones you're ready to knit. Once you've customized a pattern you can
+            add your own pictures, download a PDF as many times as you like, and archive
+            patterns you won't use again.
+        </p>
+        <p>
+            Don't see anything here? <a href="{% url "design_wizard:choose_type" %}">Click here to get started.</a>
+        </p>
+    </div>
+    <div class="visible-xs">
+      <p class="text-center">
+        <a href="{{ create_url }}" class="btn-customfit-outline">create new</a>
+      </p>
+    </div>
+  </div>
+
+
+  <h2>Ready to Customize </h2>
+  <div class="row clear-columns">
+        <p class="lead">
+            {% if pattern_list %}
+                You have no designs waiting for customization.
+            {% else %}
+                You need to <a href="{% url 'design_wizard:choose_type' %}">choose a pattern</a> first.
+            {% endif %}
+        </p>
+  </div>
+
+  <h2>Ready to Knit</h2>
+  <div class="row clear-columns">
+      {% for object in pattern_list %}
+        {% include 'patterns/individualpattern_listview_action_template.html' %}
+      {% empty %}
+        <p class="lead">
+            Once you customize a pattern, it will show up here.
+        </p>
+      {% endfor %}
+
+      <div class="col-xs-12">
+        <a href="{%  url 'patterns:individualpattern_archive_view' %}">View archived patterns</a>
+      </div>
+  </div>
+
+{% endblock %}
+
+{% block extra_compressible_js %}
+  {% if object_list %}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/customfit.js' %}"></script>
+  {% endif %}
+
+{% endblock %}

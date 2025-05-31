@@ -1,0 +1,17 @@
+{% load pattern_conventions %}
+
+<p>
+  Work as established until sleeve measures
+    {% if piece_is_graded %}
+      {{ piece.actual_wrist_to_cap | length_fmt }}, ending with a WS row.
+    {% else %}
+      {{ piece.actual_wrist_to_cap | length_fmt }}, ending with a WS row:
+      {% if piece.is_straight %}
+        {{ piece.actual_wrist_to_cap_in_rows | count_fmt }} rows from beginning.
+      {% else %}
+        {{ piece.last_shaping_to_cap_in_rows | count_fmt }} rows from (and including) last shaping row,
+        {{ piece.actual_wrist_to_cap_in_rows | count_fmt }} rows from beginning.
+      {% endif %}
+    {% endif %}
+</p>
+

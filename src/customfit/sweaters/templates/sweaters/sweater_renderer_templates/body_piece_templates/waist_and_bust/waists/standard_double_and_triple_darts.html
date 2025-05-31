@@ -1,0 +1,84 @@
+{% load pattern_conventions %}
+
+{% if is_left_side %}
+    <p>
+    <em>Marker placement row (WS):</em> Work {{ piece.inter_marker | count_fmt }} stitches, pm of
+    color A, 
+    work {{ piece.waist_inter_double_marker | count_fmt }} stitches, pm of 
+    color B, 
+    work {{ piece.waist_inter_triple_marker | count_fmt }} stitches, pm of
+    color C, 
+    work {{ piece.waist_triple_dart_marker | count_fmt }} stitches to end. 
+    Three markers
+    of three colors placed for waist shaping. 
+  </p>
+{% elif is_right_side %}
+    <p>
+    <em>Marker placement row (WS):</em> Work {{ piece.waist_triple_dart_marker | count_fmt }} stitches, pm of
+    color C, 
+    work {{ piece.waist_inter_triple_marker | count_fmt }} stitches, pm of 
+    color B, 
+    work {{ piece.waist_inter_double_marker | count_fmt }} stitches, pm of
+    color A, 
+    work {{ piece.inter_marker | count_fmt }} stitches to end. Three markers
+    of three colors placed for waist shaping. 
+    </p>
+{% else %}
+    <p>
+    <em>Marker placement row (WS):</em> Work {{ piece.waist_triple_dart_marker | count_fmt }} stitches, pm of color C,
+    work {{ piece.waist_inter_triple_marker | count_fmt }} stitches, pm of color B, 
+    work {{ piece.waist_inter_double_marker | count_fmt }} stitches, pm of color A, 
+    work {{ piece.inter_marker | count_fmt }} stitches, pm of color A, 
+    work {{ piece.waist_inter_double_marker | count_fmt }} stitches, pm of color B, 
+    work {{ piece.waist_inter_triple_marker | count_fmt }} stitches, pm of color C,
+    work {{ piece.waist_triple_dart_marker | count_fmt }} stitches to end. Six markers
+    of three colors placed for waist shaping. 
+    </p>
+{% endif %}
+<p>
+    <strong>Shape waist:</strong>
+</p>
+{% if num_waist_standard_decrease_repetitions %}
+  <p>
+    Repeat the following four rows (Decrease Rows One and Two)
+    {{ piece.num_waist_standard_decrease_rows | count_fmt }} times:
+  </p>
+{% endif %}
+
+<p>
+  <em>Decrease Row One (RS)</em>:         
+  {{ decrease_text_triple_dart_standard_decrease }} 
+  {{ stitches_per_single_dart | capfirst }} decreased.
+  Work one row even.
+</p>
+<p>      
+    <em>Decrease Row Two (RS)</em>: 
+  {{ decrease_text_triple_dart_double_decrease }}
+  {{ stitches_per_double_dart | capfirst }} decreased.
+    Work one row even.        
+</p>
+
+<p>
+  Then, work the following two rows once.
+</p>
+<p>
+  <em>Decrease Row Three (RS)</em>:  
+  {{ decrease_text_triple_dart_triple_decrease }}
+  {{ stitches_per_triple_dart | capfirst }} decreased.
+    Work 1 row even.
+</p>
+{% if num_waist_triple_dart_repetitions %}
+  <p>
+    Then, <strong>alternate</strong> Decrease Rows Two and Three every RS row
+    {{ piece.num_waist_triple_dart_repetitions | count_fmt }} 
+    additional times.
+  </p>
+{% endif %} {# triple-dart repetitons #}
+<p>
+  {{ piece.num_waist_decrease_rows_knitter_instructions | count_fmt }} 
+  <strong>total</strong> decrease rows worked since beginning. 
+  {{ piece.waist_stitches | count_fmt }} stitches remain. 
+</p>
+
+
+

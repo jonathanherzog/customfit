@@ -1,0 +1,60 @@
+{% load pattern_conventions %}
+<p>
+  <em>Trim Neckline:</em>
+</p>
+
+<p>
+  Beginning at right neck edge, pick up and knit stitches around the neckline   
+  at the following rates: 1 stitch for every bound-off stitch, 3 out of     
+  every 4 stitches along the diagonal, and 2 out of every 3 stitches along   
+  vertical sections. Approximately 
+  {{ piece.total_neckline_pickup_stitches | count_fmt }} stitches picked up total.
+  <em>(This exact number is not crucial, <strong>but should respect stitch counts 
+  for your stitch pattern</strong>.)</em>
+</p>
+
+<p>
+  {% if not pspec.is_cardigan %}
+    {# pullover #}
+  
+    Join for working in the round.
+    {% if veeneck_point_instructions %}    
+      {# V-neck pullover #}
+      Work in 
+      {{ pspec.neck_edging_stitch_patterntext }} for
+{% if piece_is_graded %}
+      {{ pspec.neck_edging_height | length_fmt }},
+{% else %}
+      {{ pspec.neck_edging_height | length_fmt }}
+      ({{ piece.neck_edging_height_in_rows | count_fmt }} rounds),
+{% endif %}
+      working a double decrease at center neck point every other round.
+    {% else %}    
+      {# non-v-neck pullover #}
+      Work in 
+      {{ pspec.neck_edging_stitch_patterntext }} for
+{% if piece_is_graded %}
+      {{ pspec.neck_edging_height | length_fmt }}.
+{% else %}
+      {{ pspec.neck_edging_height | length_fmt }}
+      ({{ piece.neck_edging_height_in_rows | count_fmt }} rounds).
+{% endif %}
+    {% endif %}
+  {% else %}
+    {% comment %}
+      Cardigan. The code in renderers.py ensures that this is not
+      a v-neck cardigan, so we only need to give the non-v-neck
+      instructions.
+    {% endcomment %}
+    Work in 
+    {{ pspec.neck_edging_stitch_patterntext }} for
+{% if piece_is_graded %}
+    {{ pspec.neck_edging_height | length_fmt }}.
+{% else %}
+    {{ pspec.neck_edging_height | length_fmt }}
+    ({{ piece.neck_edging_height_in_rows| count_fmt  }} rows).
+{% endif %}
+  {% endif %}
+  BO all sts.
+</p>
+

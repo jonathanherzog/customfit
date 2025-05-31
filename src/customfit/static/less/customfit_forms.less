@@ -1,0 +1,121 @@
+/* Used for forms on the custom design and body-creation pages. */
+@import "bootstrap/mixins/clearfix.less";
+@import "variables.less";
+
+/* Form groups -------------------------------------------------------------- */
+
+.form-group {
+  .clearfix;
+
+  .btn-group {
+    padding-right: 15px;
+  }
+}
+
+.form-actions {
+  text-align: right;
+  padding-right: 30px;
+}
+
+.image-inline-radios {
+  .radio {
+    margin-top: 0;
+    .clearfix;
+  }
+
+  label {
+    text-align: center;
+  }
+
+  .clear-columns;
+}
+
+
+/* Form typography & layout ------------------------------------------------- */
+
+form p strong {
+  padding-right: 15px;
+}
+
+legend {
+  padding-left: 15px;
+  padding-top: 20px;
+}
+
+fieldset {
+  margin-left: 0 !important;
+}
+
+.asteriskField {
+  display: none;
+}
+
+
+/* Utilities --------------------------------------------------------------- */
+
+.text-right.pad-right {
+  padding-right: 30px;
+}
+
+
+/* Labels ------------------------------------------------------------------ */
+
+label {
+  /* General typography */
+  text-align: right;
+  font-weight: normal;
+  position: relative;
+
+  /* Hover help indicator */
+  .help-callout-circle {
+    display: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    .help-callout-circle {
+      display: block;
+      position: absolute;
+      top: 9px;
+      right: -8px;
+      z-index: 100;
+      margin: 0;
+      background-color: @light-blue;
+      border-color: white;
+      padding-left: 2px;
+      padding-right: 4px;
+    }
+  }
+}
+
+.no-help-text label:hover {
+  cursor:inherit;
+}
+
+
+/* Labels ------------------------------------------------------------------- */
+p.help-block[id^="error"] {
+  color: #a94442;
+}
+
+/* Overrides for small screens ---------------------------------------------- */
+
+@media (max-width: 767px) {
+  form {
+    margin-top: 20px;
+  }
+
+  label {
+    text-align: left;
+  }
+
+  label:hover .help-callout-circle {
+    position: relative;
+    float: right;
+    margin: auto;
+    top: 0;
+    left: 9px;
+    padding: 1px 3px;
+  }
+}

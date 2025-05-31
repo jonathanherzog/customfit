@@ -1,0 +1,21 @@
+{% load pattern_conventions %}
+
+
+<h2>Design Info</h2>
+
+<ul>
+    {% if pspec.design_origin %}
+        <li>
+            {{ pspec.design_origin.name }}
+        </li>
+    {% endif %}
+
+
+    <li>
+        Height: {{ pspec.height_text | capfirst }} ({{ piece.actual_height | length_fmt }})
+    </li>
+    <li>
+        Circumference: {{ pspec.circumference_text | capfirst }} ({{ piece.actual_circumference | length_fmt }})
+    </li>
+</ul>
+

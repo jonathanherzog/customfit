@@ -1,0 +1,67 @@
+{% load pattern_conventions %}
+{% if y_bindoffs %}
+  {% if z_bindoffs %}
+    {% if q_bindoffs %}
+      <p>
+             Decrease 1 stitch at neck edge of <strong>every row</strong> 
+             {{ piece.y_bindoffs | count_fmt }} times, then every RS row 
+             {{ piece.z_bindoffs | count_fmt }} times, and then every other RS row 
+             {{ piece.q_bindoffs | count_fmt }} times as follows:
+      </p>
+    {% else %}
+      <p>
+             Decrease 1 stitch at neck edge of <strong>every row</strong> 
+             {{ piece.y_bindoffs | count_fmt }} times, then every RS row 
+             {{ piece.z_bindoffs | count_fmt }} times as follows:
+      </p>    
+    {% endif %}
+  {% else %}
+    {% if q_bindoffs %}
+      <p>
+             Decrease 1 stitch at neck edge of <strong>every row</strong> 
+             {{ piece.y_bindoffs | count_fmt }} times, and then every other RS row 
+             {{ piece.q_bindoffs | count_fmt }} times as follows:
+      </p>
+    {% else %}
+          <p>
+             Decrease 1 stitch at neck edge of <strong>every row</strong> 
+             {{ piece.y_bindoffs | count_fmt }} times as follows:
+      </p>
+    {% endif %}  
+  {% endif %}
+            <p><em>Decrease row (RS):</em> {{ decrease_text_neckline_rs }}</p>
+        <p><em>Decrease row (WS):</em> {{ decrease_text_neckline_ws }}</p>
+
+{% else %}
+  {% if z_bindoffs %}
+    {% if q_bindoffs %}
+      <p>
+             Decrease 1 stitch at neck edge every RS row 
+             {{ piece.z_bindoffs | count_fmt }} times, and then every other RS row 
+             {{ piece.q_bindoffs | count_fmt }} times as follows:
+      </p>
+    {% else %}
+      <p>
+             Decrease 1 stitch at neck edge of every RS row 
+             {{ piece.z_bindoffs | count_fmt }} times as follows:
+      </p>
+
+    {% endif %}
+              <p><em>Decrease row (RS):</em> {{ decrease_text_neckline_rs }}</p>
+
+  {% else %}
+    {% if q_bindoffs %}
+      <p>
+             Decrease 1 stitch at neck edge of 
+               <strong>every other RS row</strong>  
+             {{ piece.q_bindoffs | count_fmt }} times as follows:
+      </p>
+                <p><em>Decrease row (RS):</em> {{ decrease_text_neckline_rs }}</p>
+
+    {% else %}
+      {% comment %}
+        This case intentionally left blank 
+      {% endcomment %}    
+    {% endif %}  
+  {% endif %}
+{% endif %}

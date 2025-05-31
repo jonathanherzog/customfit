@@ -1,0 +1,8 @@
+{% load crispy_forms_tags %}
+
+<h2>Update note for {{ body.name }}</h2>
+
+<form action="" method="post">{% csrf_token %}
+  {% crispy form %}
+  <input class="btn-customfit-action" type="submit" value="Update" />
+</form>

@@ -1,0 +1,7 @@
+custom_wireframes/
+gallery-thumbs/
+tests/
+db_dumps/
+db_dumps_old/
+tests.*
+*.psd

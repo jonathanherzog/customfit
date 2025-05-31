@@ -1,0 +1,162 @@
+{% load pattern_conventions %}
+
+{% if piece.waist_triple_darts %}
+
+  {% if piece.bust_triple_darts %}
+    
+    {# do nothing #}
+
+  {% elif piece.bust_double_darts %}
+  
+  <p>
+    On last row, remove first and sixth shaping markers (color C).
+  </p>
+  
+  {% elif piece.has_bust_increases %}
+
+  <p>
+    On last row, remove first, second, fifth and sixth shaping markers
+    (colors B and C).
+  </p>
+    
+  {% else %} {# No bust markers #}
+  
+  <p>
+    On last row, remove all shaping markers.
+  </p>
+    
+  {% endif %}
+  
+{% elif piece.waist_double_darts  %}
+
+  {% if piece.bust_triple_darts %}
+    
+  <P>
+    On last row, place new markers (color C) as follows:
+    work {{ piece.bust_pre_triple_dart_marker | count_fmt }} stitches, pm,
+    work {{ piece.bust_inter_triple_dart_markers | count_fmt }} stitches, pm,
+    work remaining {{ piece.bust_pre_triple_dart_marker | count_fmt }} stitches.
+    <em>(Note: keep color A and B markers from waist shaping.)</em>    
+  </P>
+
+  {% elif piece.bust_double_darts %}
+  
+    {# do nothing #}
+  
+  {% elif piece.has_bust_increases %}
+
+  <p>
+    On last row, remove first and fourth shaping markers (color B).
+  </p>
+    
+  {% else %} {# No bust markers #}
+  
+  <p>
+    On last row, remove all shaping markers.
+  </p>
+    
+  {% endif %}
+
+{% elif piece.has_waist_decreases %}
+  {# Since double- and triple-darts are caught above, waist must only have standard decreases and hence color A markers. #}
+
+  {% if piece.bust_triple_darts %}
+    
+  <P>
+    On last row, place new markers (colors B and C) as follows:
+    work {{ piece.bust_pre_triple_dart_marker | count_fmt }} stitches, 
+    pm (color C),
+    work {{ piece.bust_inter_double_and_triple_dart_markers | count_fmt }} stitches, 
+    pm (color B),
+    work {{ piece.bust_inter_double_dart_markers | count_fmt }} stitches, 
+    pm (color B),
+    work {{ piece.bust_inter_double_and_triple_dart_markers | count_fmt }} stitches, 
+    pm (color C),
+    work remaining {{ piece.bust_pre_triple_dart_marker | count_fmt }} stitches.
+    <em>(Note: keep color A markers from waist shaping.)</em>    
+  </P>
+
+  {% elif piece.bust_double_darts %}
+  
+  <P>
+    On last row, place new markers (color B) as follows:
+    work {{ piece.bust_pre_double_dart_marker | count_fmt }} stitches, 
+    pm (color B),
+    work {{ piece.bust_inter_double_dart_markers | count_fmt }} stitches, 
+    pm (color B),
+    work remaining {{ piece.bust_pre_double_dart_marker | count_fmt }} stitches.
+    <em>(Note: keep color A markers from waist shaping.)</em>    
+  </P>
+  
+  {% elif piece.has_bust_increases %}
+
+    {# do nothing #}
+    
+  {% else %} {# No bust markers #}
+  
+  <p>
+    On last row, remove all shaping markers.
+  </p>
+    
+  {% endif %}
+
+{% else %} {# no waist markers #}
+  
+  {% if piece.bust_triple_darts %}
+    
+  <P>
+    On last row, place markers (colors A, B and C) as follows:
+    work {{ piece.bust_pre_triple_dart_marker | count_fmt }} stitches, 
+    pm (color C),
+    work {{ piece.bust_inter_double_and_triple_dart_markers | count_fmt }} stitches, 
+    pm (color B),
+    work {{ piece.bust_inter_double_and_standard_dart_markers | count_fmt }} stitches, 
+    pm (color A),
+    work {{ piece.bust_inter_standard_dart_markers | count_fmt }} stitches, 
+    pm (color A),
+    work {{ piece.bust_inter_double_and_standard_dart_markers | count_fmt }} stitches, 
+    pm (color B),
+    work {{ piece.bust_inter_double_and_triple_dart_marker | count_fmt }} stitches, 
+    pm (color C),
+    work remaining {{ piece.bust_pre_triple_dart_marker | count_fmt }} stitches.
+  </P>
+
+
+  {% elif piece.bust_double_darts %}
+  
+  <P>
+    On last row, place markers (colors A and B) as follows:
+    work {{ piece.bust_pre_double_dart_marker | count_fmt }} stitches, 
+    pm (color B),
+    work {{ piece.bust_inter_double_and_standard_dart_markers | count_fmt }} stitches, 
+    pm (color A),
+    work {{ piece.bust_inter_standard_dart_markers | count_fmt }} stitches, 
+    pm (color A),
+    work {{ piece.bust_inter_double_and_standard_dart_markers | count_fmt }} stitches, 
+    pm (color B),
+    work remaining {{ piece.bust_pre_double_dart_marker | count_fmt }} stitches.
+  </P>
+  
+  {% elif piece.has_bust_increases %}
+
+  <P>
+    On last row, place markers (color A) as follows:
+    work {{ piece.bust_pre_standard_dart_marker | count_fmt }} stitches, 
+    pm (color A),
+    work {{ piece.bust_inter_standard_dart_markers | count_fmt }} stitches, 
+    pm (color A),
+    work remaining 
+    {{ piece.bust_pre_standard_dart_marker | count_fmt }} stitches.
+  </P>
+    
+  {% else %} {# No bust markers #}
+  
+    {# do nothing #}
+    
+  {% endif %}
+
+{% endif %}
+
+
+
+

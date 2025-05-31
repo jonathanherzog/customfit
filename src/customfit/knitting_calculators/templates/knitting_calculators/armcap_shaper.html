@@ -1,0 +1,85 @@
+{% extends 'knitting_calculators/tool_base.html' %}
+{% load pattern_conventions %}
+
+
+
+{%  block calculator_description %}
+
+    This generator takes information about your gauge, the armhole shaping of the sweater you're knitting, and the
+    number of stitches in the bicep of your sleeve. It produces customized instructions to shape a sleeve cap that
+    fits properly into the sweater's armhole.
+
+{% endblock %}
+
+{% block calculator_output %}
+
+
+
+    {% if shaping_error_message %}
+
+        <div>
+        {{ shaping_error_message }}
+        </div>
+
+    {% endif %}
+
+
+    {% if show_knitting_instructions %}
+        <div id="id_instruction_text">
+            <p>
+              BO {{ armscye_x | count_fmt }} stitches at the beginning of the next 2 rows.
+            </p>
+
+            <p>
+              BO {{ armscye_y | count_fmt }} stitches at the beginning of the following
+              2 rows. {{ pre_bead_game_stitch_count | count_fmt }} stitches remain.
+            </p>
+
+            <p>
+              Decrease 1 stitch at <em><strong>each end</strong></em> of
+              {% if six_count_beads %}
+                every 3rd RS row {{ six_count_beads | count_fmt }}
+                {% if four_count_beads or two_count_beads or one_count_beads %}
+                  times, then
+                {% else %}
+                  times.
+                {% endif %}
+              {% endif %}
+
+              {% if four_count_beads %}
+                every other RS row {{ four_count_beads | count_fmt }}
+                {% if two_count_beads or one_count_beads %}
+                  times, then
+                {% else %}
+                  times.
+                {% endif %}
+              {% endif %}
+
+              {% if two_count_beads %}
+                 every RS row {{ two_count_beads | count_fmt }}
+                 {% if one_count_beads %}
+                  times, then
+                {% else %}
+                  times.
+                {% endif %}
+              {% endif %}
+
+              {% if one_count_beads %}
+                 every row {{ one_count_beads | count_fmt }} times.
+              {% endif %}
+
+              {{ post_bead_game_stitch_count | count_fmt }} stitches remain.
+            </p>
+
+            <p>
+              BO {{ armscye_d | count_fmt }} stitches at the beginning of the next 4 rows.
+            </p>
+
+            <p>
+              BO final {{ armscye_c | count_fmt }} stitches.
+            </p>
+
+
+        </div>
+    {% endif %}
+{% endblock %}

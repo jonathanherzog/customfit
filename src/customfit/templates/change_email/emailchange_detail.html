@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section>
+    <h2>Confirmation email sent</h2>
+    <p>
+      We've sent an email to {{ user.email }} to confirm your email change
+      request.  Please click the link in that email to complete the process.
+    </p>
+
+    <p>
+		<a href="{% url 'userauth:manage_account' %}">Back to account management</a>
+    </p>
+  </section>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'knitting_calculators/tool_base.html' %}
+
+{%  block calculator_description %}
+
+    <p>
+        This calculator takes a total number of stitches in a button band, a number of buttonholes, and evenly spaces the
+        buttonholes over the band. To properly space, please enter in the number of stitches each buttonhole consumes, as
+        well. Please note that the total number of stitches should be the number of stitches in the buttonhole band - if
+        you're knitting a V-neck cardigan, enter the number of stitches in the band from hem to the start of neck shaping.
+    </p>
+
+    <p>
+        If you're working a cardigan for a woman or child, buttonholes are traditionally placed on the right front
+        placket. For a man, they're traditionally placed on the left front placket. 
+    </p>
+
+{% endblock %}
+
+
+{% block calculator_output %}
+
+    {% if spacing_error_message %}
+
+        <div>
+        {{ spacing_error_message }}
+        </div>
+    {% endif %}
+
+
+    {% if show_knitting_instructions %}
+        <div id="id_instruction_text">
+        <ul>
+
+            {% if initial_stitches %}
+                <li>Work {{ initial_stitches }} st{{ initial_stitches|pluralize }}</li>
+            {% endif %}
+
+            {% if number_of_buttons <= 2 %}
+                <li>Work buttonhole over {{ stitches_per_buttonhole }} st{{ stitches_per_buttonhole|pluralize }} </li>
+                {% if number_of_buttons == 2%}
+                    <li>Work {{ stitches_between_buttonholes }} st{{ stitches_between_buttonholes|pluralize }} </li>
+                    <li>Work buttonhole over {{ stitches_per_buttonhole }} st{{ stitches_per_buttonhole|pluralize }} </li>
+                {% endif %}
+            {% else %}
+                <li>
+                    [Work buttonhole over {{ stitches_per_buttonhole }} st{{ stitches_per_buttonhole|pluralize }},
+                     work {{ stitches_between_buttonholes }} st{{ stitches_between_buttonholes|pluralize }}]
+                     {{ number_of_repeats }} times
+                </li>
+                <li>
+                    Work buttonhole over {{ stitches_per_buttonhole }} st{{ stitches_per_buttonhole|pluralize }}
+                </li>
+            {% endif %}
+
+            {% if final_stitches %}
+                <li>Work {{ final_stitches }} st{{ final_stitches|pluralize }}</li>
+            {% endif %}
+
+        </ul>
+        </div>
+    {% endif %}
+{% endblock %}

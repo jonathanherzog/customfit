@@ -1,0 +1,130 @@
+{% extends 'knitting_calculators/tool_base.html' %}
+
+{%  block calculator_description %}
+
+    <p>
+        Gauge (how big your stitches are), stitch or row count (how many you have), and size
+        (how long or wide your knitted piece is) are all related. This calculator takes any two of those,
+        and returns the third. So if you:
+        <ul>
+        <li>Know your gauge, and your desired size, you'll get a count.</li>
+        <li>Know your gauge, and your count, you'll get a size.</li>
+        <li>Know your count, and your size, you'll get a gauge.</li>
+        </ul>
+        This is helpful for generating your own simple patterns, seeing whether you need to modify
+        existing patterns, and carrying out those modifications.
+    </p>
+
+{% endblock %}
+
+
+{% block calculator_output %}
+  <p>
+        Here's the information you wanted:
+    </p>
+
+    {% if spacing_error_message %}
+
+        <div>
+        {{ spacing_error_message }}
+        </div>
+    {% endif %}
+
+
+    {% if show_knitting_instructions %}
+        <div id="id_instruction_text">
+        {{  instructions }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block calculator_specific_js %}
+  <script type="text/javascript">
+    var $j = jQuery.noConflict();
+
+    $j(document).ready(function () {
+      /* Set up variables
+      ------------------------------------------------------------------------*/
+
+      var output_type_selector = $j('#id_output_type_requested');
+      var length_row = $j('#length_row');
+      var gauge_row = $j('#gauge_row');
+      var count_row = $j('#count_row');
+
+      var length_field_el = $j("#id_length_value")
+      var gauge_field_el = $j("#id_gauge_value")
+      var count_field_el = $j("#id_count_value")
+
+
+      /* Helper functions ahoy
+      ------------------------------------------------------------------------*/
+
+      function hide_row (row_el, field_el) {
+          row_el.hide('fast');
+          field_el.val("");
+      }
+
+      function show_row (row_el) {
+          row_el.show('fast');
+      }
+
+      function show_gauge () {
+          show_row(gauge_row);
+      }
+      function hide_gauge () {
+          hide_row(gauge_row, gauge_field_el);
+      }
+
+      function show_length () {
+          show_row(length_row);
+      }
+      function hide_length () {
+          hide_row(length_row, length_field_el);
+      }
+
+      function show_count () {
+          show_row(count_row);
+      }
+      function hide_count () {
+          hide_row(count_row, count_field_el);
+      }
+
+      function update_page (output_type_requested) {
+        switch(output_type_requested) {
+            case '{{ length_string }}':
+                show_gauge();
+                show_count();
+                hide_length();
+                break;
+            case '{{ gauge_string }}':
+                show_length();
+                show_count();
+                hide_gauge();
+                break;
+            case '{{ count_string }}':
+                show_gauge();
+                show_length();
+                hide_count();
+                break;
+        }
+      }
+
+      /* Set up state on page load
+      ------------------------------------------------------------------------*/
+
+      var initial_output_type = output_type_selector.val();
+      update_page(initial_output_type);
+
+
+      /* Perform actions on user events
+      ------------------------------------------------------------------------*/
+
+      // Update the visibility of the rows every time they change the output-type selected
+      output_type_selector.change(function () {
+        var output_type = $j(this).val();
+        update_page(output_type)
+      })
+    });
+
+  </script>
+{% endblock %}

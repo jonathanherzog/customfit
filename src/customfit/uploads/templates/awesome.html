@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load cache %}
+
+{% block title %}Gallery of Awesome!{% endblock %}
+
+{% block content %}
+  {% cache 5000 awesome %}
+    {% comment %}
+      This page is wicked slow due to its large number of images, and it's a 
+      big selling point for us so it needs to be fast. It's caching time!
+    {% endcomment %}
+
+    <h2 class="text-center">
+      Gallery of Awesome<br />
+      <small>(actual knitters in their customfit sweaters)</small>
+    </h2>
+
+    <hr>
+    {% if awesome_list_basics.count %}
+    <div class="row clear-columns">
+      <h3>Basics</h2>
+      {% for awesome in awesome_list_basics %}
+        {% include "awesome_tile.html" %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if awesome_list_designs.count %}
+    <div class="row clear-columns">
+      <h3>Designs</h3>
+      {% for awesome in awesome_list_designs %}
+        {% include "awesome_tile.html" %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if awesome_list_custom.count %}
+    <div class="row clear-columns">
+      <h3>Designed by the Knitter</h3>
+      {% for awesome in awesome_list_custom %}
+        {% include "awesome_tile.html" %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  {% endcache %}
+{% endblock %}

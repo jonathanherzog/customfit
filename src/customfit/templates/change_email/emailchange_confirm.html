@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if confirmed %}
+    <h2>Email change confirmed</h2>
+
+    <p>
+      You will now receive CustomFit emails at {{ user.email }}.        
+    </p>
+  {% else %}
+    <h2>Invalid email change link</h2>
+
+    <p>
+      So sorry! This email reset link is invalid.  
+    </p>
+  {% endif %}
+
+  <p>
+	  <a href="{% url 'userauth:manage_account' %}">Back to account management</a>
+  </p>
+{% endblock %}

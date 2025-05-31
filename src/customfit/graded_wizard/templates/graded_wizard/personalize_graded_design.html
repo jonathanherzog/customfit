@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block title %}Customize your <em>graded</em> {{ design.name }}{% endblock title %}
+
+
+{% block content %}
+  <!-- begin header -->
+  <h2 class="test-knitter-header">
+    {{ design.name }}{% if design.designer %} by {{ design.designer.full_name }}{% endif %}
+  </h2>
+  <!-- end header -->
+
+  <!-- begin design information area -->
+  <div class="row">
+      {% crispy form %}
+  </div>
+{% endblock content %}
+
+
